@@ -1,0 +1,19 @@
+<li class="caesura-point" data-caesura-target="point">
+    <div class="caesura-point__field">
+        {{ form_label(point.percentage, null, {label_attr: {class: 'visually-hidden'}}) }}
+        <span class="input-affix">
+            {{ form_widget(point.percentage, {attr: {class: 'input input--number', 'data-caesura-target': 'percentage', 'data-action': 'caesura#update'}}) }}
+            <span class="input-affix__suffix" aria-hidden="true">%</span>
+        </span>
+    </div>
+    <span class="caesura-point__arrow" aria-hidden="true">{{ include('_icon.html.twig', {name: 'arrow-right'}) }}</span>
+    <div class="caesura-point__field">
+        {{ form_label(point.grade, null, {label_attr: {class: 'visually-hidden'}}) }}
+        {{ form_widget(point.grade, {attr: {class: 'input input--number', 'data-caesura-target': 'grade', 'data-action': 'caesura#update'}}) }}
+    </div>
+    <button type="button" class="icon-button caesura-point__remove" data-caesura-target="removeButton" data-action="caesura#remove" aria-label="Remove this point">
+        {{ include('_icon.html.twig', {name: 'minus'}) }}
+    </button>
+    {{ form_errors(point.percentage) }}
+    {{ form_errors(point.grade) }}
+</li>

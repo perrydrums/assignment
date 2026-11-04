@@ -1,0 +1,44 @@
+{#- Inline stroke icons (24×24). Usage: include('_icon.html.twig', {name: 'upload'}) -#}
+<svg class="icon{{ class is defined ? ' ' ~ class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    {%- if name == 'upload' -%}
+        <path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    {%- elseif name == 'sheet' -%}
+        <rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 9h16M4 15h16M10 3v18"/>
+    {%- elseif name == 'check' -%}
+        <path d="m5 12.5 4.5 4.5L19 7.5"/>
+    {%- elseif name == 'x' -%}
+        <path d="M18 6 6 18M6 6l12 12"/>
+    {%- elseif name == 'plus' -%}
+        <path d="M12 5v14M5 12h14"/>
+    {%- elseif name == 'minus' -%}
+        <path d="M5 12h14"/>
+    {%- elseif name == 'search' -%}
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+    {%- elseif name == 'download' -%}
+        <path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>
+    {%- elseif name == 'copy' -%}
+        <rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>
+    {%- elseif name == 'arrow-right' -%}
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+    {%- elseif name == 'arrow-up' -%}
+        <path d="M12 19V5M6 11l6-6 6 6"/>
+    {%- elseif name == 'terminal' -%}
+        <path d="m5 8 4 4-4 4"/><path d="M12 17h7"/>
+    {%- elseif name == 'shield' -%}
+        <path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/>
+    {%- elseif name == 'grade' -%}
+        <path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>
+    {%- elseif name == 'gauge' -%}
+        <path d="m12 14 4-4"/><path d="M3.5 18a9 9 0 1 1 17 0"/>
+    {%- elseif name == 'trend' -%}
+        <path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/>
+    {%- elseif name == 'info' -%}
+        <circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/>
+    {%- elseif name == 'alert' -%}
+        <circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5h.01"/>
+    {%- elseif name == 'sort' -%}
+        <path d="m8 9 4-4 4 4"/><path d="m16 15-4 4-4-4"/>
+    {%- elseif name == 'sparkles' -%}
+        <path d="M12 3.5 13.8 9 19.5 11 13.8 13 12 18.5 10.2 13 4.5 11 10.2 9Z"/><path d="M19 3v4M17 5h4"/>
+    {%- endif -%}
+</svg>

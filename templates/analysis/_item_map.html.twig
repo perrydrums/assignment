@@ -1,0 +1,74 @@
+{% set points = view.itemMap %}
+{% set rit_ticks = view.ritTicks %}
+{% set rit_low = rit_ticks|first %}
+{% set rit_high = rit_ticks|last %}
+{% set width = 440 %}
+{% set height = 300 %}
+{% set left = 46 %}
+{% set right = 16 %}
+{% set top = 22 %}
+{% set bottom = 40 %}
+{% set plot_width = width - left - right %}
+{% set plot_height = height - top - bottom %}
+{% set baseline = top + plot_height %}
+{% set zero_y = (baseline - (0 - rit_low) / (rit_high - rit_low) * plot_height)|round(2) %}
+{% set without_rit = view.questionsWithoutRitValue %}
+
+<article class="chart-card chart-card--item-map" data-controller="chart" data-reveal-target="item">
+    <header class="chart-card__header">
+        <div>
+            <h2 class="chart-card__title">Item map</h2>
+            <p class="chart-card__subtitle">Difficulty (P') against discrimination (rit). Select a question to find it.</p>
+        </div>
+        <p class="legend legend--note">Dot size: max score</p>
+    </header>
+
+    <div class="chart" data-chart-target="frame"
+         data-action="pointerover->chart#show pointerout->chart#hide focusin->chart#show focusout->chart#hide">
+        <svg class="item-map" viewBox="0 0 {{ width }} {{ height }}" role="group" aria-label="Questions by P'-value and rit-value">
+            <g class="chart__grid">
+                {% for tick in rit_ticks %}
+                    {% set y = (baseline - (tick - rit_low) / (rit_high - rit_low) * plot_height)|round(2) %}
+                    <line x1="{{ left }}" x2="{{ width - right }}" y1="{{ y }}" y2="{{ y }}"/>
+                    <text class="chart__tick chart__tick--y" x="{{ left - 10 }}" y="{{ y }}" dy="0.32em">{{ tick|number_format(1) }}</text>
+                {% endfor %}
+                {% for p in [0, 0.25, 0.5, 0.75, 1] %}
+                    {% set x = (left + p * plot_width)|round(2) %}
+                    <line x1="{{ x }}" x2="{{ x }}" y1="{{ top }}" y2="{{ baseline }}"/>
+                    <text class="chart__tick chart__tick--x" x="{{ x }}" y="{{ baseline + 20 }}">{{ p|number_format(2) }}</text>
+                {% endfor %}
+            </g>
+            <line class="item-map__zero" x1="{{ left }}" x2="{{ width - right }}" y1="{{ zero_y }}" y2="{{ zero_y }}"/>
+            <text class="chart__axis-title" x="{{ left }}" y="{{ top - 9 }}">rit ↑</text>
+            <text class="chart__axis-title chart__axis-title--end" x="{{ width - right }}" y="{{ baseline + 36 }}">P' → easier</text>
+
+            {% for point in points %}
+                {% set question = point.question %}
+                <circle class="item-map__dot{{ question.ritValue < 0 ? ' is-negative' }}"
+                        cx="{{ (left + point.x * plot_width)|round(2) }}" cy="{{ (baseline - point.y * plot_height)|round(2) }}"
+                        r="{{ min(3.5 + question.maxScore, 9) }}" style="--i: {{ loop.index0 }}"
+                        tabindex="0" role="button"
+                        aria-label="{{ question.label }}: P'-value {{ question.pValue|number_format(3) }}, rit-value {{ question.ritValue|number_format(3) }}. Show in the questions table."
+                        data-tooltip="{{ question.label }}&#10;P' {{ question.pValue|number_format(3) }} · rit {{ question.ritValue|number_format(3) }} · max {{ question.maxScore|score }}"
+                        data-action="click->chart#select keydown->chart#selectWithKeyboard"
+                        data-chart-event-name-param="analysis:focus-question"
+                        data-chart-detail-param="{{ {tab: 'questions', rowId: 'question-' ~ point.number}|json_encode }}"/>
+            {% endfor %}
+        </svg>
+        <div class="chart__tooltip" data-chart-target="tooltip" hidden></div>
+    </div>
+
+    {% if without_rit is not empty %}
+        <p class="chart-card__note">
+            {{ include('_icon.html.twig', {name: 'info'}) }}
+            <span>
+                Not plotted, because every student had the same score:
+                {% for number, question in without_rit -%}
+                    <button type="button" class="inline-link" data-action="chart#select"
+                            data-chart-event-name-param="analysis:focus-question"
+                            data-chart-detail-param="{{ {tab: 'questions', rowId: 'question-' ~ number}|json_encode }}">{{ question.label }}</button>{{ not loop.last ? ', ' }}
+                {%- endfor %}
+            </span>
+        </p>
+    {% endif %}
+</article>

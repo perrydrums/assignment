@@ -1,0 +1,13 @@
+<footer class="site-footer">
+    <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+            {{ include('_wordmark.html.twig', {light: true}) }}
+            <p>Grades, pass/fail results and item analysis for exam results.</p>
+        </div>
+        <ul class="site-footer__facts">
+            <li>{{ include('_icon.html.twig', {name: 'shield'}) }} Workbooks are analysed in memory and never stored.</li>
+            <li>{{ include('_icon.html.twig', {name: 'terminal'}) }} Same analysis as <code>bin/console app:analyze-exam</code>.</li>
+            <li>{{ include('_icon.html.twig', {name: 'sparkles'}) }} Built with Symfony, PhpSpreadsheet and Stimulus.</li>
+        </ul>
+    </div>
+</footer>

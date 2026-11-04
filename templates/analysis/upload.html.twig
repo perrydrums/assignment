@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analyse exam results{% endblock %}
+
+{% block body %}
+    <header class="hero">
+        {{ include('_hero_backdrop.html.twig') }}
+        <div class="container topbar">
+            {{ include('_wordmark.html.twig', {light: true}) }}
+            <p class="topbar__note">{{ include('_icon.html.twig', {name: 'shield'}) }} Analysed in memory, never stored</p>
+        </div>
+        <div class="container hero__content">
+            <p class="eyebrow eyebrow--on-dark">Item analysis for RemindoTest exams</p>
+            <h1 class="hero__title">
+                {%- for word in 'Turn exam results into insight.'|split(' ') -%}
+                    <span class="reveal-word" style="--i: {{ loop.index0 }}">{{ word }}</span>{{ not loop.last ? ' ' }}
+                {%- endfor -%}
+            </h1>
+            <p class="hero__lead">Grade every student with your caesura and see how each question performed, with P'- and rit-values, straight from a results workbook.</p>
+        </div>
+    </header>
+
+    <main id="main" class="container page page--upload">
+        {{ form_start(form, {attr: {class: 'upload-card', 'data-controller': 'upload', 'data-action': 'upload#submit', 'data-upload-max-bytes-value': 10000000}}) }}
+            {% if form.vars.errors|length > 0 %}
+                <div class="upload-card__errors">{{ form_errors(form) }}</div>
+            {% endif %}
+            <div class="upload-card__grid">
+                <section class="upload-step" aria-labelledby="step-file">
+                    <h2 class="step-title" id="step-file"><span class="step-title__number">1</span> Choose the results workbook</h2>
+
+                    <label class="dropzone" data-upload-target="dropzone"
+                           data-action="dragenter->upload#dragOver dragover->upload#dragOver dragleave->upload#dragLeave drop->upload#drop">
+                        {{ form_widget(form.workbook, {required: false, attr: {class: 'visually-hidden', 'aria-required': 'true', 'data-upload-target': 'input', 'data-action': 'upload#update'}}) }}
+                        <span class="dropzone__icon">{{ include('_icon.html.twig', {name: 'upload'}) }}</span>
+                        <span class="dropzone__title">Drop your workbook here</span>
+                        <span class="dropzone__hint">or <span class="dropzone__browse">browse your files</span></span>
+                        <span class="dropzone__formats">.xlsx or .xls · up to 10 MB</span>
+                    </label>
+
+                    <div class="file-chip" data-upload-target="selected" hidden>
+                        <span class="file-chip__icon">{{ include('_icon.html.twig', {name: 'sheet'}) }}</span>
+                        <span class="file-chip__details">
+                            <strong class="file-chip__name" data-upload-target="fileName"></strong>
+                            <span class="file-chip__meta"><span data-upload-target="fileSize"></span> · ready to analyse</span>
+                        </span>
+                        <span class="file-chip__check" aria-hidden="true">{{ include('_icon.html.twig', {name: 'check'}) }}</span>
+                        <button type="button" class="icon-button" data-action="upload#clear" aria-label="Remove the selected file">
+                            {{ include('_icon.html.twig', {name: 'x'}) }}
+                        </button>
+                    </div>
+
+                    <p class="field-errors" data-upload-target="error" role="alert" hidden></p>
+                    {{ form_errors(form.workbook) }}
+
+                    <details class="format-help">
+                        <summary>{{ include('_icon.html.twig', {name: 'info'}) }} Expected layout</summary>
+                        <div class="format-help__body">
+                            <table class="format-help__table">
+                                <tr><th>ID</th><th>Score Question 1</th><th>Score Question 2</th><th>…</th></tr>
+                                <tr><th>Max question score:</th><td>1</td><td>3</td><td>…</td></tr>
+                                <tr><th>Student 0001</th><td>1</td><td>1.2</td><td>…</td></tr>
+                            </table>
+                            <p>The first worksheet is read. Any number of questions and students; every score must be a number between 0 and the question's maximum.</p>
+                        </div>
+                    </details>
+                </section>
+
+                <section class="upload-step upload-step--caesura" aria-labelledby="step-caesura"
+                         data-controller="caesura"
+                         data-caesura-index-value="{{ form.caesuraPoints|length }}"
+                         data-caesura-default-points-value="{{ default_caesura.points|map(point => {percentage: point.percentage, grade: point.grade})|json_encode }}"
+                         data-caesura-default-pass-value="{{ default_caesura.passPercentage }}">
+                    <h2 class="step-title" id="step-caesura"><span class="step-title__number">2</span> Check the caesura</h2>
+                    <p class="upload-step__intro">How scores translate into grades. Between the points, grades are interpolated linearly.</p>
+
+                    <div class="caesura">
+                        <div class="caesura__editor">
+                            <div class="caesura__columns" aria-hidden="true"><span>Score</span><span>Grade</span></div>
+                            <ol class="caesura__points" data-caesura-target="list">
+                                {% for point in form.caesuraPoints %}
+                                    {{ include('analysis/_caesura_point.html.twig', {point: point}) }}
+                                {% endfor %}
+                            </ol>
+                            <template data-caesura-target="template">
+                                {{- include('analysis/_caesura_point.html.twig', {point: form.caesuraPoints.vars.prototype}) -}}
+                            </template>
+                            <button type="button" class="text-button" data-action="caesura#add">
+                                {{ include('_icon.html.twig', {name: 'plus'}) }} Add a point
+                            </button>
+                            {{ form_errors(form.caesuraPoints) }}
+                            <p class="field-errors field-errors--soft" data-caesura-target="problem" role="status" hidden></p>
+
+                            <div class="caesura__pass">
+                                {{ form_label(form.passPercentage, 'Students pass from', {label_attr: {class: 'caesura__pass-label'}}) }}
+                                <span class="input-affix">
+                                    {{ form_widget(form.passPercentage, {attr: {class: 'input input--number', 'data-caesura-target': 'pass', 'data-action': 'caesura#update'}}) }}
+                                    <span class="input-affix__suffix" aria-hidden="true">%</span>
+                                </span>
+                            </div>
+                            {{ form_errors(form.passPercentage) }}
+                        </div>
+
+                        <figure class="caesura__preview">
+                            <svg class="caesura-chart" viewBox="0 0 320 210" role="img" aria-labelledby="caesura-chart-title" data-caesura-target="chart">
+                                <title id="caesura-chart-title">Preview of the caesura: grade by score percentage</title>
+                            </svg>
+                            <figcaption>
+                                <span>Live preview</span>
+                                <button type="button" class="text-button text-button--small" data-action="caesura#reset">Reset to the assignment's caesura</button>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </section>
+            </div>
+
+            <footer class="upload-card__footer">
+                <p class="upload-card__privacy">{{ include('_icon.html.twig', {name: 'shield'}) }} Your workbook is analysed in memory and discarded straight after.</p>
+                <div class="upload-card__actions">
+                    {% if sample_available %}
+                        <a class="button button--ghost" href="{{ path('app_analysis_sample') }}">Try the sample workbook</a>
+                    {% endif %}
+                    <button type="submit" class="button button--primary button--large" data-upload-target="submit">
+                        <span class="button__label" data-upload-target="submitLabel">Analyse results</span>
+                        <span class="button__icon">{{ include('_icon.html.twig', {name: 'arrow-right'}) }}</span>
+                        <span class="button__spinner" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </footer>
+        {{ form_end(form) }}
+
+        <section class="features" aria-labelledby="features-title" data-controller="reveal">
+            <p class="eyebrow">What you get</p>
+            <h2 class="section-title" id="features-title">Three questions, answered for every exam</h2>
+            <div class="features__grid">
+                <article class="feature-card">
+                    <span class="feature-card__icon">{{ include('_icon.html.twig', {name: 'grade'}) }}</span>
+                    <h3>How did each student do?</h3>
+                    <p>Every total score is converted into a grade with your caesura. Whether a student passes is decided on the exact score, never on a rounded grade.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-card__icon">{{ include('_icon.html.twig', {name: 'gauge'}) }}</span>
+                    <h3>Was a question too easy or too hard?</h3>
+                    <p>The P'-value is the average score on a question divided by its maximum: close to 0, almost nobody scored; close to 1, almost everybody had full marks.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-card__icon">{{ include('_icon.html.twig', {name: 'trend'}) }}</span>
+                    <h3>Did it separate strong from weak?</h3>
+                    <p>The rit-value correlates a question with the total score. The higher it is, the better students with a high total did on that question.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+{% endblock %}

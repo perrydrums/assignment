@@ -1,0 +1,61 @@
+{% set pass_rate = view.passRate * 100 %}
+{% set lowest_grade = (caesura.points|first).grade %}
+{% set highest_grade = (caesura.points|last).grade %}
+{% set grade_span = max(highest_grade - lowest_grade, 0.0001) %}
+{% set average_percentage = view.averageScore / analysis.maxScore * 100 %}
+{% set without_rit = view.questionsWithoutRitValue|length %}
+
+<section class="kpis" aria-label="Summary">
+    <article class="kpi kpi--pass-rate" style="--i: 0">
+        <div class="ring" role="img" aria-label="{{ pass_rate|number_format(1) }}% of the students passed">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring__track" cx="60" cy="60" r="50" pathLength="100"/>
+                <circle class="ring__value" cx="60" cy="60" r="50" pathLength="100" style="--offset: {{ (100 - pass_rate)|round(3) }}"/>
+            </svg>
+            <span class="ring__label" aria-hidden="true">
+                <span><span data-controller="count-up" data-count-up-to-value="{{ pass_rate|round(3) }}" data-count-up-decimals-value="1">{{ pass_rate|number_format(1) }}</span><span class="ring__unit">%</span></span>
+            </span>
+        </div>
+        <div class="kpi__body">
+            <h2 class="kpi__label">Pass rate</h2>
+            <p class="kpi__headline"><strong>{{ analysis.passedCount }}</strong> of {{ student_count }} students passed</p>
+            <p class="kpi__detail">{{ analysis.failedCount }} failed · pass from {{ caesura.passPercentage|score }}% of {{ analysis.maxScore|score }} points</p>
+        </div>
+    </article>
+
+    <article class="kpi" style="--i: 1">
+        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'grade'}) }} Average grade</h2>
+        <p class="kpi__value">
+            <span data-controller="count-up" data-count-up-to-value="{{ analysis.averageGrade|round(3) }}" data-count-up-decimals-value="1">{{ analysis.averageGrade|number_format(1) }}</span>
+        </p>
+        <div class="grade-scale" style="--average: {{ ((analysis.averageGrade - lowest_grade) / grade_span)|round(4) }}; --pass: {{ ((view.passGrade - lowest_grade) / grade_span)|round(4) }}"
+             role="img" aria-label="Average grade {{ analysis.averageGrade|number_format(1) }}, pass grade {{ view.passGrade|number_format(1) }}">
+            <span class="grade-scale__pass"></span>
+            <span class="grade-scale__marker"></span>
+        </div>
+        <p class="kpi__scale-labels" aria-hidden="true">
+            <span>{{ lowest_grade|number_format(1) }}</span>
+            <span>pass {{ view.passGrade|number_format(1) }}</span>
+            <span>{{ highest_grade|number_format(1) }}</span>
+        </p>
+    </article>
+
+    <article class="kpi" style="--i: 2">
+        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'sheet'}) }} Average score</h2>
+        <p class="kpi__value">
+            <span data-controller="count-up" data-count-up-to-value="{{ average_percentage|round(3) }}" data-count-up-decimals-value="1">{{ average_percentage|number_format(1) }}</span><span class="kpi__unit">%</span>
+        </p>
+        <p class="kpi__detail">{{ view.averageScore|score }} of {{ analysis.maxScore|score }} points on average</p>
+    </article>
+
+    <article class="kpi" style="--i: 3">
+        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'gauge'}) }} Average P'-value</h2>
+        <p class="kpi__value">
+            <span data-controller="count-up" data-count-up-to-value="{{ view.averagePValue|round(4) }}" data-count-up-decimals-value="2">{{ view.averagePValue|number_format(2) }}</span>
+        </p>
+        <p class="kpi__detail">
+            across {{ question_count }} questions
+            {%- if without_rit > 0 %} · {{ without_rit }} without rit-value{% endif %}
+        </p>
+    </article>
+</section>

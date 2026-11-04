@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Exam analytics{% endblock %} · Remindo Analytics</title>
+        <meta name="description" content="Grades, pass/fail results and item analysis (P'- and rit-values) for exam results.">
+        <meta name="theme-color" content="#162e47">
+        <link rel="icon" href="{{ asset('images/favicon.svg') }}" type="image/svg+xml">
+        <link rel="preload" href="{{ asset('fonts/plus-jakarta-sans-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ asset('fonts/dm-sans-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        {% block body %}{% endblock %}
+
+        {{ include('_footer.html.twig') }}
+
+        <button type="button" class="back-to-top" aria-label="Back to top"
+                data-controller="back-to-top" data-action="back-to-top#scrollUp scroll@window->back-to-top#toggle:passive">
+            {{ include('_icon.html.twig', {name: 'arrow-up'}) }}
+        </button>
+    </body>
+</html>

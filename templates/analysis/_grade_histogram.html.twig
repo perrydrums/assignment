@@ -1,0 +1,87 @@
+{% set bins = view.gradeHistogram %}
+{% set ticks = view.histogramTicks %}
+{% set top_count = ticks|last %}
+{% set width = 640 %}
+{% set height = 330 %}
+{% set left = 42 %}
+{% set right = 14 %}
+{% set top = 22 %}
+{% set bottom = 40 %}
+{% set plot_width = width - left - right %}
+{% set plot_height = height - top - bottom %}
+{% set baseline = top + plot_height %}
+{% set slot = plot_width / bins|length %}
+{% set bar_width = slot * 0.68 %}
+{% set first_grade = (bins|first).lowerGrade %}
+{% set last_grade = (bins|last).upperGrade %}
+{% set pass_x = left + (view.passGrade - first_grade) / (last_grade - first_grade) * plot_width %}
+
+<article class="chart-card chart-card--histogram" data-controller="chart" data-reveal-target="item"
+         data-action="analysis:grade-filter-cleared@window->chart#clearSelection">
+    <header class="chart-card__header">
+        <div>
+            <h2 class="chart-card__title">Grade distribution</h2>
+            <p class="chart-card__subtitle">Students per rounded grade. Select a bar to list those students.</p>
+        </div>
+        <ul class="legend" aria-label="Legend">
+            <li><span class="legend__swatch legend__swatch--passed"></span> Passed</li>
+            <li><span class="legend__swatch legend__swatch--failed"></span> Failed</li>
+        </ul>
+    </header>
+
+    <div class="chart" data-chart-target="frame"
+         data-action="pointerover->chart#show pointerout->chart#hide focusin->chart#show focusout->chart#hide">
+        <svg class="histogram" viewBox="0 0 {{ width }} {{ height }}" role="group" aria-label="Number of students per grade">
+            <g class="chart__grid">
+                {% for tick in ticks %}
+                    {% set y = (baseline - tick / top_count * plot_height)|round(2) %}
+                    <line x1="{{ left }}" x2="{{ width - right }}" y1="{{ y }}" y2="{{ y }}"/>
+                    <text class="chart__tick chart__tick--y" x="{{ left - 10 }}" y="{{ y }}" dy="0.32em">{{ tick }}</text>
+                {% endfor %}
+            </g>
+
+            {% for bin in bins %}
+                {% set x = left + loop.index0 * slot %}
+                {% set failed_height = bin.failed / top_count * plot_height %}
+                {% set passed_height = bin.passed / top_count * plot_height %}
+                {% set bar_x = (x + (slot - bar_width) / 2)|round(2) %}
+                {% if bin.total > 0 %}
+                    <g class="histogram__bin" style="--i: {{ loop.index0 }}" tabindex="0" role="button"
+                       aria-label="Grade {{ bin.label }}: {{ bin.total }} {{ bin.total == 1 ? 'student' : 'students' }}, {{ bin.passed }} passed. Show these students."
+                       data-tooltip="Grade {{ bin.label }}&#10;{{ bin.total }} {{ bin.total == 1 ? 'student' : 'students' }} · {{ bin.passed }} passed · {{ bin.failed }} failed"
+                       data-action="click->chart#select keydown->chart#selectWithKeyboard"
+                       data-chart-event-name-param="analysis:filter-grade"
+                       data-chart-detail-param="{{ {tab: 'students', min: bin.lowerGrade, max: bin.upperGrade, inclusive: bin.includesUpperGrade, label: bin.label}|json_encode }}">
+                        <rect class="histogram__hit" x="{{ x|round(2) }}" y="{{ top }}" width="{{ slot|round(2) }}" height="{{ plot_height }}"/>
+                        <g class="histogram__stack" data-tooltip-anchor>
+                            {% if bin.failed > 0 %}
+                                <rect class="histogram__bar histogram__bar--failed" x="{{ bar_x }}" y="{{ (baseline - failed_height)|round(2) }}" width="{{ bar_width|round(2) }}" height="{{ failed_height|round(2) }}" rx="3"/>
+                            {% endif %}
+                            {% if bin.passed > 0 %}
+                                <rect class="histogram__bar histogram__bar--passed" x="{{ bar_x }}" y="{{ (baseline - failed_height - passed_height)|round(2) }}" width="{{ bar_width|round(2) }}" height="{{ passed_height|round(2) }}" rx="3"/>
+                            {% endif %}
+                        </g>
+                    </g>
+                {% endif %}
+            {% endfor %}
+
+            <g class="chart__axis">
+                <line x1="{{ left }}" x2="{{ width - right }}" y1="{{ baseline }}" y2="{{ baseline }}"/>
+                {% for bin in bins %}
+                    {% if bin.lowerGrade == bin.lowerGrade|round %}
+                        <text class="chart__tick chart__tick--x" x="{{ (left + loop.index0 * slot)|round(2) }}" y="{{ baseline + 20 }}">{{ bin.lowerGrade|number_format(0) }}</text>
+                    {% endif %}
+                    {% if loop.last and bin.upperGrade == bin.upperGrade|round %}
+                        <text class="chart__tick chart__tick--x" x="{{ width - right }}" y="{{ baseline + 20 }}">{{ bin.upperGrade|number_format(0) }}</text>
+                    {% endif %}
+                {% endfor %}
+            </g>
+
+            <g class="histogram__pass-line">
+                <line x1="{{ pass_x|round(2) }}" x2="{{ pass_x|round(2) }}" y1="{{ top - 8 }}" y2="{{ baseline }}"/>
+                <text x="{{ (pass_x + 6)|round(2) }}" y="{{ top - 2 }}">pass {{ view.passGrade|number_format(1) }}</text>
+            </g>
+        </svg>
+        <div class="chart__tooltip" data-chart-target="tooltip" hidden></div>
+    </div>
+</article>

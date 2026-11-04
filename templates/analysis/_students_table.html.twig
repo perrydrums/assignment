@@ -1,0 +1,87 @@
+{% set base_name = view.fileName|split('.')|first %}
+
+<div class="table-card" data-controller="data-table"
+     data-data-table-noun-value="students" data-data-table-filename-value="{{ base_name }}-students.csv"
+     data-action="analysis:filter-grade@window->data-table#filterRange">
+    <div class="table-toolbar">
+        <label class="search">
+            {{ include('_icon.html.twig', {name: 'search'}) }}
+            <span class="visually-hidden">Search students</span>
+            <input type="search" class="search__input" placeholder="Search student ID…" autocomplete="off"
+                   data-data-table-target="search" data-action="data-table#search">
+        </label>
+        <div class="segmented" role="group" aria-label="Filter by result">
+            <button type="button" aria-pressed="true" data-data-table-target="filterButton" data-action="data-table#filter" data-data-table-tag-param="all">
+                All <span class="segmented__count">{{ student_count }}</span>
+            </button>
+            <button type="button" aria-pressed="false" data-data-table-target="filterButton" data-action="data-table#filter" data-data-table-tag-param="passed">
+                Passed <span class="segmented__count">{{ analysis.passedCount }}</span>
+            </button>
+            <button type="button" aria-pressed="false" data-data-table-target="filterButton" data-action="data-table#filter" data-data-table-tag-param="failed">
+                Failed <span class="segmented__count">{{ analysis.failedCount }}</span>
+            </button>
+        </div>
+        <button type="button" class="filter-chip" data-data-table-target="rangeChip" data-action="data-table#clearRange" hidden>
+            Grade <span data-data-table-target="rangeLabel"></span>
+            {{ include('_icon.html.twig', {name: 'x'}) }}<span class="visually-hidden">Remove the grade filter</span>
+        </button>
+        <p class="table-toolbar__count" data-data-table-target="count" aria-live="polite">{{ student_count }} students</p>
+        <button type="button" class="button button--secondary button--small" data-action="data-table#exportCsv">
+            {{ include('_icon.html.twig', {name: 'download'}) }} Export CSV
+        </button>
+    </div>
+
+    <div class="table-scroll">
+        <table class="data-table">
+            <caption class="visually-hidden">Score, grade and result per student</caption>
+            <thead>
+                <tr>
+                    <th scope="col" aria-sort="ascending" data-data-table-target="header" data-export-label="Student">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="0" data-data-table-type-param="text">Student<span class="sort-indicator" aria-hidden="true"></span></button>
+                    </th>
+                    <th scope="col" class="num" data-data-table-target="header" data-export-label="Score">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="1" data-data-table-type-param="number">Score<span class="sort-indicator" aria-hidden="true"></span></button>
+                    </th>
+                    <th scope="col" class="num" data-data-table-target="header" data-export-label="Percentage">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="2" data-data-table-type-param="number">Percentage<span class="sort-indicator" aria-hidden="true"></span></button>
+                    </th>
+                    <th scope="col" class="num" data-data-table-target="header" data-export-label="Grade">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="3" data-data-table-type-param="number">Grade<span class="sort-indicator" aria-hidden="true"></span></button>
+                    </th>
+                    <th scope="col" data-data-table-target="header" data-export-label="Result">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="4" data-data-table-type-param="number">Result<span class="sort-indicator" aria-hidden="true"></span></button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody data-data-table-target="body">
+                {% for student in analysis.students %}
+                    {% set grade = student.grade.roundedGrade %}
+                    {% set passed = student.grade.passed %}
+                    <tr class="{{ passed ? 'is-passed' : 'is-failed' }}" data-data-table-target="row"
+                        data-search="{{ student.studentId|lower }}" data-tags="{{ passed ? 'passed' : 'failed' }}" data-grade="{{ grade }}"
+                        {%- if loop.index0 < 16 %} style="--i: {{ loop.index0 }}"{% endif %}>
+                        <th scope="row">{{ student.studentId }}</th>
+                        <td class="num" data-sort="{{ student.totalScore }}" data-export="{{ student.totalScore|score }}">
+                            <span class="score-cell">
+                                <span class="score-bar" style="--value: {{ (student.grade.percentage / 100)|round(4) }}"><span></span></span>
+                                <span class="score-cell__value">{{ student.totalScore|score }}<span class="muted"> / {{ analysis.maxScore|score }}</span></span>
+                            </span>
+                        </td>
+                        <td class="num" data-sort="{{ student.grade.percentage }}" data-export="{{ student.grade.percentage|number_format(1, '.', '') }}">{{ student.grade.percentage|number_format(1) }}%</td>
+                        <td class="num" data-sort="{{ student.grade.grade }}" data-export="{{ grade|number_format(1, '.', '') }}"><span class="grade-pill">{{ grade|number_format(1) }}</span></td>
+                        <td data-sort="{{ passed ? 1 : 0 }}" data-export="{{ passed ? 'passed' : 'failed' }}">
+                            {%- if passed -%}
+                                <span class="status status--passed">{{ include('_icon.html.twig', {name: 'check'}) }} Passed</span>
+                            {%- else -%}
+                                <span class="status status--failed">{{ include('_icon.html.twig', {name: 'x'}) }} Failed</span>
+                            {%- endif -%}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="data-table__empty" data-data-table-target="empty" hidden>
+                    <td colspan="5">No students match these filters. <button type="button" class="inline-link" data-action="data-table#reset">Clear all filters</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% set analysis = view.analysis %}
+{% set caesura = analysis.caesura %}
+{% set student_count = analysis.students|length %}
+{% set question_count = analysis.questions|length %}
+
+{% block title %}{{ view.fileName }}{% endblock %}
+
+{% block body %}
+    <header class="hero hero--results">
+        {{ include('_hero_backdrop.html.twig') }}
+        <div class="container topbar">
+            {{ include('_wordmark.html.twig', {light: true}) }}
+            <a class="button button--light button--small" href="{{ path('app_analysis_upload') }}">
+                {{ include('_icon.html.twig', {name: 'upload'}) }} New analysis
+            </a>
+        </div>
+        <div class="container hero__content">
+            <p class="eyebrow eyebrow--on-dark">Analysis complete</p>
+            <h1 class="hero__title hero__title--file">{{ view.fileName }}</h1>
+            <ul class="meta-chips" aria-label="About this exam">
+                <li style="--i: 0"><strong>{{ student_count }}</strong> students</li>
+                <li style="--i: 1"><strong>{{ question_count }}</strong> questions</li>
+                <li style="--i: 2">max <strong>{{ analysis.maxScore|score }}</strong> points</li>
+                <li style="--i: 3">caesura
+                    {% for point in caesura.points -%}
+                        <strong>{{ point.percentage|score }}%</strong> → {{ point.grade|number_format(1) }}{{ not loop.last ? ' · ' }}
+                    {%- endfor %}
+                </li>
+                <li style="--i: 4">pass from <strong>{{ caesura.passPercentage|score }}%</strong></li>
+            </ul>
+            <div class="command-line" data-controller="clipboard" data-clipboard-text-value="{{ view.cliCommand }}">
+                <span class="command-line__prompt" aria-hidden="true">$</span>
+                <code class="command-line__code" title="{{ view.cliCommand }}">{{ view.cliCommand }}</code>
+                <button type="button" class="copy-button" data-action="clipboard#copy">
+                    {{ include('_icon.html.twig', {name: 'copy'}) }}
+                    <span data-clipboard-target="label">Copy CLI command</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main" class="container page page--results">
+        {{ include('analysis/_kpis.html.twig') }}
+
+        <section class="panel charts" aria-label="Charts" data-controller="reveal">
+            {{ include('analysis/_grade_histogram.html.twig') }}
+            {{ include('analysis/_item_map.html.twig') }}
+        </section>
+
+        <section class="panel results" aria-labelledby="results-title" data-controller="tabs"
+                 data-action="analysis:filter-grade@window->tabs#showFromEvent analysis:focus-question@window->tabs#showFromEvent">
+            <div class="results__header">
+                <div>
+                    <p class="eyebrow">Explore</p>
+                    <h2 class="section-title" id="results-title">Results per student and question</h2>
+                </div>
+                <div class="tabs" role="tablist" aria-label="Result tables">
+                    <span class="tabs__indicator" data-tabs-target="indicator" aria-hidden="true"></span>
+                    <button type="button" class="tabs__tab" role="tab" id="tab-students" aria-controls="panel-students" aria-selected="true"
+                            data-tabs-target="tab" data-tabs-name-param="students" data-action="tabs#select keydown->tabs#navigate">
+                        Students <span class="tabs__count">{{ student_count }}</span>
+                    </button>
+                    <button type="button" class="tabs__tab" role="tab" id="tab-questions" aria-controls="panel-questions" aria-selected="false" tabindex="-1"
+                            data-tabs-target="tab" data-tabs-name-param="questions" data-action="tabs#select keydown->tabs#navigate">
+                        Questions <span class="tabs__count">{{ question_count }}</span>
+                    </button>
+                    <button type="button" class="tabs__tab" role="tab" id="tab-console" aria-controls="panel-console" aria-selected="false" tabindex="-1"
+                            data-tabs-target="tab" data-tabs-name-param="console" data-action="tabs#select keydown->tabs#navigate">
+                        {{ include('_icon.html.twig', {name: 'terminal'}) }} Console
+                    </button>
+                </div>
+            </div>
+
+            <div class="tabs__panel" role="tabpanel" id="panel-students" aria-labelledby="tab-students" data-tabs-target="panel" data-name="students">
+                {{ include('analysis/_students_table.html.twig') }}
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="panel-questions" aria-labelledby="tab-questions" data-tabs-target="panel" data-name="questions" hidden>
+                {{ include('analysis/_questions_table.html.twig') }}
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="panel-console" aria-labelledby="tab-console" data-tabs-target="panel" data-name="console" hidden>
+                {{ include('analysis/_console.html.twig') }}
+            </div>
+        </section>
+    </main>
+{% endblock %}
