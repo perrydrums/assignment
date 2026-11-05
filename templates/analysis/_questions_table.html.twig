@@ -1,91 +1,96 @@
-{% set base_name = view.fileName|split('.')|first %}
-{% set without_rit = view.questionsWithoutRitValue|length %}
+{% set review_count = view.reviewCount %}
 
 <div class="table-card" data-controller="data-table"
-     data-data-table-noun-value="questions" data-data-table-filename-value="{{ base_name }}-questions.csv"
+     data-data-table-noun-value="{{ 'results.noun_questions'|trans }}"
+     data-data-table-count-all-pattern-value="{{ 'results.count_all'|trans }}"
+     data-data-table-count-pattern-value="{{ 'results.count_some'|trans }}"
      data-action="analysis:focus-question@window->data-table#focusRow">
     <div class="table-toolbar">
         <label class="search">
             {{ include('_icon.html.twig', {name: 'search'}) }}
-            <span class="visually-hidden">Search questions</span>
-            <input type="search" class="search__input" placeholder="Search questions…" autocomplete="off"
+            <span class="visually-hidden">{{ 'results.search_questions'|trans }}</span>
+            <input type="search" class="search__input" placeholder="{{ 'results.search_questions'|trans }}" autocomplete="off"
                    data-data-table-target="search" data-action="data-table#search">
         </label>
-        {% if without_rit > 0 %}
-            <div class="segmented" role="group" aria-label="Filter by rit-value">
-                <button type="button" aria-pressed="true" data-data-table-target="filterButton" data-action="data-table#filter" data-data-table-tag-param="all">
-                    All <span class="segmented__count">{{ question_count }}</span>
+        <div class="segmented" role="group" aria-label="{{ 'results.filter_review'|trans }}">
+            <button type="button" aria-pressed="true" data-data-table-target="filterButton" data-action="data-table#filter" data-data-table-tag-param="all">
+                {{ 'results.filter_all'|trans }} <span class="segmented__count">{{ question_count }}</span>
+            </button>
+            {% if review_count > 0 %}
+                <button type="button" aria-pressed="false" data-data-table-target="filterButton" data-action="data-table#filter" data-data-table-tag-param="review">
+                    {{ 'results.needs_review'|trans }} <span class="segmented__count">{{ review_count }}</span>
                 </button>
-                <button type="button" aria-pressed="false" data-data-table-target="filterButton" data-action="data-table#filter" data-data-table-tag-param="undefined">
-                    Without rit-value <span class="segmented__count">{{ without_rit }}</span>
-                </button>
-            </div>
-        {% endif %}
-        <p class="table-toolbar__count" data-data-table-target="count" aria-live="polite">{{ question_count }} questions</p>
-        <button type="button" class="button button--secondary button--small" data-action="data-table#exportCsv">
-            {{ include('_icon.html.twig', {name: 'download'}) }} Export CSV
-        </button>
+            {% endif %}
+        </div>
+        <p class="table-toolbar__count" data-data-table-target="count" aria-live="polite">{{ 'results.count_all'|trans|replace({'{total}': question_count, '{noun}': 'results.noun_questions'|trans}) }}</p>
     </div>
 
     <div class="table-scroll">
         <table class="data-table">
-            <caption class="visually-hidden">P'-value and rit-value per question</caption>
+            <caption class="visually-hidden">{{ 'results.question_caption'|trans }}</caption>
             <thead>
                 <tr>
-                    <th scope="col" class="num" aria-sort="ascending" data-data-table-target="header" data-export-label="Number">
+                    <th scope="col" class="num" aria-sort="ascending" data-data-table-target="header">
                         <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="0" data-data-table-type-param="number">#<span class="sort-indicator" aria-hidden="true"></span></button>
                     </th>
-                    <th scope="col" data-data-table-target="header" data-export-label="Question">
-                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="1" data-data-table-type-param="text">Question<span class="sort-indicator" aria-hidden="true"></span></button>
+                    <th scope="col" data-data-table-target="header">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="1" data-data-table-type-param="text">{{ 'detail.question'|trans }}<span class="sort-indicator" aria-hidden="true"></span></button>
                     </th>
-                    <th scope="col" class="num" data-data-table-target="header" data-export-label="Max score">
-                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="2" data-data-table-type-param="number">Max score<span class="sort-indicator" aria-hidden="true"></span></button>
+                    <th scope="col" class="num" data-data-table-target="header">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="2" data-data-table-type-param="number">{{ 'detail.maximum'|trans }}<span class="sort-indicator" aria-hidden="true"></span></button>
                     </th>
-                    <th scope="col" class="num" data-data-table-target="header" data-export-label="Average score">
-                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="3" data-data-table-type-param="number">Avg. score<span class="sort-indicator" aria-hidden="true"></span></button>
+                    <th scope="col" class="num" data-data-table-target="header">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="3" data-data-table-type-param="number">{{ 'term.difficulty.label'|trans }} {{ include('analysis/_term.html.twig', {term: 'difficulty'}) }}<span class="sort-indicator" aria-hidden="true"></span></button>
                     </th>
-                    <th scope="col" class="num" data-data-table-target="header" data-export-label="P'-value">
-                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="4" data-data-table-type-param="number">P'-value<span class="sort-indicator" aria-hidden="true"></span></button>
+                    <th scope="col" class="num" data-data-table-target="header">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="4" data-data-table-type-param="number">{{ 'term.discrimination.label'|trans }} {{ include('analysis/_term.html.twig', {term: 'discrimination'}) }}<span class="sort-indicator" aria-hidden="true"></span></button>
                     </th>
-                    <th scope="col" class="num" data-data-table-target="header" data-export-label="rit-value">
-                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="5" data-data-table-type-param="number">rit-value<span class="sort-indicator" aria-hidden="true"></span></button>
+                    <th scope="col" data-data-table-target="header">
+                        <button type="button" class="sort-button" data-action="data-table#sort" data-data-table-column-param="5" data-data-table-type-param="text">{{ 'results.review'|trans }}<span class="sort-indicator" aria-hidden="true"></span></button>
                     </th>
                 </tr>
             </thead>
             <tbody data-data-table-target="body">
                 {% for question in analysis.questions %}
                     {% set number = loop.index %}
+                    {% set flags = view.flags(question) %}
                     {% set rit = question.ritValue %}
-                    {% set average_score = question.pValue * question.maxScore %}
-                    <tr id="question-{{ number }}" data-data-table-target="row"
-                        data-search="{{ question.label|lower }}" data-tags="{{ rit is null ? 'undefined' : 'defined' }}"
+                    <tr id="question-{{ number }}" class="is-clickable" data-data-table-target="row"
+                        data-search="{{ question.label|lower }}" data-tags="{{ flags is empty ? 'ok' : 'review' }}"
+                        data-action="click->details#openQuestion" data-details-index-param="{{ loop.index0 }}"
                         {%- if loop.index0 < 16 %} style="--i: {{ loop.index0 }}"{% endif %}>
                         <td class="num muted" data-sort="{{ number }}">{{ number }}</td>
                         <th scope="row">{{ question.label }}</th>
                         <td class="num" data-sort="{{ question.maxScore }}">{{ question.maxScore|score }}</td>
-                        <td class="num" data-sort="{{ average_score }}" data-export="{{ average_score|number_format(2, '.', '') }}">{{ average_score|number_format(2) }}</td>
-                        <td class="num" data-sort="{{ question.pValue }}" data-export="{{ question.pValue|number_format(3, '.', '') }}">
+                        <td class="num" data-sort="{{ question.pValue }}">
                             <span class="metric">
                                 <span class="meter" style="--value: {{ question.pValue|round(4) }}"><span></span></span>
-                                {{ question.pValue|number_format(3) }}
+                                {{ question.pValue|format_number({fraction_digit: 3}) }}
                             </span>
                         </td>
                         {% if rit is null %}
-                            <td class="num" data-export="n/a">
-                                <span class="badge" title="Undefined: every student had the same score on this question">n/a</span>
+                            <td class="num">
+                                <span class="badge" title="{{ 'results.no_variation'|trans }}">{{ 'results.not_available'|trans }}</span>
                             </td>
                         {% else %}
-                            <td class="num" data-sort="{{ rit }}" data-export="{{ rit|number_format(3, '.', '') }}">
+                            <td class="num" data-sort="{{ rit }}">
                                 <span class="metric">
                                     <span class="diverging{{ rit < 0 ? ' is-negative' }}" style="--magnitude: {{ rit|abs|round(4) }}"><span></span></span>
-                                    {{ rit|number_format(3) }}
+                                    {{ rit|format_number({fraction_digit: 3}) }}
                                 </span>
                             </td>
                         {% endif %}
+                        <td data-sort="{{ flags is empty ? '' : flags|first.value }}">
+                            {% for flag in flags %}
+                                <span class="flag flag--{{ flag.value }}">{{ ('flag.' ~ flag.value)|trans }}</span>
+                            {% else %}
+                                <span class="flag flag--fine">{{ 'results.no_flags'|trans }}</span>
+                            {% endfor %}
+                        </td>
                     </tr>
                 {% endfor %}
                 <tr class="data-table__empty" data-data-table-target="empty" hidden>
-                    <td colspan="6">No questions match these filters. <button type="button" class="inline-link" data-action="data-table#reset">Clear all filters</button></td>
+                    <td colspan="6">{{ 'results.no_questions'|trans }} <button type="button" class="inline-link" data-action="data-table#reset">{{ 'results.clear_filters'|trans }}</button></td>
                 </tr>
             </tbody>
         </table>

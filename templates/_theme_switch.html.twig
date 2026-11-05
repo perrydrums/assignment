@@ -1,0 +1,31 @@
+{% set current = current_theme() %}
+{% macro name(theme) %}{{ theme.value == 'default' ? 'theme.default'|trans : theme.brand }}{% endmacro %}
+<div class="theme-switch">
+    <button type="button" class="theme-switch__toggle" popovertarget="theme-menu" aria-haspopup="true"
+            data-theme-switch-target="toggle">
+        <span class="theme-swatch" data-theme="{{ current.value }}" data-theme-switch-target="swatch" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="visually-hidden">{{ 'theme.label'|trans }}:</span>
+        <span class="theme-switch__name" data-theme-switch-target="name">{{ _self.name(current) }}</span>
+        {{ include('_icon.html.twig', {name: 'chevron-down'}) }}
+    </button>
+    <div class="theme-menu" id="theme-menu" popover aria-label="{{ 'theme.label'|trans }}"
+         data-theme-switch-target="menu" data-action="beforetoggle->theme-switch#position">
+        <p class="theme-menu__title" aria-hidden="true">{{ 'theme.label'|trans }}</p>
+        <ul class="theme-menu__list">
+            {% for theme in themes() %}
+                <li>
+                    <button type="button" class="theme-menu__option" aria-pressed="{{ theme == current ? 'true' : 'false' }}"
+                            data-theme-switch-target="option" data-action="theme-switch#select"
+                            data-theme-switch-id-param="{{ theme.value }}"
+                            data-theme-switch-name-param="{{ _self.name(theme) }}"
+                            data-theme-switch-brand-param="{{ theme.brand }}"
+                            data-theme-switch-logo-param="{{ asset(theme.logo) }}">
+                        <span class="theme-swatch" data-theme="{{ theme.value }}" aria-hidden="true"><span></span><span></span><span></span></span>
+                        <span>{{ _self.name(theme) }}</span>
+                        {{ include('_icon.html.twig', {name: 'check', class: 'theme-menu__check'}) }}
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="nl" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="brand.product" resname="brand.product">
+        <source>Remindo Analytics</source>
+      </trans-unit>
+      <trans-unit id="brand.description" resname="brand.description">
+        <source>Cijfers, slagingspercentages en vraaginzicht voor je toetsen.</source>
+      </trans-unit>
+      <trans-unit id="language.label" resname="language.label">
+        <source>Taal</source>
+      </trans-unit>
+      <trans-unit id="footer.tagline" resname="footer.tagline">
+        <source>Zie hoe je studenten het deden, en welke vragen je nog eens moet bekijken.</source>
+      </trans-unit>
+      <trans-unit id="footer.privacy" resname="footer.privacy">
+        <source>Resultaten worden geanalyseerd en daarna verwijderd. Er wordt niets bewaard.</source>
+      </trans-unit>
+      <trans-unit id="footer.help" resname="footer.help">
+        <source>Hoe de analyse werkt</source>
+      </trans-unit>
+      <trans-unit id="upload.title" resname="upload.title">
+        <source>Toetsresultaten analyseren</source>
+      </trans-unit>
+      <trans-unit id="upload.eyebrow" resname="upload.eyebrow">
+        <source>Voor docenten</source>
+      </trans-unit>
+      <trans-unit id="upload.headline" resname="upload.headline">
+        <source>Zie hoe je toets ging.</source>
+      </trans-unit>
+      <trans-unit id="upload.lead" resname="upload.lead">
+        <source>Upload de Excel-export uit RemindoTest. Je krijgt een cijfer per student, en een helder beeld van welke vragen werkten.</source>
+      </trans-unit>
+      <trans-unit id="upload.private" resname="upload.private">
+        <source>Niets wordt bewaard</source>
+      </trans-unit>
+      <trans-unit id="upload.step_file" resname="upload.step_file">
+        <source>Upload de resultaten</source>
+      </trans-unit>
+      <trans-unit id="upload.drop_title" resname="upload.drop_title">
+        <source>Sleep het Excel-bestand hierheen</source>
+      </trans-unit>
+      <trans-unit id="upload.drop_or" resname="upload.drop_or">
+        <source>of</source>
+      </trans-unit>
+      <trans-unit id="upload.browse" resname="upload.browse">
+        <source>blader door je bestanden</source>
+      </trans-unit>
+      <trans-unit id="upload.formats" resname="upload.formats">
+        <source>Excel-export uit RemindoTest · maximaal 10 MB</source>
+      </trans-unit>
+      <trans-unit id="upload.ready" resname="upload.ready">
+        <source>klaar</source>
+      </trans-unit>
+      <trans-unit id="upload.remove_file" resname="upload.remove_file">
+        <source>Geselecteerd bestand verwijderen</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_toggle" resname="upload.layout_toggle">
+        <source>Hoe het bestand eruitziet</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_question" resname="upload.layout_question">
+        <source>Score vraag</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_max" resname="upload.layout_max">
+        <source>Max question score:</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_student" resname="upload.layout_student">
+        <source>Student 0001</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_help" resname="upload.layout_help">
+        <source>Het eerste werkblad wordt gelezen. De eerste rij benoemt de vragen, de tweede rij geeft het maximum per vraag, en elke volgende rij is één student.</source>
+      </trans-unit>
+      <trans-unit id="upload.step_scale" resname="upload.step_scale">
+        <source>Controleer de cesuur</source>
+      </trans-unit>
+      <trans-unit id="upload.scale_intro" resname="upload.scale_intro">
+        <source>Zo wordt een score een cijfer. Tussen de punten verandert het cijfer gelijkmatig.</source>
+      </trans-unit>
+      <trans-unit id="upload.scale_help" resname="upload.scale_help">
+        <source>Hoe werkt dit?</source>
+      </trans-unit>
+      <trans-unit id="upload.add_point" resname="upload.add_point">
+        <source>Punt toevoegen</source>
+      </trans-unit>
+      <trans-unit id="upload.live_preview" resname="upload.live_preview">
+        <source>Voorbeeld</source>
+      </trans-unit>
+      <trans-unit id="upload.reset_scale" resname="upload.reset_scale">
+        <source>Standaardschaal: 70% = 5,5</source>
+      </trans-unit>
+      <trans-unit id="upload.privacy" resname="upload.privacy">
+        <source>Het bestand wordt alleen voor deze analyse gebruikt en daarna verwijderd.</source>
+      </trans-unit>
+      <trans-unit id="upload.example" resname="upload.example">
+        <source>Bekijk een voorbeeldanalyse</source>
+      </trans-unit>
+      <trans-unit id="upload.submit" resname="upload.submit">
+        <source>Resultaten analyseren</source>
+      </trans-unit>
+      <trans-unit id="upload.busy" resname="upload.busy">
+        <source>Bezig met analyseren…</source>
+      </trans-unit>
+      <trans-unit id="upload.error_required" resname="upload.error_required">
+        <source>Kies een Excel-bestand om te analyseren.</source>
+      </trans-unit>
+      <trans-unit id="upload.error_type" resname="upload.error_type">
+        <source>Alleen Excel-bestanden (.xlsx of .xls) kunnen worden geanalyseerd, niet "{name}".</source>
+      </trans-unit>
+      <trans-unit id="upload.error_size" resname="upload.error_size">
+        <source>Dit bestand is {size}. Het maximum is {max}.</source>
+      </trans-unit>
+      <trans-unit id="upload.features_eyebrow" resname="upload.features_eyebrow">
+        <source>Wat je krijgt</source>
+      </trans-unit>
+      <trans-unit id="upload.features_title" resname="upload.features_title">
+        <source>Drie vragen, beantwoord voor elke toets</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.grades.title" resname="upload.feature.grades.title">
+        <source>Hoe deed elke student het?</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.grades.text" resname="upload.feature.grades.text">
+        <source>Elke totaalscore wordt een cijfer op jouw schaal. Een student slaagt op de exacte score, niet op een cijfer dat is afgerond.</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.difficulty.title" resname="upload.feature.difficulty.title">
+        <source>Was een vraag te makkelijk of te moeilijk?</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.difficulty.text" resname="upload.feature.difficulty.text">
+        <source>Moeilijkheid (p-waarde) vergelijkt de gemiddelde score met het maximum. Dicht bij 0 scoorde bijna niemand; dicht bij 1 had bijna iedereen alles goed.</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.discrimination.title" resname="upload.feature.discrimination.title">
+        <source>Maakte de vraag verschil tussen sterk en zwak?</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.discrimination.text" resname="upload.feature.discrimination.text">
+        <source>Onderscheidend vermogen (rit) laat zien of studenten met een hoog totaal ook beter scoorden op die vraag. Een heel lage of negatieve waarde is het nakijken waard.</source>
+      </trans-unit>
+      <trans-unit id="upload.chart_title" resname="upload.chart_title">
+        <source>Voorbeeld van de cesuur</source>
+      </trans-unit>
+      <trans-unit id="form.workbook" resname="form.workbook">
+        <source>Toetsresultaten</source>
+      </trans-unit>
+      <trans-unit id="form.caesura" resname="form.caesura">
+        <source>Cesuur</source>
+      </trans-unit>
+      <trans-unit id="form.score_percentage" resname="form.score_percentage">
+        <source>Scorepercentage</source>
+      </trans-unit>
+      <trans-unit id="form.grade" resname="form.grade">
+        <source>Cijfer</source>
+      </trans-unit>
+      <trans-unit id="form.score" resname="form.score">
+        <source>Score</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage" resname="form.pass_percentage">
+        <source>Zak/slaag-grens</source>
+      </trans-unit>
+      <trans-unit id="form.pass_from" resname="form.pass_from">
+        <source>Studenten slagen vanaf</source>
+      </trans-unit>
+      <trans-unit id="form.adjustment.keep" resname="form.adjustment.keep">
+        <source>Meetellen zoals gescoord</source>
+      </trans-unit>
+      <trans-unit id="form.adjustment.remove" resname="form.adjustment.remove">
+        <source>Weglaten uit de toets</source>
+      </trans-unit>
+      <trans-unit id="form.adjustment.full_marks" resname="form.adjustment.full_marks">
+        <source>Iedereen de volle punten</source>
+      </trans-unit>
+      <trans-unit id="results.eyebrow" resname="results.eyebrow">
+        <source>Analyse</source>
+      </trans-unit>
+      <trans-unit id="results.new" resname="results.new">
+        <source>Nieuwe analyse</source>
+      </trans-unit>
+      <trans-unit id="results.facts" resname="results.facts">
+        <source>Over deze toets</source>
+      </trans-unit>
+      <trans-unit id="results.students" resname="results.students">
+        <source>studenten</source>
+      </trans-unit>
+      <trans-unit id="results.questions" resname="results.questions">
+        <source>vragen</source>
+      </trans-unit>
+      <trans-unit id="results.max" resname="results.max">
+        <source>maximum</source>
+      </trans-unit>
+      <trans-unit id="results.pass_from" resname="results.pass_from">
+        <source>slagen vanaf</source>
+      </trans-unit>
+      <trans-unit id="results.adjust" resname="results.adjust">
+        <source>Analyse aanpassen</source>
+      </trans-unit>
+      <trans-unit id="results.download" resname="results.download">
+        <source>Excel downloaden</source>
+      </trans-unit>
+      <trans-unit id="results.print" resname="results.print">
+        <source>Samenvatting afdrukken</source>
+      </trans-unit>
+      <trans-unit id="results.undo" resname="results.undo">
+        <source>Alle wijzigingen ongedaan maken</source>
+      </trans-unit>
+      <trans-unit id="results.insights_eyebrow" resname="results.insights_eyebrow">
+        <source>In het kort</source>
+      </trans-unit>
+      <trans-unit id="results.insights_title" resname="results.insights_title">
+        <source>Wat valt op</source>
+      </trans-unit>
+      <trans-unit id="results.charts" resname="results.charts">
+        <source>Grafieken</source>
+      </trans-unit>
+      <trans-unit id="results.explore" resname="results.explore">
+        <source>Verder kijken</source>
+      </trans-unit>
+      <trans-unit id="results.tables_title" resname="results.tables_title">
+        <source>Studenten en vragen</source>
+      </trans-unit>
+      <trans-unit id="results.tab_students" resname="results.tab_students">
+        <source>Studenten</source>
+      </trans-unit>
+      <trans-unit id="results.tab_questions" resname="results.tab_questions">
+        <source>Vragen</source>
+      </trans-unit>
+      <trans-unit id="results.summary" resname="results.summary">
+        <source>Samenvatting</source>
+      </trans-unit>
+      <trans-unit id="results.pass_rate" resname="results.pass_rate">
+        <source>Slagingspercentage</source>
+      </trans-unit>
+      <trans-unit id="results.average_grade" resname="results.average_grade">
+        <source>Gemiddeld cijfer</source>
+      </trans-unit>
+      <trans-unit id="results.not_available" resname="results.not_available">
+        <source>n.v.t.</source>
+      </trans-unit>
+      <trans-unit id="results.to_review" resname="results.to_review">
+        <source>Vragen om te bekijken</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_good" resname="results.reliability_good">
+        <source>Goed: de vragen wijzen dezelfde kant op</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_acceptable" resname="results.reliability_acceptable">
+        <source>Acceptabel</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_low" resname="results.reliability_low">
+        <source>Laag: gebruik het totaal voorzichtig</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_unknown" resname="results.reliability_unknown">
+        <source>Te weinig variatie om te beoordelen</source>
+      </trans-unit>
+      <trans-unit id="results.noun_students" resname="results.noun_students">
+        <source>studenten</source>
+      </trans-unit>
+      <trans-unit id="results.noun_questions" resname="results.noun_questions">
+        <source>vragen</source>
+      </trans-unit>
+      <trans-unit id="results.count_all" resname="results.count_all">
+        <source>{total} {noun}</source>
+      </trans-unit>
+      <trans-unit id="results.count_some" resname="results.count_some">
+        <source>{visible} van {total} {noun}</source>
+      </trans-unit>
+      <trans-unit id="results.search_students" resname="results.search_students">
+        <source>Zoek op student</source>
+      </trans-unit>
+      <trans-unit id="results.search_questions" resname="results.search_questions">
+        <source>Zoek vragen</source>
+      </trans-unit>
+      <trans-unit id="results.filter_result" resname="results.filter_result">
+        <source>Filter op resultaat</source>
+      </trans-unit>
+      <trans-unit id="results.filter_review" resname="results.filter_review">
+        <source>Filter vragen</source>
+      </trans-unit>
+      <trans-unit id="results.filter_all" resname="results.filter_all">
+        <source>Alles</source>
+      </trans-unit>
+      <trans-unit id="results.passed" resname="results.passed">
+        <source>Geslaagd</source>
+      </trans-unit>
+      <trans-unit id="results.failed" resname="results.failed">
+        <source>Gezakt</source>
+      </trans-unit>
+      <trans-unit id="results.changed" resname="results.changed">
+        <source>Resultaat gewijzigd</source>
+      </trans-unit>
+      <trans-unit id="results.grade" resname="results.grade">
+        <source>Cijfer</source>
+      </trans-unit>
+      <trans-unit id="results.clear_grade" resname="results.clear_grade">
+        <source>Cijferfilter verwijderen</source>
+      </trans-unit>
+      <trans-unit id="results.percentage" resname="results.percentage">
+        <source>Percentage</source>
+      </trans-unit>
+      <trans-unit id="results.result" resname="results.result">
+        <source>Resultaat</source>
+      </trans-unit>
+      <trans-unit id="results.student" resname="results.student">
+        <source>Student</source>
+      </trans-unit>
+      <trans-unit id="results.no_students" resname="results.no_students">
+        <source>Geen studenten passen bij deze filters.</source>
+      </trans-unit>
+      <trans-unit id="results.clear_filters" resname="results.clear_filters">
+        <source>Filters wissen</source>
+      </trans-unit>
+      <trans-unit id="results.needs_review" resname="results.needs_review">
+        <source>Nog bekijken</source>
+      </trans-unit>
+      <trans-unit id="results.review" resname="results.review">
+        <source>Beoordeling</source>
+      </trans-unit>
+      <trans-unit id="results.no_variation" resname="results.no_variation">
+        <source>Iedere student had dezelfde score, dus het onderscheidend vermogen kan niet worden berekend.</source>
+      </trans-unit>
+      <trans-unit id="results.no_flags" resname="results.no_flags">
+        <source>In orde</source>
+      </trans-unit>
+      <trans-unit id="results.no_questions" resname="results.no_questions">
+        <source>Geen vragen passen bij deze filters.</source>
+      </trans-unit>
+      <trans-unit id="results.question_caption" resname="results.question_caption">
+        <source>Moeilijkheid, onderscheidend vermogen en opmerkingen per vraag</source>
+      </trans-unit>
+      <trans-unit id="chart.grades_title" resname="chart.grades_title">
+        <source>Cijferverdeling</source>
+      </trans-unit>
+      <trans-unit id="chart.grades_help" resname="chart.grades_help">
+        <source>Studenten per afgerond cijfer. Kies een staaf om die studenten te zien.</source>
+      </trans-unit>
+      <trans-unit id="chart.legend" resname="chart.legend">
+        <source>Legenda</source>
+      </trans-unit>
+      <trans-unit id="chart.pass" resname="chart.pass">
+        <source>voldoende</source>
+      </trans-unit>
+      <trans-unit id="chart.map_title" resname="chart.map_title">
+        <source>Vragenkaart</source>
+      </trans-unit>
+      <trans-unit id="chart.map_help" resname="chart.map_help">
+        <source>Moeilijkheid horizontaal, onderscheidend vermogen omhoog. Gekleurde vlakken vallen buiten de richtlijnen. Kies een vraag om haar te openen.</source>
+      </trans-unit>
+      <trans-unit id="chart.dot_size" resname="chart.dot_size">
+        <source>Grotere stip: meer punten</source>
+      </trans-unit>
+      <trans-unit id="chart.easier" resname="chart.easier">
+        <source>Moeilijkheid → makkelijker</source>
+      </trans-unit>
+      <trans-unit id="chart.not_plotted" resname="chart.not_plotted">
+        <source>Niet op de kaart, omdat elke student hetzelfde scoorde:</source>
+      </trans-unit>
+      <trans-unit id="term.caesura" resname="term.caesura">
+        <source>Cesuur</source>
+      </trans-unit>
+      <trans-unit id="term.caesura_short" resname="term.caesura_short">
+        <source>Cesuur</source>
+      </trans-unit>
+      <trans-unit id="term.reliability" resname="term.reliability">
+        <source>Betrouwbaarheid</source>
+      </trans-unit>
+      <trans-unit id="term.difficulty.label" resname="term.difficulty.label">
+        <source>Moeilijkheid (p-waarde)</source>
+      </trans-unit>
+      <trans-unit id="term.difficulty.short" resname="term.difficulty.short">
+        <source>p'</source>
+      </trans-unit>
+      <trans-unit id="term.difficulty.text" resname="term.difficulty.text">
+        <source>De gemiddelde score gedeeld door het maximum. 0 betekent dat niemand iets scoorde; 1 betekent dat iedereen de volle punten had.</source>
+      </trans-unit>
+      <trans-unit id="term.discrimination.label" resname="term.discrimination.label">
+        <source>Onderscheidend vermogen (rit)</source>
+      </trans-unit>
+      <trans-unit id="term.discrimination.short" resname="term.discrimination.short">
+        <source>rit</source>
+      </trans-unit>
+      <trans-unit id="term.discrimination.text" resname="term.discrimination.text">
+        <source>Hoe goed de vraag het totaal volgt. Boven 0,20 is een gangbare richtlijn. Een negatieve waarde betekent dat de sterkere studenten het slechter deden: controleer de antwoordensleutel.</source>
+      </trans-unit>
+      <trans-unit id="term.reliability.label" resname="term.reliability.label">
+        <source>Betrouwbaarheid (Cronbach's alpha)</source>
+      </trans-unit>
+      <trans-unit id="term.reliability.text" resname="term.reliability.text">
+        <source>Of de vragen één samenhangend geheel meten. Ongeveer 0,70 is acceptabel en 0,80 is goed. Dit zijn richtlijnen, geen oordeel. Alpha is niet te berekenen als bijna iedereen hetzelfde scoorde.</source>
+      </trans-unit>
+      <trans-unit id="detail.score" resname="detail.score">
+        <source>Score</source>
+      </trans-unit>
+      <trans-unit id="detail.question" resname="detail.question">
+        <source>Vraag</source>
+      </trans-unit>
+      <trans-unit id="detail.maximum" resname="detail.maximum">
+        <source>Maximum</source>
+      </trans-unit>
+      <trans-unit id="detail.counted" resname="detail.counted">
+        <source>In deze analyse</source>
+      </trans-unit>
+      <trans-unit id="detail.students" resname="detail.students">
+        <source>Studenten</source>
+      </trans-unit>
+      <trans-unit id="detail.high_group" resname="detail.high_group">
+        <source>Sterkste studenten</source>
+      </trans-unit>
+      <trans-unit id="detail.low_group" resname="detail.low_group">
+        <source>Zwakste studenten</source>
+      </trans-unit>
+      <trans-unit id="settings.eyebrow" resname="settings.eyebrow">
+        <source>Wat als</source>
+      </trans-unit>
+      <trans-unit id="settings.title" resname="settings.title">
+        <source>Pas deze analyse aan</source>
+      </trans-unit>
+      <trans-unit id="settings.close" resname="settings.close">
+        <source>Sluiten</source>
+      </trans-unit>
+      <trans-unit id="settings.scale_intro" resname="settings.scale_intro">
+        <source>Wijzig de schaal of de zak/slaag-grens en pas toe. Het oorspronkelijke bestand blijft ongewijzigd.</source>
+      </trans-unit>
+      <trans-unit id="settings.reset_baseline" resname="settings.reset_baseline">
+        <source>Terug naar de schaal waarmee je begon</source>
+      </trans-unit>
+      <trans-unit id="settings.questions" resname="settings.questions">
+        <source>Vragen</source>
+      </trans-unit>
+      <trans-unit id="settings.questions_intro" resname="settings.questions_intro">
+        <source>Laat een zwakke vraag weg, of geef iedereen de volle punten als de antwoordensleutel fout was.</source>
+      </trans-unit>
+      <trans-unit id="settings.guidelines" resname="settings.guidelines">
+        <source>Richtlijnen</source>
+      </trans-unit>
+      <trans-unit id="settings.guidelines_intro" resname="settings.guidelines_intro">
+        <source>Indicatieve grenzen. Vragen erbuiten worden gemarkeerd om te bekijken; ze zijn niet automatisch slecht.</source>
+      </trans-unit>
+      <trans-unit id="settings.difficult_below" resname="settings.difficult_below">
+        <source>Erg moeilijk onder</source>
+      </trans-unit>
+      <trans-unit id="settings.easy_above" resname="settings.easy_above">
+        <source>Erg makkelijk boven</source>
+      </trans-unit>
+      <trans-unit id="settings.weak_below" resname="settings.weak_below">
+        <source>Zwak onderscheid onder</source>
+      </trans-unit>
+      <trans-unit id="settings.apply" resname="settings.apply">
+        <source>Analyse bijwerken</source>
+      </trans-unit>
+      <trans-unit id="help.eyebrow" resname="help.eyebrow">
+        <source>Uitleg</source>
+      </trans-unit>
+      <trans-unit id="help.title" resname="help.title">
+        <source>Hoe de analyse werkt</source>
+      </trans-unit>
+      <trans-unit id="help.lead" resname="help.lead">
+        <source>Een korte uitleg van de getallen op de resultatenpagina.</source>
+      </trans-unit>
+      <trans-unit id="help.caesura" resname="help.caesura">
+        <source>De cesuur maakt van een percentage van de maximale score een cijfer. Tussen twee punten verandert het cijfer gelijkmatig. Onder het eerste punt blijft het cijfer op het eerste cijfer, en bovenaan stopt het bij het laatste cijfer.</source>
+      </trans-unit>
+      <trans-unit id="help.caesura_pass" resname="help.caesura_pass">
+        <source>Slagen wordt bepaald op het exacte percentage, niet op het afgeronde cijfer. Een student kan dus een 5,5 zien en toch gezakt zijn, als de score net onder de grens zat.</source>
+      </trans-unit>
+      <trans-unit id="help.flags_title" resname="help.flags_title">
+        <source>Waarom een vraag is gemarkeerd</source>
+      </trans-unit>
+      <trans-unit id="help.flags" resname="help.flags">
+        <source>Standaard wordt een vraag gemarkeerd als de moeilijkheid onder 0,30 of boven 0,90 ligt, of als het onderscheidend vermogen onder 0,20 ligt. Een negatief onderscheidend vermogen wordt altijd gemarkeerd, omdat dat vaak een fout in de antwoordensleutel betekent. Je kunt de grenzen wijzigen via Analyse aanpassen.</source>
+      </trans-unit>
+      <trans-unit id="help.adjust_title" resname="help.adjust_title">
+        <source>Een wijziging proberen</source>
+      </trans-unit>
+      <trans-unit id="help.adjust" resname="help.adjust">
+        <source>Een vraag weglaten haalt haar punten uit het maximum en bij elke student weg. De cijfers worden opnieuw berekend.</source>
+      </trans-unit>
+      <trans-unit id="help.adjust_full" resname="help.adjust_full">
+        <source>Iedereen de volle punten geven houdt de punten van de vraag, maar gaat ervan uit dat elke student ze haalde, bijvoorbeeld na een foutieve antwoordensleutel.</source>
+      </trans-unit>
+      <trans-unit id="help.privacy_title" resname="help.privacy_title">
+        <source>De resultaten van je studenten</source>
+      </trans-unit>
+      <trans-unit id="help.privacy" resname="help.privacy">
+        <source>Het bestand wordt in het geheugen gelezen voor de analyse en niet opgeslagen. Als je de analyse aanpast, worden dezelfde gegevens opnieuw met de pagina meegestuurd. Sluit de pagina en ze zijn weg.</source>
+      </trans-unit>
+      <trans-unit id="flash.exam_data_invalid" resname="flash.exam_data_invalid">
+        <source>Deze analyse kon niet worden voortgezet. Upload het bestand opnieuw.</source>
+      </trans-unit>
+      <trans-unit id="export.sheet.summary" resname="export.sheet.summary">
+        <source>Samenvatting</source>
+      </trans-unit>
+      <trans-unit id="export.sheet.grades" resname="export.sheet.grades">
+        <source>Cijfers</source>
+      </trans-unit>
+      <trans-unit id="export.sheet.questions" resname="export.sheet.questions">
+        <source>Vragen</source>
+      </trans-unit>
+      <trans-unit id="export.file" resname="export.file">
+        <source>Bestand</source>
+      </trans-unit>
+      <trans-unit id="export.students" resname="export.students">
+        <source>Studenten</source>
+      </trans-unit>
+      <trans-unit id="export.questions" resname="export.questions">
+        <source>Vragen</source>
+      </trans-unit>
+      <trans-unit id="export.max_score" resname="export.max_score">
+        <source>Maximale score</source>
+      </trans-unit>
+      <trans-unit id="export.pass_percentage" resname="export.pass_percentage">
+        <source>Zak/slaag-grens</source>
+      </trans-unit>
+      <trans-unit id="export.passed" resname="export.passed">
+        <source>Geslaagd</source>
+      </trans-unit>
+      <trans-unit id="export.failed" resname="export.failed">
+        <source>Gezakt</source>
+      </trans-unit>
+      <trans-unit id="export.average_grade" resname="export.average_grade">
+        <source>Gemiddeld cijfer</source>
+      </trans-unit>
+      <trans-unit id="export.reliability" resname="export.reliability">
+        <source>Betrouwbaarheid (alpha)</source>
+      </trans-unit>
+      <trans-unit id="export.grading_scale" resname="export.grading_scale">
+        <source>Cesuur</source>
+      </trans-unit>
+      <trans-unit id="export.student" resname="export.student">
+        <source>Student</source>
+      </trans-unit>
+      <trans-unit id="export.score" resname="export.score">
+        <source>Score</source>
+      </trans-unit>
+      <trans-unit id="export.percentage" resname="export.percentage">
+        <source>Percentage</source>
+      </trans-unit>
+      <trans-unit id="export.grade" resname="export.grade">
+        <source>Cijfer</source>
+      </trans-unit>
+      <trans-unit id="export.result" resname="export.result">
+        <source>Resultaat</source>
+      </trans-unit>
+      <trans-unit id="export.passed_value" resname="export.passed_value">
+        <source>geslaagd</source>
+      </trans-unit>
+      <trans-unit id="export.failed_value" resname="export.failed_value">
+        <source>gezakt</source>
+      </trans-unit>
+      <trans-unit id="export.number" resname="export.number">
+        <source>Nummer</source>
+      </trans-unit>
+      <trans-unit id="export.question" resname="export.question">
+        <source>Vraag</source>
+      </trans-unit>
+      <trans-unit id="export.difficulty" resname="export.difficulty">
+        <source>Moeilijkheid (p-waarde)</source>
+      </trans-unit>
+      <trans-unit id="export.discrimination" resname="export.discrimination">
+        <source>Onderscheidend vermogen (rit)</source>
+      </trans-unit>
+      <trans-unit id="export.alpha_if_removed" resname="export.alpha_if_removed">
+        <source>Betrouwbaarheid zonder deze vraag</source>
+      </trans-unit>
+      <trans-unit id="export.review" resname="export.review">
+        <source>Beoordeling</source>
+      </trans-unit>
+      <trans-unit id="flag.negative" resname="flag.negative">
+        <source>Controleer de antwoordensleutel</source>
+      </trans-unit>
+      <trans-unit id="flag.no_variation" resname="flag.no_variation">
+        <source>Geen variatie</source>
+      </trans-unit>
+      <trans-unit id="flag.very_difficult" resname="flag.very_difficult">
+        <source>Erg moeilijk</source>
+      </trans-unit>
+      <trans-unit id="flag.very_easy" resname="flag.very_easy">
+        <source>Erg makkelijk</source>
+      </trans-unit>
+      <trans-unit id="flag.weak" resname="flag.weak">
+        <source>Zwak onderscheid</source>
+      </trans-unit>
+      <trans-unit id="nav.skip" resname="nav.skip">
+        <source>Ga naar de inhoud</source>
+      </trans-unit>
+      <trans-unit id="nav.back_to_top" resname="nav.back_to_top">
+        <source>Terug naar boven</source>
+      </trans-unit>
+      <trans-unit id="nav.home" resname="nav.home">
+        <source>Remindo Analytics, begin een nieuwe analyse</source>
+      </trans-unit>
+      <trans-unit id="form.remove_point" resname="form.remove_point">
+        <source>Verwijder dit punt</source>
+      </trans-unit>
+      <trans-unit id="detail.per_question" resname="detail.per_question">
+        <source>Score per vraag</source>
+      </trans-unit>
+      <trans-unit id="detail.distribution" resname="detail.distribution">
+        <source>Hoe studenten scoorden</source>
+      </trans-unit>
+      <trans-unit id="detail.groups" resname="detail.groups">
+        <source>Sterkste tegenover zwakste studenten</source>
+      </trans-unit>
+      <trans-unit id="detail.groups_note" resname="detail.groups_note">
+        <source>Gemiddelde score op deze vraag van de %size% studenten met het hoogste totaal en de %size% met het laagste.</source>
+      </trans-unit>
+      <trans-unit id="detail.alpha_if_removed" resname="detail.alpha_if_removed">
+        <source>Betrouwbaarheid zonder deze vraag</source>
+      </trans-unit>
+      <trans-unit id="detail.alpha_now" resname="detail.alpha_now">
+        <source>nu %alpha%</source>
+      </trans-unit>
+      <trans-unit id="settings.questions_changed" resname="settings.questions_changed">
+        <source>%count% gewijzigd</source>
+      </trans-unit>
+      <trans-unit id="theme.label" resname="theme.label">
+        <source>Thema</source>
+      </trans-unit>
+      <trans-unit id="theme.default" resname="theme.default">
+        <source>Standaard</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

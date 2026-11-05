@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale|default('en') }}" data-theme="{{ current_theme().value }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Exam analytics{% endblock %} · Remindo Analytics</title>
-        <meta name="description" content="Grades, pass/fail results and item analysis (P'- and rit-values) for exam results.">
+        <title>{% block title %}{{ 'brand.product'|trans }}{% endblock %} · {{ 'brand.product'|trans }}</title>
+        <meta name="description" content="{{ 'brand.description'|trans }}">
         <meta name="theme-color" content="#162e47">
         <link rel="icon" href="{{ asset('images/favicon.svg') }}" type="image/svg+xml">
         <link rel="preload" href="{{ asset('fonts/plus-jakarta-sans-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
@@ -15,13 +15,13 @@
         {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">
-        <a class="skip-link" href="#main">Skip to content</a>
+        <a class="skip-link" href="#main">{{ 'nav.skip'|trans }}</a>
 
         {% block body %}{% endblock %}
 
         {{ include('_footer.html.twig') }}
 
-        <button type="button" class="back-to-top" aria-label="Back to top"
+        <button type="button" class="back-to-top" aria-label="{{ 'nav.back_to_top'|trans }}"
                 data-controller="back-to-top" data-action="back-to-top#scrollUp scroll@window->back-to-top#toggle:passive">
             {{ include('_icon.html.twig', {name: 'arrow-up'}) }}
         </button>

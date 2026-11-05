@@ -47,32 +47,17 @@
     --font-body: 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
 
-    --lavender: #9785ff;
-    --lavender-strong: #6959c2;
-    --lavender-button: #6f5ce6;
-    --lavender-ink: #4b3bb5;
-    --lavender-soft: #b9adff;
-    --lavender-tint: #edeaff;
-    --lavender-wash: #f6f5ff;
-    --mist: #e8e9f3;
-    --mist-strong: #d6d8e8;
-    --navy: #162e47;
-    --navy-deep: #0e1f33;
     --ink: #212724;
-    --text: #162e47;
     --muted: #737875;
     --subtle: #8f9894;
-    --cream: #f2f1e1;
-    --cream-light: #f7f6eb;
-    --line: #e2e2d6;
-    --line-cool: #e6e7f1;
     --charcoal: #303633;
     --rose: #d64569;
     --rose-ink: #a3203f;
     --rose-tint: #fdebef;
     --amber-ink: #7a5300;
     --amber-tint: #fff4dc;
-    --failed: #c7cbe0;
+    --green-ink: #146c43;
+    --green-tint: #e7f6ee;
 
     --radius-sm: 10px;
     --radius: 12px;
@@ -81,11 +66,11 @@
     --radius-xl: 40px;
     --radius-pill: 999px;
 
-    --shadow-xs: 0 1px 2px rgb(22 46 71 / 0.06);
-    --shadow-sm: 0 1px 2px rgb(22 46 71 / 0.05), 0 6px 16px -8px rgb(22 46 71 / 0.14);
-    --shadow-md: 0 1px 2px rgb(22 46 71 / 0.04), 0 18px 40px -18px rgb(22 46 71 / 0.28);
-    --shadow-lg: 0 2px 6px rgb(22 46 71 / 0.04), 0 40px 80px -32px rgb(22 46 71 / 0.42);
-    --focus-ring: 0 0 0 4px rgb(151 133 255 / 0.3);
+    --shadow-xs: 0 1px 2px color-mix(in srgb, var(--dark) 6%, transparent);
+    --shadow-sm: 0 1px 2px color-mix(in srgb, var(--dark) 5%, transparent), 0 6px 16px -8px color-mix(in srgb, var(--dark) 14%, transparent);
+    --shadow-md: 0 1px 2px color-mix(in srgb, var(--dark) 4%, transparent), 0 18px 40px -18px color-mix(in srgb, var(--dark) 28%, transparent);
+    --shadow-lg: 0 2px 6px color-mix(in srgb, var(--dark) 4%, transparent), 0 40px 80px -32px color-mix(in srgb, var(--dark) 42%, transparent);
+    --focus-ring: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent);
 
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -133,16 +118,17 @@ p {
 }
 
 a {
-    color: var(--lavender-strong);
+    color: var(--accent-strong);
     text-underline-offset: 3px;
 }
 
 a:hover {
-    color: var(--lavender-ink);
+    color: var(--accent-ink);
 }
 
 button,
-input {
+input,
+select {
     font: inherit;
     color: inherit;
 }
@@ -153,13 +139,13 @@ pre {
 }
 
 :focus-visible {
-    outline: 2px solid var(--lavender);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
 }
 
 ::selection {
-    background: var(--lavender-soft);
-    color: var(--navy-deep);
+    background: var(--accent-soft);
+    color: var(--dark-deep);
 }
 
 [hidden] {
@@ -201,7 +187,7 @@ pre {
     padding: 10px 18px;
     border-radius: var(--radius-pill);
     background: #fff;
-    color: var(--navy);
+    color: var(--dark);
     font-weight: 600;
     transition: top 0.2s var(--ease-out);
 }
@@ -219,7 +205,7 @@ pre {
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.01em;
-    color: var(--lavender-strong);
+    color: var(--accent-strong);
 }
 
 .eyebrow::before {
@@ -227,12 +213,12 @@ pre {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--lavender);
-    box-shadow: 0 0 0 4px rgb(151 133 255 / 0.22);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 .eyebrow--on-dark {
-    color: var(--lavender-soft);
+    color: var(--accent-soft);
 }
 
 .section-title {

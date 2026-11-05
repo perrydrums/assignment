@@ -4,84 +4,151 @@
 {% set caesura = analysis.caesura %}
 {% set student_count = analysis.students|length %}
 {% set question_count = analysis.questions|length %}
+{% form_theme settings_form 'form/theme.html.twig' %}
 
 {% block title %}{{ view.fileName }}{% endblock %}
 
 {% block body %}
-    <header class="hero hero--results">
-        {{ include('_hero_backdrop.html.twig') }}
-        <div class="container topbar">
-            {{ include('_wordmark.html.twig', {light: true}) }}
-            <a class="button button--light button--small" href="{{ path('app_analysis_upload') }}">
-                {{ include('_icon.html.twig', {name: 'upload'}) }} New analysis
-            </a>
-        </div>
-        <div class="container hero__content">
-            <p class="eyebrow eyebrow--on-dark">Analysis complete</p>
-            <h1 class="hero__title hero__title--file">{{ view.fileName }}</h1>
-            <ul class="meta-chips" aria-label="About this exam">
-                <li style="--i: 0"><strong>{{ student_count }}</strong> students</li>
-                <li style="--i: 1"><strong>{{ question_count }}</strong> questions</li>
-                <li style="--i: 2">max <strong>{{ analysis.maxScore|score }}</strong> points</li>
-                <li style="--i: 3">caesura
-                    {% for point in caesura.points -%}
-                        <strong>{{ point.percentage|score }}%</strong> → {{ point.grade|number_format(1) }}{{ not loop.last ? ' · ' }}
-                    {%- endfor %}
-                </li>
-                <li style="--i: 4">pass from <strong>{{ caesura.passPercentage|score }}%</strong></li>
-            </ul>
-            <div class="command-line" data-controller="clipboard" data-clipboard-text-value="{{ view.cliCommand }}">
-                <span class="command-line__prompt" aria-hidden="true">$</span>
-                <code class="command-line__code" title="{{ view.cliCommand }}">{{ view.cliCommand }}</code>
-                <button type="button" class="copy-button" data-action="clipboard#copy">
-                    {{ include('_icon.html.twig', {name: 'copy'}) }}
-                    <span data-clipboard-target="label">Copy CLI command</span>
-                </button>
-            </div>
-        </div>
-    </header>
+    {% set labels = {
+        score: 'detail.score'|trans,
+        grade: 'results.grade'|trans,
+        result: 'results.result'|trans,
+        difficulty: 'term.difficulty.label'|trans,
+        discrimination: 'term.discrimination.label'|trans,
+        alpha_if_removed: 'detail.alpha_if_removed'|trans,
+        alpha_now: 'detail.alpha_now'|trans,
+        high_group: 'detail.high_group'|trans,
+        low_group: 'detail.low_group'|trans,
+        groups_note: 'detail.groups_note'|trans,
+        not_available: 'results.not_available'|trans,
+        keep: 'form.adjustment.keep'|trans,
+        remove: 'form.adjustment.remove'|trans,
+        full_marks: 'form.adjustment.full_marks'|trans
+    } %}
 
-    <main id="main" class="container page page--results">
-        {{ include('analysis/_kpis.html.twig') }}
+    {{ form_start(settings_form, {attr: {
+        id: 'analysis-settings',
+        class: 'settings-form',
+        'data-controller': 'settings',
+        action: path('app_analysis_results', {_locale: app.locale}),
+    }}) }}
+    {{ form_widget(settings_form.fileName) }}
+    {{ form_widget(settings_form.exam) }}
+    {{ form_widget(settings_form.baselineCaesura) }}
 
-        <section class="panel charts" aria-label="Charts" data-controller="reveal">
-            {{ include('analysis/_grade_histogram.html.twig') }}
-            {{ include('analysis/_item_map.html.twig') }}
-        </section>
-
-        <section class="panel results" aria-labelledby="results-title" data-controller="tabs"
-                 data-action="analysis:filter-grade@window->tabs#showFromEvent analysis:focus-question@window->tabs#showFromEvent">
-            <div class="results__header">
-                <div>
-                    <p class="eyebrow">Explore</p>
-                    <h2 class="section-title" id="results-title">Results per student and question</h2>
-                </div>
-                <div class="tabs" role="tablist" aria-label="Result tables">
-                    <span class="tabs__indicator" data-tabs-target="indicator" aria-hidden="true"></span>
-                    <button type="button" class="tabs__tab" role="tab" id="tab-students" aria-controls="panel-students" aria-selected="true"
-                            data-tabs-target="tab" data-tabs-name-param="students" data-action="tabs#select keydown->tabs#navigate">
-                        Students <span class="tabs__count">{{ student_count }}</span>
-                    </button>
-                    <button type="button" class="tabs__tab" role="tab" id="tab-questions" aria-controls="panel-questions" aria-selected="false" tabindex="-1"
-                            data-tabs-target="tab" data-tabs-name-param="questions" data-action="tabs#select keydown->tabs#navigate">
-                        Questions <span class="tabs__count">{{ question_count }}</span>
-                    </button>
-                    <button type="button" class="tabs__tab" role="tab" id="tab-console" aria-controls="panel-console" aria-selected="false" tabindex="-1"
-                            data-tabs-target="tab" data-tabs-name-param="console" data-action="tabs#select keydown->tabs#navigate">
-                        {{ include('_icon.html.twig', {name: 'terminal'}) }} Console
-                    </button>
+    <div data-controller="details print drawer"
+         data-drawer-open-value="{{ settings_form.vars.valid ? 'false' : 'true' }}"
+         data-original-indexes="{{ original_indexes }}"
+         data-details-exam-value="{{ exam_payload|json_encode|e('html_attr') }}"
+         data-details-details-value="{{ question_details|json_encode|e('html_attr') }}"
+         data-details-adjustments-value="{{ settings.adjustments|map(adjustment => adjustment.value)|json_encode|e('html_attr') }}"
+         data-details-labels-value="{{ labels|json_encode|e('html_attr') }}"
+         data-details-reliability-value="{{ analysis.reliability }}">
+        <header class="hero hero--results">
+            {{ include('_hero_backdrop.html.twig') }}
+            <div class="container topbar" data-controller="theme-switch">
+                {{ include('_topbar_brand.html.twig') }}
+                <div class="topbar__tools">
+                    {{ include('_theme_switch.html.twig') }}
+                    {{ include('_language_switch.html.twig', {mode: 'form'}) }}
+                    <a class="button button--light button--small" href="{{ path('app_analysis_upload', {_locale: app.locale}) }}">
+                        {{ include('_icon.html.twig', {name: 'upload'}) }} {{ 'results.new'|trans }}
+                    </a>
                 </div>
             </div>
+            <div class="container hero__content">
+                <p class="eyebrow eyebrow--on-dark">{{ 'results.eyebrow'|trans }}</p>
+                <h1 class="hero__title hero__title--file">{{ view.fileName }}</h1>
+                <p class="print-only">{{ 'now'|format_datetime('long', 'short') }}</p>
+                <ul class="meta-chips" aria-label="{{ 'results.facts'|trans }}">
+                    <li style="--i: 0"><strong>{{ student_count }}</strong> {{ 'results.students'|trans }}</li>
+                    <li style="--i: 1"><strong>{{ question_count }}</strong> {{ 'results.questions'|trans }}</li>
+                    <li style="--i: 2">{{ 'results.max'|trans }} <strong>{{ analysis.maxScore|score }}</strong></li>
+                    <li style="--i: 3">{{ 'term.caesura_short'|trans }}
+                        {% for point in caesura.points -%}
+                            <strong>{{ point.percentage|score }}%</strong> → {{ point.grade|format_number({fraction_digit: 1}) }}{{ not loop.last ? ' · ' }}
+                        {%- endfor %}
+                    </li>
+                    <li style="--i: 4">{{ 'results.pass_from'|trans }} <strong>{{ caesura.passPercentage|score }}%</strong></li>
+                </ul>
+                <div class="result-actions no-print">
+                    <button type="button" class="button button--light" data-action="drawer#open">{{ include('_icon.html.twig', {name: 'gauge'}) }} {{ 'results.adjust'|trans }}</button>
+                    <button type="submit" class="button button--light" formaction="{{ path('app_analysis_export', {_locale: app.locale}) }}">{{ include('_icon.html.twig', {name: 'download'}) }} {{ 'results.download'|trans }}</button>
+                    <button type="button" class="button button--light" data-action="print#print">{{ include('_icon.html.twig', {name: 'printer'}) }} {{ 'results.print'|trans }}</button>
+                </div>
+            </div>
+        </header>
 
-            <div class="tabs__panel" role="tabpanel" id="panel-students" aria-labelledby="tab-students" data-tabs-target="panel" data-name="students">
-                {{ include('analysis/_students_table.html.twig') }}
-            </div>
-            <div class="tabs__panel" role="tabpanel" id="panel-questions" aria-labelledby="tab-questions" data-tabs-target="panel" data-name="questions" hidden>
-                {{ include('analysis/_questions_table.html.twig') }}
-            </div>
-            <div class="tabs__panel" role="tabpanel" id="panel-console" aria-labelledby="tab-console" data-tabs-target="panel" data-name="console" hidden>
-                {{ include('analysis/_console.html.twig') }}
-            </div>
-        </section>
-    </main>
+        <main id="main" class="container page page--results">
+            {% if view.outcome.adjusted %}
+                <div class="adjustment-banner" role="status">
+                    <p>
+                        {% if settings.removedCount > 0 %}{{ 'results.removed'|trans({count: settings.removedCount}) }} {% endif %}
+                        {% if settings.fullMarksCount > 0 %}{{ 'results.full_marks'|trans({count: settings.fullMarksCount}) }} {% endif %}
+                        {% if settings.caesura.passPercentage != settings.baselineCaesura.passPercentage %}
+                            {{ 'results.pass_mark_now'|trans({percent: settings.caesura.passPercentage|score}) }}
+                        {% endif %}
+                        {% if view.outcome.passCountDelta > 0 %}{{ 'results.passes_gained'|trans({count: view.outcome.passCountDelta}) }}
+                        {% elseif view.outcome.passCountDelta < 0 %}{{ 'results.passes_lost'|trans({count: view.outcome.passCountDelta|abs}) }}{% endif %}
+                    </p>
+                    <button type="button" class="button button--secondary button--small no-print" data-action="settings#undo">{{ 'results.undo'|trans }}</button>
+                </div>
+            {% endif %}
+
+            {{ include('analysis/_kpis.html.twig') }}
+
+            {% if view.insights is not empty %}
+                <section class="panel insights" aria-labelledby="insights-title">
+                    <p class="eyebrow">{{ 'results.insights_eyebrow'|trans }}</p>
+                    <h2 class="section-title" id="insights-title">{{ 'results.insights_title'|trans }}</h2>
+                    <ul class="insights__list">
+                        {% for insight in view.insights %}
+                            <li>
+                                <button type="button" class="insight" data-action="details#follow" data-details-event-name-param="{{ insight.target == 'students' ? 'analysis:show-tab' : 'analysis:focus-question' }}" data-details-detail-param="{{ (insight.target == 'question' ? {tab: 'questions', rowId: 'question-' ~ insight.questionNumber} : {tab: insight.target})|json_encode }}">
+                                    {{ include('_icon.html.twig', {name: 'sparkles'}) }}
+                                    <span>{{ insight.messageKey|trans(insight.parameters) }}</span>
+                                </button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
+
+            <section class="panel charts" aria-label="{{ 'results.charts'|trans }}" data-controller="reveal">
+                {{ include('analysis/_grade_histogram.html.twig') }}
+                {{ include('analysis/_item_map.html.twig') }}
+            </section>
+
+            <section class="panel results no-print" aria-labelledby="results-title" data-controller="tabs"
+                     data-action="analysis:filter-grade@window->tabs#showFromEvent analysis:focus-question@window->tabs#showFromEvent analysis:show-tab@window->tabs#showFromEvent">
+                <div class="results__header">
+                    <div>
+                        <p class="eyebrow">{{ 'results.explore'|trans }}</p>
+                        <h2 class="section-title" id="results-title">{{ 'results.tables_title'|trans }}</h2>
+                    </div>
+                    <div class="tabs" role="tablist" aria-label="{{ 'results.tables_title'|trans }}">
+                        <span class="tabs__indicator" data-tabs-target="indicator" aria-hidden="true"></span>
+                        <button type="button" class="tabs__tab" role="tab" id="tab-students" aria-controls="panel-students" aria-selected="true"
+                                data-tabs-target="tab" data-tabs-name-param="students" data-action="tabs#select keydown->tabs#navigate">
+                            {{ 'results.tab_students'|trans }} <span class="tabs__count">{{ student_count }}</span>
+                        </button>
+                        <button type="button" class="tabs__tab" role="tab" id="tab-questions" aria-controls="panel-questions" aria-selected="false" tabindex="-1"
+                                data-tabs-target="tab" data-tabs-name-param="questions" data-action="tabs#select keydown->tabs#navigate">
+                            {{ 'results.tab_questions'|trans }} <span class="tabs__count">{{ question_count }}</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="tabs__panel" role="tabpanel" id="panel-students" aria-labelledby="tab-students" data-tabs-target="panel" data-name="students">
+                    {{ include('analysis/_students_table.html.twig') }}
+                </div>
+                <div class="tabs__panel" role="tabpanel" id="panel-questions" aria-labelledby="tab-questions" data-tabs-target="panel" data-name="questions" hidden>
+                    {{ include('analysis/_questions_table.html.twig') }}
+                </div>
+            </section>
+        </main>
+
+        {{ include('analysis/_settings_drawer.html.twig') }}
+        {{ include('analysis/_detail_drawers.html.twig') }}
+    </div>
+    {{ form_end(settings_form) }}
 {% endblock %}

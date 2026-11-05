@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="caesura.invalid" resname="caesura.invalid">
+        <source>The grading scale is not valid.</source>
+      </trans-unit>
+      <trans-unit id="caesura.too_few_points" resname="caesura.too_few_points">
+        <source>A grading scale needs at least two points.</source>
+      </trans-unit>
+      <trans-unit id="caesura.percentage_range" resname="caesura.percentage_range">
+        <source>A percentage must be between 0 and 100, got %value%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.grade_not_finite" resname="caesura.grade_not_finite">
+        <source>A grade must be a number.</source>
+      </trans-unit>
+      <trans-unit id="caesura.percentages_not_increasing" resname="caesura.percentages_not_increasing">
+        <source>Percentages must go up. %current%% follows %previous%%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.grades_decrease" resname="caesura.grades_decrease">
+        <source>Grades must not go down. %current% follows %previous%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.pass_percentage_range" resname="caesura.pass_percentage_range">
+        <source>The pass percentage must be greater than 0 and at most 100, got %value%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.incomplete_point" resname="caesura.incomplete_point">
+        <source>Every point needs a percentage and a grade.</source>
+      </trans-unit>
+      <trans-unit id="caesura.pass_percentage_missing" resname="caesura.pass_percentage_missing">
+        <source>The pass percentage is missing.</source>
+      </trans-unit>
+      <trans-unit id="caesura.invalid_point" resname="caesura.invalid_point">
+        <source>Invalid point "%point%". Use percentage:grade, for example 70:5.5.</source>
+      </trans-unit>
+      <trans-unit id="caesura.invalid_number" resname="caesura.invalid_number">
+        <source>"%value%" is not a number.</source>
+      </trans-unit>
+      <trans-unit id="workbook.generic" resname="workbook.generic">
+        <source>The file could not be read.</source>
+      </trans-unit>
+      <trans-unit id="workbook.file_missing" resname="workbook.file_missing">
+        <source>The file does not exist or is not readable.</source>
+      </trans-unit>
+      <trans-unit id="workbook.not_excel" resname="workbook.not_excel">
+        <source>The file could not be read as an Excel workbook (.xlsx or .xls): %detail%</source>
+      </trans-unit>
+      <trans-unit id="workbook.no_sheet" resname="workbook.no_sheet">
+        <source>The workbook does not contain a worksheet.</source>
+      </trans-unit>
+      <trans-unit id="workbook.unprocessable" resname="workbook.unprocessable">
+        <source>The workbook could not be processed: %detail%</source>
+      </trans-unit>
+      <trans-unit id="workbook.rejected" resname="workbook.rejected">
+        <source>%detail%</source>
+      </trans-unit>
+      <trans-unit id="workbook.no_questions" resname="workbook.no_questions">
+        <source>The header row does not contain any question columns.</source>
+      </trans-unit>
+      <trans-unit id="workbook.no_students" resname="workbook.no_students">
+        <source>The worksheet does not contain any student rows (expected from row %row%).</source>
+      </trans-unit>
+      <trans-unit id="workbook.example_missing" resname="workbook.example_missing">
+        <source>The example workbook is not available.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.header_id" resname="workbook.cell.header_id">
+        <source>Cell %cell%: expected the header "ID", got "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_label" resname="workbook.cell.max_label">
+        <source>Cell %cell%: expected the maximum-score row label (e.g. "Max question score:"), got "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.header_empty" resname="workbook.cell.header_empty">
+        <source>Cell %cell%: the question header is empty, but the column contains data.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_not_positive" resname="workbook.cell.max_not_positive">
+        <source>Cell %cell%: the maximum score of "%label%" must be greater than 0, got %value%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.student_missing" resname="workbook.cell.student_missing">
+        <source>Cell %cell%: the student ID is missing.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.student_duplicate" resname="workbook.cell.student_duplicate">
+        <source>Cell %cell%: student ID "%id%" already occurs in row %row%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_range" resname="workbook.cell.score_range">
+        <source>Cell %cell%: score %value% of student "%id%" on "%label%" is outside the allowed range 0 to %max%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.expected_text" resname="workbook.cell.expected_text">
+        <source>Cell %cell%: expected text, got %type%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_missing" resname="workbook.cell.max_missing">
+        <source>Cell %cell%: the maximum score of "%label%" is missing.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_text" resname="workbook.cell.max_text">
+        <source>Cell %cell%: the maximum score of "%label%" must be a number, got text "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_type" resname="workbook.cell.max_type">
+        <source>Cell %cell%: the maximum score of "%label%" must be a number, got %value%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_missing" resname="workbook.cell.score_missing">
+        <source>Cell %cell%: the score of student "%id%" on "%label%" is missing.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_text" resname="workbook.cell.score_text">
+        <source>Cell %cell%: the score of student "%id%" on "%label%" must be a number, got text "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_type" resname="workbook.cell.score_type">
+        <source>Cell %cell%: the score of student "%id%" on "%label%" must be a number, got %value%.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.invalid_json" resname="exam_data.invalid_json">
+        <source>The analysis data is not valid. Please upload the file again.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.structure" resname="exam_data.structure">
+        <source>The analysis data has an unexpected structure.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.too_large" resname="exam_data.too_large">
+        <source>An analysis is limited to %questions% questions and %students% students.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.question" resname="exam_data.question">
+        <source>A question in the analysis data is incomplete.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.student" resname="exam_data.student">
+        <source>A student in the analysis data is incomplete.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.score" resname="exam_data.score">
+        <source>A score in the analysis data is not a number.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.rejected" resname="exam_data.rejected">
+        <source>The analysis data was rejected.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="nl" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="form.workbook.required" resname="form.workbook.required">
+        <source>Kies een Excel-werkboek (.xlsx of .xls) om te analyseren.</source>
+      </trans-unit>
+      <trans-unit id="form.workbook.max_size" resname="form.workbook.max_size">
+        <source>Het bestand is te groot (maximaal {{ limit }} {{ suffix }}).</source>
+      </trans-unit>
+      <trans-unit id="form.workbook.extension" resname="form.workbook.extension">
+        <source>Alleen Excel-werkboeken ({{ extensions }}) kunnen worden geanalyseerd, geen "{{ extension }}"-bestanden.</source>
+      </trans-unit>
+      <trans-unit id="form.workbook.mime" resname="form.workbook.mime">
+        <source>Dit bestand lijkt geen Excel-werkboek te zijn.</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage.required" resname="form.pass_percentage.required">
+        <source>Vul de zak/slaag-grens in.</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage.positive" resname="form.pass_percentage.positive">
+        <source>De zak/slaag-grens moet groter zijn dan 0.</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage.max" resname="form.pass_percentage.max">
+        <source>De zak/slaag-grens kan hoogstens 100 zijn.</source>
+      </trans-unit>
+      <trans-unit id="form.number" resname="form.number">
+        <source>Vul een getal in.</source>
+      </trans-unit>
+      <trans-unit id="form.adjustments.count" resname="form.adjustments.count">
+        <source>Elke vraag heeft een keuze nodig.</source>
+      </trans-unit>
+      <trans-unit id="form.guidelines.order" resname="form.guidelines.order">
+        <source>De grens "erg moeilijk" moet lager zijn dan de grens "erg makkelijk".</source>
+      </trans-unit>
+    <trans-unit id="form.percentage.required" resname="form.percentage.required"><source>Vul een percentage in.</source></trans-unit><trans-unit id="form.percentage.range" resname="form.percentage.range"><source>Gebruik een percentage tussen {{ min }} en {{ max }}.</source></trans-unit><trans-unit id="form.grade.required" resname="form.grade.required"><source>Vul een cijfer in.</source></trans-unit></body>
+  </file>
+</xliff>

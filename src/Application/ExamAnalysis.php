@@ -17,6 +17,8 @@ final readonly class ExamAnalysis
         public Caesura $caesura,
         public array $students,
         public array $questions,
+        /** Cronbach's alpha; null when it cannot be computed. */
+        public ?float $reliability = null,
     ) {
         if ([] === $students || [] === $questions) {
             throw new \InvalidArgumentException('An exam analysis needs at least one student and one question.');

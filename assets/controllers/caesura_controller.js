@@ -10,7 +10,7 @@ const PLOT = { left: 30, right: 10, top: 16, bottom: 28 };
  */
 export default class extends Controller {
     static targets = ['list', 'template', 'point', 'percentage', 'grade', 'pass', 'chart', 'problem', 'removeButton'];
-    static values = { index: Number, defaultPoints: Array, defaultPass: Number };
+    static values = { index: Number, defaultPoints: Array, defaultPass: Number, passWord: { type: String, default: 'pass' } };
 
     connect() {
         this.render();
@@ -69,7 +69,7 @@ export default class extends Controller {
             button.disabled = this.pointTargets.length <= 2;
         });
 
-        this.chartTarget.innerHTML = drawChart(points, pass, problem !== null, !this.hasDrawn);
+        this.chartTarget.innerHTML = drawChart(points, pass, problem !== null, !this.hasDrawn, this.passWordValue);
         this.hasDrawn = true;
     }
 
@@ -123,7 +123,7 @@ function gradeAt(points, percentage) {
     return points.at(-1).grade;
 }
 
-function drawChart(points, pass, invalid, animate) {
+function drawChart(points, pass, invalid, animate, passWord) {
     const plotWidth = WIDTH - PLOT.left - PLOT.right;
     const plotHeight = HEIGHT - PLOT.top - PLOT.bottom;
     const grades = points.length > 0 ? points.map((point) => point.grade) : [1, 10];
@@ -135,7 +135,7 @@ function drawChart(points, pass, invalid, animate) {
 
     let svg = '<title>Preview of the caesura: grade by score percentage</title>'
         + '<defs><linearGradient id="caesura-fill" x1="0" x2="0" y1="0" y2="1">'
-        + '<stop offset="0%" stop-color="#9785ff" stop-opacity="0.32"/><stop offset="100%" stop-color="#9785ff" stop-opacity="0.02"/>'
+        + '<stop class="caesura-chart__stop" offset="0%" stop-opacity="0.32"/><stop class="caesura-chart__stop" offset="100%" stop-opacity="0.02"/>'
         + '</linearGradient></defs><g class="caesura-chart__grid">';
     for (let grade = lowest; grade <= highest; grade += gradeStep) {
         svg += `<line x1="${PLOT.left}" x2="${WIDTH - PLOT.right}" y1="${y(grade)}" y2="${y(grade)}"/>`
@@ -163,7 +163,7 @@ function drawChart(points, pass, invalid, animate) {
             const passGrade = gradeAt(points, pass);
             svg += `<line class="caesura-chart__pass-line" x1="${x(pass)}" x2="${x(pass)}" y1="${PLOT.top - 4}" y2="${PLOT.top + plotHeight}"/>`
                 + `<circle class="caesura-chart__pass-point" cx="${x(pass)}" cy="${y(passGrade)}" r="5.5"/>`
-                + `<text class="caesura-chart__pass-label" x="${x(pass) - 6}" y="${PLOT.top + 6}" text-anchor="end">pass ${formatNumber(pass)}% → ${passGrade.toFixed(1)}</text>`;
+                + `<text class="caesura-chart__pass-label" x="${x(pass) - 6}" y="${PLOT.top + 6}" text-anchor="end">${passWord} ${formatNumber(pass)}% → ${formatNumber(passGrade)}</text>`;
         }
     }
 
@@ -175,5 +175,7 @@ function round(value) {
 }
 
 function formatNumber(value) {
-    return Number.isInteger(value) ? String(value) : value.toFixed(1);
+    return new Intl.NumberFormat(document.documentElement.lang || 'en', {
+        maximumFractionDigits: 1,
+    }).format(value);
 }

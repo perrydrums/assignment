@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Infrastructure\Web;
 
+use App\Application\AnalysisOutcome;
 use App\Application\ExamAnalysis;
 use App\Application\QuestionResult;
 use App\Application\StudentResult;
+use App\Domain\Analytics\QualityGuidelines;
+use App\Domain\Analytics\QuestionFlag;
 use App\Domain\Grade\Caesura;
 use App\Domain\Grade\CaesuraPoint;
 use App\Domain\Grade\GradeResult;
 use App\Infrastructure\Web\ExamAnalysisView;
 use App\Infrastructure\Web\GradeHistogramBin;
+use App\Infrastructure\Web\Insight;
 use PHPUnit\Framework\TestCase;
 
 final class ExamAnalysisViewTest extends TestCase
@@ -85,10 +89,41 @@ final class ExamAnalysisViewTest extends TestCase
         self::assertSame([3], array_keys($view->questionsWithoutRitValue()));
     }
 
+    public function testExplainsWhichQuestionsToReview(): void
+    {
+        $view = self::view([[1.0, false], [1.0, false], [10.0, true], [1.0, false]]);
+
+        self::assertSame([QuestionFlag::NegativeDiscrimination, QuestionFlag::VeryDifficult], $view->flags($view->analysis()->questions[1]));
+        self::assertSame([QuestionFlag::NoVariation], $view->flags($view->analysis()->questions[2]));
+        self::assertSame(2, $view->reviewCount());
+
+        $keys = array_map(static fn (Insight $insight): string => $insight->messageKey, $view->insights());
+        self::assertContains('insight.negative_rit', $keys);
+        self::assertContains('insight.low_pass_rate', $keys);
+    }
+
+    public function testDescribesEachQuestionForTheDetailDrawer(): void
+    {
+        $details = self::view(
+            [[1.0, false], [5.5, true], [10.0, true], [5.4, false]],
+            null,
+            [[0.0, 1.0, 2.0, 1.0], [1.0, 1.0, 2.0, 0.0], [3.0, 3.0, 3.0, 3.0]],
+        )->questionDetails();
+
+        self::assertSame(0.5, $details[0]['pValue']);
+        self::assertSame(0.53, $details[0]['ritValue']);
+        self::assertSame(0.61, $details[0]['alphaIfRemoved']);
+        self::assertNull($details[2]['ritValue']);
+        self::assertSame([['score' => 0.0, 'count' => 1], ['score' => 1.0, 'count' => 2], ['score' => 2.0, 'count' => 1]], $details[0]['distribution']);
+        // Totals are 1, 5.5, 10 and 5.4: the strongest student (10) scored 2 on Q1, the weakest (1) scored 0.
+        self::assertSame(['size' => 1, 'high' => 2.0, 'low' => 0.0], $details[0]['group']);
+    }
+
     /**
-     * @param list<array{float, bool}> $grades unrounded grade and pass/fail per student
+     * @param list<array{float, bool}> $grades         unrounded grade and pass/fail per student
+     * @param list<list<float>>        $questionScores student scores per question
      */
-    private static function view(array $grades, ?Caesura $caesura = null): ExamAnalysisView
+    private static function view(array $grades, ?Caesura $caesura = null, array $questionScores = []): ExamAnalysisView
     {
         $students = [];
         foreach ($grades as $index => [$grade, $passed]) {
@@ -100,12 +135,12 @@ final class ExamAnalysisViewTest extends TestCase
             $caesura ?? new Caesura([new CaesuraPoint(20.0, 1.0), new CaesuraPoint(70.0, 5.5), new CaesuraPoint(100.0, 10.0)], 70.0),
             $students,
             [
-                new QuestionResult('Q1', 2.0, 0.5, 0.53),
+                new QuestionResult('Q1', 2.0, 0.5, 0.53, 0.61),
                 new QuestionResult('Q2', 4.0, 0.25, -0.05),
                 new QuestionResult('Q3', 4.0, 0.75, null),
             ],
         );
 
-        return new ExamAnalysisView($analysis, 'results.xlsx', 5.5, 'php bin/console app:analyze-exam results.xlsx', '');
+        return new ExamAnalysisView(new AnalysisOutcome($analysis, null, array_fill(0, \count($grades), false)), 'results.xlsx', 5.5, new QualityGuidelines(), [0, 1, 2], $questionScores);
     }
 }

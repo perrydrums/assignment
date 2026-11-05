@@ -1,0 +1,5 @@
+{% set theme = current_theme() %}
+<div class="topbar__brand">
+    {{ include('_wordmark.html.twig', {light: true}) }}
+    <img class="brand-logo" src="{{ asset(theme.logo) }}" alt="{{ theme.brand }}" data-theme-switch-target="logo">
+</div>

@@ -26,17 +26,31 @@ export default class extends Controller {
         const tick = (now) => {
             const progress = Math.min(1, Math.max(0, (now - start) / this.durationValue));
             const eased = 1 - (1 - progress) ** 4;
-            this.element.textContent = progress < 1 ? (this.toValue * eased).toFixed(this.decimalsValue) : finalText;
+            this.element.textContent = progress < 1 ? formatNumber(this.toValue * eased, this.decimalsValue) : finalText;
             if (progress < 1) {
                 this.frame = requestAnimationFrame(tick);
             }
         };
 
-        this.element.textContent = (0).toFixed(this.decimalsValue);
+        this.finish = () => {
+            cancelAnimationFrame(this.frame);
+            this.element.textContent = finalText;
+        };
+        window.addEventListener('beforeprint', this.finish);
+
+        this.element.textContent = formatNumber(0, this.decimalsValue);
         this.frame = requestAnimationFrame(tick);
     }
 
     disconnect() {
         cancelAnimationFrame(this.frame);
+        window.removeEventListener('beforeprint', this.finish);
     }
+}
+
+function formatNumber(value, decimals) {
+    return new Intl.NumberFormat(document.documentElement.lang || 'en', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+    }).format(value);
 }

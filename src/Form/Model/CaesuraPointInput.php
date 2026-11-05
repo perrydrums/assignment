@@ -12,10 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class CaesuraPointInput
 {
     public function __construct(
-        #[Assert\NotNull(message: 'Enter a percentage.')]
-        #[Assert\Range(notInRangeMessage: 'Use a percentage between {{ min }} and {{ max }}.', min: 0, max: 100)]
+        #[Assert\NotNull(message: 'form.percentage.required')]
+        #[Assert\Range(notInRangeMessage: 'form.percentage.range', min: 0, max: 100)]
         public ?float $percentage = null,
-        #[Assert\NotNull(message: 'Enter a grade.')]
+        #[Assert\NotNull(message: 'form.grade.required')]
         public ?float $grade = null,
     ) {
     }

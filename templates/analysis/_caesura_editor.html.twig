@@ -1,0 +1,37 @@
+<div class="caesura">
+    <div class="caesura__editor">
+        <div class="caesura__columns" aria-hidden="true"><span>{{ 'form.score'|trans }}</span><span>{{ 'form.grade'|trans }}</span></div>
+        <ol class="caesura__points" data-caesura-target="list">
+            {% for point in points %}
+                {{ include('analysis/_caesura_point.html.twig', {point: point}) }}
+            {% endfor %}
+        </ol>
+        <template data-caesura-target="template">
+            {{- include('analysis/_caesura_point.html.twig', {point: points.vars.prototype}) -}}
+        </template>
+        <button type="button" class="text-button" data-action="caesura#add">
+            {{ include('_icon.html.twig', {name: 'plus'}) }} {{ 'upload.add_point'|trans }}
+        </button>
+        {{ form_errors(points) }}
+        <p class="field-errors field-errors--soft" data-caesura-target="problem" role="status" hidden></p>
+
+        <div class="caesura__pass">
+            {{ form_label(pass, 'form.pass_from', {label_attr: {class: 'caesura__pass-label'}}) }}
+            <span class="input-affix">
+                {{ form_widget(pass, {attr: {class: 'input input--number', 'data-caesura-target': 'pass', 'data-action': 'caesura#update'}}) }}
+                <span class="input-affix__suffix" aria-hidden="true">%</span>
+            </span>
+        </div>
+        {{ form_errors(pass) }}
+    </div>
+
+    <figure class="caesura__preview">
+        <svg class="caesura-chart" viewBox="0 0 320 210" role="img" aria-labelledby="{{ chart_title_id|default('caesura-chart-title') }}" data-caesura-target="chart">
+            <title id="{{ chart_title_id|default('caesura-chart-title') }}">{{ 'upload.chart_title'|trans }}</title>
+        </svg>
+        <figcaption>
+            <span>{{ 'upload.live_preview'|trans }}</span>
+            <button type="button" class="text-button text-button--small" data-action="caesura#reset">{{ reset_label|default('upload.reset_scale'|trans) }}</button>
+        </figcaption>
+    </figure>
+</div>

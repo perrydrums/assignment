@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application;
 
 use App\Application\ExamAnalyzer;
+use App\Domain\Analytics\CronbachAlpha;
 use App\Domain\Analytics\PearsonCorrelation;
 use App\Domain\Analytics\PValueCalculator;
 use App\Domain\Exam\Exam;
@@ -30,7 +31,7 @@ final class ExamAnalyzerTest extends TestCase
         );
         $caesura = new Caesura([new CaesuraPoint(20.0, 1.0), new CaesuraPoint(70.0, 5.5), new CaesuraPoint(100.0, 10.0)], 70.0);
 
-        $analysis = (new ExamAnalyzer(new GradeCalculator(), new PValueCalculator(), new PearsonCorrelation()))->analyze($exam, $caesura);
+        $analysis = (new ExamAnalyzer(new GradeCalculator(), new PValueCalculator(), new PearsonCorrelation(), new CronbachAlpha()))->analyze($exam, $caesura);
 
         self::assertSame(10.0, $analysis->maxScore);
         self::assertSame(['A', 'B', 'C'], array_map(static fn ($student): string => $student->studentId, $analysis->students));

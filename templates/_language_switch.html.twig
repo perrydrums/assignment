@@ -1,0 +1,17 @@
+<nav class="language-switch" aria-label="{{ 'language.label'|trans }}">
+    {% for locale in ['en', 'nl'] %}
+        {% if mode|default('link') == 'form' %}
+            <button type="submit" class="language-switch__option{{ app.locale == locale ? ' is-active' }}"
+                    form="analysis-settings" formaction="{{ path('app_analysis_results', {_locale: locale}) }}"
+                    hreflang="{{ locale }}" lang="{{ locale }}"{% if app.locale == locale %} aria-current="page"{% endif %}>
+                {{ locale|upper }}
+            </button>
+        {% else %}
+            <a class="language-switch__option{{ app.locale == locale ? ' is-active' }}"
+               href="{{ path(app.current_route, app.current_route_parameters|merge({_locale: locale})) }}"
+               hreflang="{{ locale }}" lang="{{ locale }}"{% if app.locale == locale %} aria-current="page"{% endif %}>
+                {{ locale|upper }}
+            </a>
+        {% endif %}
+    {% endfor %}
+</nav>

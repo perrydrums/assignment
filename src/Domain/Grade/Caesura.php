@@ -26,7 +26,7 @@ final readonly class Caesura
         public float $passPercentage,
     ) {
         if (\count($points) < 2) {
-            throw new InvalidCaesuraException('A caesura needs at least two reference points.');
+            throw InvalidCaesuraException::tooFewPoints();
         }
 
         for ($i = 1, $count = \count($points); $i < $count; ++$i) {
@@ -34,16 +34,16 @@ final readonly class Caesura
             $current = $points[$i];
 
             if ($current->percentage <= $previous->percentage) {
-                throw new InvalidCaesuraException(\sprintf('Caesura percentages must be strictly increasing, got %s%% after %s%%.', $current->percentage, $previous->percentage));
+                throw InvalidCaesuraException::percentagesNotIncreasing($current->percentage, $previous->percentage);
             }
 
             if ($current->grade < $previous->grade) {
-                throw new InvalidCaesuraException(\sprintf('Caesura grades must not decrease, got %s after %s.', $current->grade, $previous->grade));
+                throw InvalidCaesuraException::gradesDecrease($current->grade, $previous->grade);
             }
         }
 
         if (!is_finite($passPercentage) || $passPercentage <= 0.0 || $passPercentage > 100.0) {
-            throw new InvalidCaesuraException(\sprintf('The pass percentage must be greater than 0 and at most 100, got %s.', $passPercentage));
+            throw InvalidCaesuraException::passPercentageOutOfRange($passPercentage);
         }
 
         $this->points = $points;

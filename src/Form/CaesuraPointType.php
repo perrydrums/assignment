@@ -16,15 +16,15 @@ final class CaesuraPointType extends AbstractType
     {
         $builder
             ->add('percentage', NumberType::class, [
-                'label' => 'Score percentage',
+                'label' => 'form.score_percentage',
                 'html5' => true,
-                'invalid_message' => 'Enter a number.',
+                'invalid_message' => 'form.number',
                 'attr' => ['min' => 0, 'max' => 100, 'step' => 'any', 'inputmode' => 'decimal'],
             ])
             ->add('grade', NumberType::class, [
-                'label' => 'Grade',
+                'label' => 'form.grade',
                 'html5' => true,
-                'invalid_message' => 'Enter a number.',
+                'invalid_message' => 'form.number',
                 'attr' => ['step' => 'any', 'inputmode' => 'decimal'],
             ]);
     }

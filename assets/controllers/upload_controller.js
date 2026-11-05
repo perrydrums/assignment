@@ -8,7 +8,13 @@ const EXTENSIONS = ['xlsx', 'xls'];
  */
 export default class extends Controller {
     static targets = ['input', 'dropzone', 'selected', 'fileName', 'fileSize', 'error', 'submitLabel'];
-    static values = { maxBytes: Number };
+    static values = {
+        maxBytes: Number,
+        requiredMessage: String,
+        typeMessage: String,
+        sizeMessage: String,
+        busyMessage: String,
+    };
 
     connect() {
         this.update();
@@ -60,7 +66,7 @@ export default class extends Controller {
 
     submit(event) {
         const file = this.selectedFile();
-        const problem = file ? this.problemWith(file) : 'Choose an Excel workbook (.xlsx or .xls) to analyse.';
+        const problem = file ? this.problemWith(file) : this.requiredMessageValue;
         if (problem) {
             event.preventDefault();
             this.showError(problem);
@@ -71,7 +77,7 @@ export default class extends Controller {
 
         this.element.classList.add('is-submitting');
         this.element.setAttribute('aria-busy', 'true');
-        this.submitLabelTarget.textContent = 'Analysing…';
+        this.submitLabelTarget.textContent = this.busyMessageValue;
     }
 
     selectedFile() {
@@ -81,11 +87,11 @@ export default class extends Controller {
     problemWith(file) {
         const extension = file.name.includes('.') ? file.name.split('.').pop().toLowerCase() : '';
         if (!EXTENSIONS.includes(extension)) {
-            return `Only Excel workbooks (.xlsx or .xls) can be analysed, not "${file.name}".`;
+            return this.typeMessageValue.replace('{name}', file.name);
         }
 
         if (this.hasMaxBytesValue && file.size > this.maxBytesValue) {
-            return `This file is ${formatBytes(file.size)}; workbooks can be at most ${formatBytes(this.maxBytesValue)}.`;
+            return this.sizeMessageValue.replace('{size}', formatBytes(file.size)).replace('{max}', formatBytes(this.maxBytesValue));
         }
 
         return null;

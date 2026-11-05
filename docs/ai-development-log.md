@@ -61,10 +61,81 @@ design in the style of certify360.com. The AI did the following:
 | A shell loop variable named `path` wiped `PATH` in zsh during verification. | Commands suddenly not found. | Renamed; no impact on the code. |
 | `composer audit` reported 10 advisories, published that day, for Symfony < 8.1.11. | Composer output while installing packages. | Updated to 8.1.11; audit clean. |
 
+## Teacher-focused redesign
+
+The developer asked to aim the web UI at teachers, in English and Dutch, and to drop developer-facing
+content. Chosen features: question-quality flags, an Excel download, a printable report, detail
+panels, Cronbach's alpha, and what-if recalculation. Borderline-student reporting was not selected.
+Nothing is stored on the server.
+
+The AI added the domain and application types (`CronbachAlpha`, `QualityGuidelines`,
+`QuestionAdjustment`, `AnalysisRunner`), the settings form with the exam embedded as JSON, the
+results page, the help page, and the Excel exporter. It removed the console tab, the CLI command
+line and the CSV export from the web UI. The CLI itself is unchanged.
+
+| What | How it was caught | Resolution |
+| --- | --- | --- |
+| XLIFF units used `id` as the key. Symfony's loader uses `resname`, otherwise the source text, so every translation was missing. | `debug:translation` and a page that showed raw keys such as `results.of_passed`. | `resname` set to the message id. |
+| Parameter values turned into `%B3%`. The non-ICU formatter replaces substrings, so a parameter named `cell` rewrote the inside of `%cell%`. | The importer functional test. | The web translator passes `%cell%` as the parameter name. |
+| A boolean score was reported as `got 1` because `(string) true` is `"1"`. | The existing importer test expecting `got bool`. | The type branch uses `get_debug_type()`. |
+| ICU messages printed the pattern when loaded as ordinary messages, and `{total}` in the table counter would be eaten if it lived in the ICU file. | A manual translator probe, and the plan's note about the counter. | Plurals and `{name}` placeholders are in `messages+intl-icu`; the counter patterns stay in the plain catalogue. |
+
+Verification for this change: 129 PHPUnit tests, PHPStan level max, PHP-CS-Fixer, `lint:twig`,
+`lint:xliff`, `lint:container`, `debug:translation` with no missing keys for `en` or `nl`, and
+`node --check` on the Stimulus controllers. Cronbach's alpha on `Assignment.xlsx` is
+0.71659266620098 in PHP and 0.7165926662009835 in an independent Python calculation (49 questions,
+452 students). The example analysis was also opened in a browser in English and Dutch, at a desktop
+width and at 390px, including the student and question drawers and a print-media emulation.
+
+## Print summary and drawer polish
+
+The developer asked for a "Print summary" without the table options, no page breaks inside
+components, styled dropdowns, a collapsed question list below the guidelines, a visible submit
+button in the drawer, and detail drawers that match the settings drawer.
+
+| What | How it was caught | Resolution |
+| --- | --- | --- |
+| The drawer's submit button was cut off. The dialog kept the browser's `overflow: auto` and was 42px taller than the viewport, so it scrolled as well as its body. | Measuring the open dialog: height 900, scroll height 942. | The open drawer is a full-height flex column; only the body scrolls. |
+| The detail drawers were short boxes in the top corner, and their table headers ran together because the shared header style relies on sort buttons for padding. | Screenshots at desktop width. | All drawers share the head, sections and foot; drawer tables have their own header padding. |
+| Sticky table headers in a drawer stopped 24px below the top, because sticky positioning stops at the scroller's padding edge. | Measuring the header against the body after scrolling. | The header is offset by the body's top padding. |
+| A real PDF of the old print split "What stands out" and the question map across pages, and printed the file name mid-animation (invisible). | Printing the example with headless Chrome and rendering the pages. | `break-inside: avoid` on each card, the tables left out, animated values pinned in print. |
+| Resetting `animation` in print would replay every entrance animation after printing. | Toggling print media in the browser: 10 animations restarted with `animation: none`, none with pinned values. | Final values are pinned with `!important`, which outranks animations without restarting them. |
+| On A4 the charts panel left an empty box at the bottom of page 1 when its first chart moved to page 2. | The rendered A4 PDF. | The charts panel has no background or padding in print. |
+
+Verification: 131 PHPUnit tests, PHPStan level max, PHP-CS-Fixer, `lint:twig`, `lint:xliff` and
+`node --check`. PDFs of the example in English and Dutch, on A4 and US Letter, with and without an
+adjustment, each print on two pages with no card split.
+
+## Brand themes
+
+The developer asked for a theme switcher with a theme for each of the eight brands under "Our
+Brands" on certify360.com, plus the current style as Default. Each theme uses its brand's colours and
+logo, with no other changes.
+
+The AI first collected each site's computed colours and logo files in a browser. At the developer's
+request, it then ran one subagent per brand in parallel. Each subagent received the same token
+contract with WCAG targets and returned a complete palette with contrast ratios and a checked logo.
+In parallel, the AI renamed the colour tokens to role names, replaced the remaining hard-coded colours
+with tokens, and built the switcher, the cookie-based server rendering and the tests.
+
+| What | How it was caught | Resolution |
+| --- | --- | --- |
+| WWZ Academie and COEL have no colour dark enough for a header with white text, and WWZ's yellow button fails contrast with white (1.9:1). | The subagents' contrast checks. | A deep rust (WWZ) and a deep sky blue (COEL) derived from the brand colours; WWZ buttons use its deeper orange. |
+| Several brand accents fail as fills or text on white (FOI blue 2.5:1, Learncare orange 2.3:1, Examenadviesburo green 2.2:1). | Contrast checks against the token targets. | Darkened at the same hue; the original colour is kept where it passes, for example on the dark header. |
+| COEL only publishes a black logo, invisible on a dark header. | Rendering every logo on the header colour. | Recoloured the black lettering to white and kept the sky-blue mark, with no dark halos. |
+| The embedded browser stopped returning screenshots for the last checks. | Repeated screenshot timeouts. | Screenshots taken with headless Chrome over the DevTools protocol, with the theme cookie set. |
+
+Verification: 132 PHPUnit tests (one renders the theme from the cookie and rejects an unknown value),
+PHPStan level max, PHP-CS-Fixer, the Twig, XLIFF and container linters, `node --check`, and `composer
+audit`. Every theme was viewed on the results page at desktop width, and Default and NCI at 390px.
+Default's computed colours were compared with the previous values (header, accents, chips, shadows).
+
 ## For the developer to review / own
 
 - The open questions in `technical-decisions.md` (5.5-but-failed, rit vs grade, rir).
 - The strict "no missing values" policy.
 - The web UI is beyond the original brief (which asked for a CLI); decide whether to present it as
   an extra.
+- The brand logos and colours belong to the Certify360 brands; confirm they may be used before
+  sharing the app outside the application process.
 - Time spent (the assignment asks to report it).

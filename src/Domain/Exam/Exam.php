@@ -36,6 +36,40 @@ final readonly class Exam
         }
     }
 
+    /**
+     * A copy of this exam with questions removed or awarded in full.
+     *
+     * @param list<QuestionAdjustment> $adjustments one per question, in question order
+     */
+    public function adjusted(array $adjustments): self
+    {
+        if (\count($adjustments) !== \count($this->questions)) {
+            throw new InvalidExamException(\sprintf('Expected an adjustment for each of the %d questions, got %d.', \count($this->questions), \count($adjustments)));
+        }
+
+        $kept = [];
+        foreach ($this->questions as $index => $question) {
+            if (QuestionAdjustment::Remove !== $adjustments[$index]) {
+                $kept[] = ['question' => $question, 'index' => $index, 'fullMarks' => QuestionAdjustment::FullMarks === $adjustments[$index]];
+            }
+        }
+
+        if ([] === $kept) {
+            throw new InvalidExamException('At least one question must remain in the analysis.');
+        }
+
+        $students = [];
+        foreach ($this->students as $student) {
+            $scores = [];
+            foreach ($kept as $item) {
+                $scores[] = $item['fullMarks'] ? $item['question']->maxScore : $student->scores[$item['index']];
+            }
+            $students[] = new Student($student->id, $scores);
+        }
+
+        return new self(array_map(static fn (array $item): Question => $item['question'], $kept), $students);
+    }
+
     public function maxScore(): float
     {
         return array_sum(array_map(static fn (Question $question): float => $question->maxScore, $this->questions));

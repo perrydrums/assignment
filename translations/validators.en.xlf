@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="form.workbook.required" resname="form.workbook.required">
+        <source>Choose an Excel workbook (.xlsx or .xls) to analyse.</source>
+      </trans-unit>
+      <trans-unit id="form.workbook.max_size" resname="form.workbook.max_size">
+        <source>The file is too large (maximum {{ limit }} {{ suffix }}).</source>
+      </trans-unit>
+      <trans-unit id="form.workbook.extension" resname="form.workbook.extension">
+        <source>Only Excel workbooks ({{ extensions }}) can be analysed, not "{{ extension }}" files.</source>
+      </trans-unit>
+      <trans-unit id="form.workbook.mime" resname="form.workbook.mime">
+        <source>This file does not look like an Excel workbook.</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage.required" resname="form.pass_percentage.required">
+        <source>Enter the pass percentage.</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage.positive" resname="form.pass_percentage.positive">
+        <source>The pass percentage must be greater than 0.</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage.max" resname="form.pass_percentage.max">
+        <source>The pass percentage can be at most 100.</source>
+      </trans-unit>
+      <trans-unit id="form.number" resname="form.number">
+        <source>Enter a number.</source>
+      </trans-unit>
+      <trans-unit id="form.adjustments.count" resname="form.adjustments.count">
+        <source>Each question needs a choice.</source>
+      </trans-unit>
+      <trans-unit id="form.guidelines.order" resname="form.guidelines.order">
+        <source>The "very difficult" boundary must be below the "very easy" boundary.</source>
+      </trans-unit>
+    <trans-unit id="form.percentage.required" resname="form.percentage.required"><source>Enter a percentage.</source></trans-unit><trans-unit id="form.percentage.range" resname="form.percentage.range"><source>Use a percentage between {{ min }} and {{ max }}.</source></trans-unit><trans-unit id="form.grade.required" resname="form.grade.required"><source>Enter a grade.</source></trans-unit></body>
+  </file>
+</xliff>

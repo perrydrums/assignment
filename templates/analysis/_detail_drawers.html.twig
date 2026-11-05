@@ -1,0 +1,74 @@
+{% set question_changes = settings.removedCount + settings.fullMarksCount %}
+
+<dialog class="drawer" data-details-target="studentDialog" aria-labelledby="student-detail-title">
+    <header class="drawer__head">
+        <div>
+            <p class="eyebrow">{{ 'results.student'|trans }}</p>
+            <h2 class="drawer__title" id="student-detail-title" data-details-target="studentTitle"></h2>
+        </div>
+        <button type="button" class="icon-button" data-action="details#close" aria-label="{{ 'settings.close'|trans }}">{{ include('_icon.html.twig', {name: 'x'}) }}</button>
+    </header>
+    <div class="drawer__body">
+        <dl class="stats" data-details-target="studentStats"></dl>
+
+        <section class="drawer__section" aria-labelledby="student-questions-title">
+            <h3 class="drawer__section-title" id="student-questions-title">{{ 'detail.per_question'|trans }}</h3>
+            <div class="drawer-table">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'detail.question'|trans }}</th>
+                            <th scope="col" class="num">{{ 'detail.score'|trans }}</th>
+                            {% if question_changes > 0 %}<th scope="col">{{ 'detail.counted'|trans }}</th>{% endif %}
+                        </tr>
+                    </thead>
+                    <tbody data-details-target="studentRows"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <template data-details-target="passedTemplate"><span class="status status--passed">{{ include('_icon.html.twig', {name: 'check'}) }} {{ 'results.passed'|trans }}</span></template>
+        <template data-details-target="failedTemplate"><span class="status status--failed">{{ include('_icon.html.twig', {name: 'x'}) }} {{ 'results.failed'|trans }}</span></template>
+    </div>
+    <footer class="drawer__foot">
+        <button type="button" class="button button--ghost" data-action="details#close">{{ 'settings.close'|trans }}</button>
+    </footer>
+</dialog>
+
+<dialog class="drawer" data-details-target="questionDialog" aria-labelledby="question-detail-title">
+    <header class="drawer__head">
+        <div>
+            <p class="eyebrow">{{ 'detail.question'|trans }}</p>
+            <h2 class="drawer__title" id="question-detail-title" data-details-target="questionTitle"></h2>
+        </div>
+        <button type="button" class="icon-button" data-action="details#close" aria-label="{{ 'settings.close'|trans }}">{{ include('_icon.html.twig', {name: 'x'}) }}</button>
+    </header>
+    <div class="drawer__body">
+        <dl class="stats" data-details-target="questionStats"></dl>
+
+        <section class="drawer__section" aria-labelledby="question-distribution-title">
+            <h3 class="drawer__section-title" id="question-distribution-title">{{ 'detail.distribution'|trans }}</h3>
+            <div class="drawer-table">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'detail.score'|trans }}</th>
+                            <th scope="col" class="num">{{ 'detail.students'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody data-details-target="questionRows"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="drawer__section" aria-labelledby="question-groups-title" data-details-target="questionGroupSection">
+            <h3 class="drawer__section-title" id="question-groups-title">{{ 'detail.groups'|trans }}</h3>
+            <p class="drawer__intro" data-details-target="questionGroupNote"></p>
+            <dl class="stats" data-details-target="questionGroups"></dl>
+        </section>
+    </div>
+    <footer class="drawer__foot">
+        <button type="button" class="button button--ghost" data-action="details#close">{{ 'settings.close'|trans }}</button>
+        <div class="drawer__actions" data-details-target="questionActions"></div>
+    </footer>
+</dialog>

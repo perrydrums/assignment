@@ -20,18 +20,18 @@
          data-action="analysis:grade-filter-cleared@window->chart#clearSelection">
     <header class="chart-card__header">
         <div>
-            <h2 class="chart-card__title">Grade distribution</h2>
-            <p class="chart-card__subtitle">Students per rounded grade. Select a bar to list those students.</p>
+            <h2 class="chart-card__title">{{ 'chart.grades_title'|trans }}</h2>
+            <p class="chart-card__subtitle">{{ 'chart.grades_help'|trans }}</p>
         </div>
-        <ul class="legend" aria-label="Legend">
-            <li><span class="legend__swatch legend__swatch--passed"></span> Passed</li>
-            <li><span class="legend__swatch legend__swatch--failed"></span> Failed</li>
+        <ul class="legend" aria-label="{{ 'chart.legend'|trans }}">
+            <li><span class="legend__swatch legend__swatch--passed"></span> {{ 'results.passed'|trans }}</li>
+            <li><span class="legend__swatch legend__swatch--failed"></span> {{ 'results.failed'|trans }}</li>
         </ul>
     </header>
 
     <div class="chart" data-chart-target="frame"
          data-action="pointerover->chart#show pointerout->chart#hide focusin->chart#show focusout->chart#hide">
-        <svg class="histogram" viewBox="0 0 {{ width }} {{ height }}" role="group" aria-label="Number of students per grade">
+        <svg class="histogram" viewBox="0 0 {{ width }} {{ height }}" role="group" aria-label="{{ 'chart.grades_title'|trans }}">
             <g class="chart__grid">
                 {% for tick in ticks %}
                     {% set y = (baseline - tick / top_count * plot_height)|round(2) %}
@@ -46,12 +46,16 @@
                 {% set passed_height = bin.passed / top_count * plot_height %}
                 {% set bar_x = (x + (slot - bar_width) / 2)|round(2) %}
                 {% if bin.total > 0 %}
+                    {% set high = bin.includesUpperGrade ? bin.upperGrade : bin.upperGrade - 0.1 %}
+                    {% set shown = (high - bin.lowerGrade) < 0.05
+                        ? bin.lowerGrade|format_number({fraction_digit: 1})
+                        : bin.lowerGrade|format_number({fraction_digit: 1}) ~ '–' ~ high|format_number({fraction_digit: 1}) %}
                     <g class="histogram__bin" style="--i: {{ loop.index0 }}" tabindex="0" role="button"
-                       aria-label="Grade {{ bin.label }}: {{ bin.total }} {{ bin.total == 1 ? 'student' : 'students' }}, {{ bin.passed }} passed. Show these students."
-                       data-tooltip="Grade {{ bin.label }}&#10;{{ bin.total }} {{ bin.total == 1 ? 'student' : 'students' }} · {{ bin.passed }} passed · {{ bin.failed }} failed"
+                       aria-label="{{ 'chart.bin'|trans({label: shown, total: bin.total, passed: bin.passed}) }}"
+                       data-tooltip="{{ 'chart.bin'|trans({label: shown, total: bin.total, passed: bin.passed}) }}"
                        data-action="click->chart#select keydown->chart#selectWithKeyboard"
                        data-chart-event-name-param="analysis:filter-grade"
-                       data-chart-detail-param="{{ {tab: 'students', min: bin.lowerGrade, max: bin.upperGrade, inclusive: bin.includesUpperGrade, label: bin.label}|json_encode }}">
+                       data-chart-detail-param="{{ {tab: 'students', min: bin.lowerGrade, max: bin.upperGrade, inclusive: bin.includesUpperGrade, label: shown}|json_encode }}">
                         <rect class="histogram__hit" x="{{ x|round(2) }}" y="{{ top }}" width="{{ slot|round(2) }}" height="{{ plot_height }}"/>
                         <g class="histogram__stack" data-tooltip-anchor>
                             {% if bin.failed > 0 %}
@@ -79,7 +83,7 @@
 
             <g class="histogram__pass-line">
                 <line x1="{{ pass_x|round(2) }}" x2="{{ pass_x|round(2) }}" y1="{{ top - 8 }}" y2="{{ baseline }}"/>
-                <text x="{{ (pass_x + 6)|round(2) }}" y="{{ top - 2 }}">pass {{ view.passGrade|number_format(1) }}</text>
+                <text x="{{ (pass_x + 6)|round(2) }}" y="{{ top - 2 }}">{{ 'chart.pass'|trans }} {{ view.passGrade|format_number({fraction_digit: 1}) }}</text>
             </g>
         </svg>
         <div class="chart__tooltip" data-chart-target="tooltip" hidden></div>

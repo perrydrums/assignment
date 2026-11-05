@@ -24,7 +24,7 @@ final class CaesuraNotation
         foreach (explode(',', $points) as $pair) {
             $parts = explode(':', trim($pair));
             if (2 !== \count($parts)) {
-                throw new InvalidCaesuraException(\sprintf('Invalid caesura point "%s"; expected "percentage:grade", e.g. "70:5.5".', trim($pair)));
+                throw InvalidCaesuraException::invalidPoint(trim($pair));
             }
 
             $caesuraPoints[] = new CaesuraPoint(
@@ -58,7 +58,7 @@ final class CaesuraNotation
     {
         $value = trim($value);
         if (!is_numeric($value)) {
-            throw new InvalidCaesuraException(\sprintf('Invalid %s "%s"; expected a number (use a dot as decimal separator).', $description, $value));
+            throw InvalidCaesuraException::invalidNumber($description, $value);
         }
 
         return (float) $value;

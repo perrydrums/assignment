@@ -1,0 +1,221 @@
+/*
+ * Colour themes. Default follows certify360.com; the others follow the brands of the Certify360 group,
+ * measured from their websites. A theme only sets colours. The data-theme attribute on <html> selects
+ * the page theme; on any other element it scopes a theme to that element (the switcher's swatches).
+ */
+
+:root,
+[data-theme='default'] {
+    --dark: #162e47;
+    --dark-deep: #0e1f33;
+    --text: #162e47;
+    --accent: #9785ff;
+    --accent-strong: #6959c2;
+    --accent-button: #6f5ce6;
+    --accent-button-hover: #604ed8;
+    --accent-ink: #4b3bb5;
+    --accent-soft: #b9adff;
+    --accent-tint: #edeaff;
+    --accent-wash: #f6f5ff;
+    --surface: #e8e9f3;
+    --surface-strong: #d6d8e8;
+    --line: #e6e7f1;
+    --surface-warm: #f2f1e1;
+    --surface-warm-light: #f7f6eb;
+    --line-warm: #e2e2d6;
+    --failed: #c7cbe0;
+    --failed-strong: #a9aecb;
+    --glow: #2e5aa8;
+}
+
+/* lindenhaeghe.nl: red header, orange buttons, purple text. The orange is the site's exact button colour. */
+[data-theme='lindenhaeghe'] {
+    --dark: #a7292e;
+    --dark-deep: #8c192c;
+    --text: #3a244c;
+    --accent: #e1603d;
+    --accent-strong: #c74738;
+    --accent-button: #e1603d;
+    --accent-button-hover: #c74738;
+    --accent-ink: #923521;
+    --accent-soft: #f5ccc1;
+    --accent-tint: #f9dfd8;
+    --accent-wash: #fcefec;
+    --surface: #eae8eb;
+    --surface-strong: #d7d3da;
+    --line: #e5e3e7;
+    --surface-warm: #f3edeb;
+    --surface-warm-light: #faf8f7;
+    --line-warm: #e6e0dd;
+    --failed: #c9c4ce;
+    --failed-strong: #b0a7b7;
+    --glow: #3a244c;
+}
+
+/* cs-opleidingen.nl: navy, teal fills, crimson buttons. */
+[data-theme='cs-opleidingen'] {
+    --dark: #203f58;
+    --dark-deep: #162b3c;
+    --text: #203f58;
+    --accent: #00a794;
+    --accent-strong: #007567;
+    --accent-button: #c5003e;
+    --accent-button-hover: #a70035;
+    --accent-ink: #01544a;
+    --accent-soft: #64d8ca;
+    --accent-tint: #cceeea;
+    --accent-wash: #ebf8f6;
+    --surface: #eae8eb;
+    --surface-strong: #d7d3da;
+    --line: #e4e2e6;
+    --surface-warm: #f3edeb;
+    --surface-warm-light: #fdf1ec;
+    --line-warm: #e8ddd9;
+    --failed: #c3cbd2;
+    --failed-strong: #a6b2bc;
+    --glow: #00a894;
+}
+
+/* compliance-instituut.nl: blue and magenta, peach highlights. */
+[data-theme='nci'] {
+    --dark: #1a4672;
+    --dark-deep: #112d49;
+    --text: #1a4672;
+    --accent: #cc0066;
+    --accent-strong: #cc0066;
+    --accent-button: #cc0066;
+    --accent-button-hover: #ad0057;
+    --accent-ink: #a80350;
+    --accent-soft: #f6acd1;
+    --accent-tint: #ffedd1;
+    --accent-wash: #fff6e8;
+    --surface: #eaf2fa;
+    --surface-strong: #d1dae3;
+    --line: #dae8f6;
+    --surface-warm: #ffedd1;
+    --surface-warm-light: #fff6e8;
+    --line-warm: #ede0c9;
+    --failed: #bac8d5;
+    --failed-strong: #a3b5c7;
+    --glow: #7590aa;
+}
+
+/* wwz-academie.nl: the brand orange, deepened for the header and buttons (the site has no dark colour). */
+[data-theme='wwz-academie'] {
+    --dark: #7a4125;
+    --dark-deep: #60331d;
+    --text: #333333;
+    --accent: #e3753e;
+    --accent-strong: #c13700;
+    --accent-button: #d03d02;
+    --accent-button-hover: #b83400;
+    --accent-ink: #962900;
+    --accent-soft: #ffbc54;
+    --accent-tint: #fce6db;
+    --accent-wash: #fef5f0;
+    --surface: #f3edeb;
+    --surface-strong: #e1d7d4;
+    --line: #eee6e3;
+    --surface-warm: #f5f0e3;
+    --surface-warm-light: #f9f6ef;
+    --line-warm: #e6e1d6;
+    --failed: #b0c5d9;
+    --failed-strong: #9eb6d0;
+    --glow: #7c9ebf;
+}
+
+/* foi.nl: deep green-teal, sky-blue accents, green buttons (both darkened for contrast). */
+[data-theme='foi'] {
+    --dark: #223b38;
+    --dark-deep: #162725;
+    --text: #162725;
+    --accent: #2898d1;
+    --accent-strong: #146fa1;
+    --accent-button: #418416;
+    --accent-button-hover: #387213;
+    --accent-ink: #0e5176;
+    --accent-soft: #44aee8;
+    --accent-tint: #daeffa;
+    --accent-wash: #ecf7fc;
+    --surface: #e9ebeb;
+    --surface-strong: #d3d8d7;
+    --line: #e2e5e5;
+    --surface-warm: #f3edeb;
+    --surface-warm-light: #f8f5f4;
+    --line-warm: #e5dbd8;
+    --failed: #c1c8c7;
+    --failed-strong: #a7b1af;
+    --glow: #6ac231;
+}
+
+/* learncare.nl: charcoal and orange (darkened for contrast). */
+[data-theme='learncare'] {
+    --dark: #484845;
+    --dark-deep: #333331;
+    --text: #484845;
+    --accent: #e3760d;
+    --accent-strong: #af5009;
+    --accent-button: #ba5509;
+    --accent-button-hover: #a84d08;
+    --accent-ink: #823c07;
+    --accent-soft: #f7b16d;
+    --accent-tint: #fbd9b7;
+    --accent-wash: #fef4e9;
+    --surface: #f3edeb;
+    --surface-strong: #d8d3db;
+    --line: #eae8eb;
+    --surface-warm: #fdecdb;
+    --surface-warm-light: #fef7ef;
+    --line-warm: #ebd6c2;
+    --failed: #cecbc5;
+    --failed-strong: #b5b2ab;
+    --glow: #3eb9ef;
+}
+
+/* examenadviesburo.nl: teal-navy text and the brand green (darkened for contrast); pink only in the glow. */
+[data-theme='examenadviesburo'] {
+    --dark: #073a52;
+    --dark-deep: #042a3d;
+    --text: #073a52;
+    --accent: #4ea53d;
+    --accent-strong: #3a772e;
+    --accent-button: #378029;
+    --accent-button-hover: #317224;
+    --accent-ink: #2a611f;
+    --accent-soft: #5bc446;
+    --accent-tint: #caf2c2;
+    --accent-wash: #ecfaea;
+    --surface: #ede6e2;
+    --surface-strong: #d9d0c6;
+    --line: #e9e2dc;
+    --surface-warm: #f3efec;
+    --surface-warm-light: #f7f5f3;
+    --line-warm: #e5ddd7;
+    --failed: #c7c3bf;
+    --failed-strong: #b0aca7;
+    --glow: #f73e7c;
+}
+
+/* coeltoetscentra.nl: magenta and sky blue; the deep sky-blue header is derived (the site has no dark colour). */
+[data-theme='coel'] {
+    --dark: #0e3649;
+    --dark-deep: #072431;
+    --text: #0e3649;
+    --accent: #bf3e99;
+    --accent-strong: #bf3e99;
+    --accent-button: #bf3e99;
+    --accent-button-hover: #a73584;
+    --accent-ink: #77225d;
+    --accent-soft: #87ceeb;
+    --accent-tint: #f8e3f1;
+    --accent-wash: #fcf3f9;
+    --surface: #e3eef2;
+    --surface-strong: #cfdde3;
+    --line: #e1ebef;
+    --surface-warm: #f1ede9;
+    --surface-warm-light: #f7f5f3;
+    --line-warm: #e1dbd6;
+    --failed: #c0c9ce;
+    --failed-strong: #a4b1b7;
+    --glow: #7ebec5;
+}

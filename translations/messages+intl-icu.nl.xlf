@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="nl" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="results.of_passed" resname="results.of_passed">
+        <source>{count, plural, one {van # student is geslaagd} other {van # studenten zijn geslaagd}}</source>
+      </trans-unit>
+      <trans-unit id="results.failed_count" resname="results.failed_count">
+        <source>{count, plural, one {# gezakt} other {# gezakt}}</source>
+      </trans-unit>
+      <trans-unit id="results.removed" resname="results.removed">
+        <source>{count, plural, one {# vraag is weggelaten.} other {# vragen zijn weggelaten.}}</source>
+      </trans-unit>
+      <trans-unit id="results.full_marks" resname="results.full_marks">
+        <source>{count, plural, one {# vraag telt voor iedereen als volledig goed.} other {# vragen tellen voor iedereen als volledig goed.}}</source>
+      </trans-unit>
+      <trans-unit id="results.passes_gained" resname="results.passes_gained">
+        <source>{count, plural, one {# student slaagt nu die eerder zakte.} other {# studenten slagen nu die eerder zakten.}}</source>
+      </trans-unit>
+      <trans-unit id="results.passes_lost" resname="results.passes_lost">
+        <source>{count, plural, one {# student zakt nu die eerder slaagde.} other {# studenten zakken nu die eerder slaagden.}}</source>
+      </trans-unit>
+      <trans-unit id="results.to_review_detail" resname="results.to_review_detail">
+        <source>{count, plural, one {van # vraag} other {van # vragen}}</source>
+      </trans-unit>
+      <trans-unit id="insight.passes_gained" resname="insight.passes_gained">
+        <source>{count, plural, one {# student slaagt nu die eerder zakte.} other {# studenten slagen nu die eerder zakten.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.passes_lost" resname="insight.passes_lost">
+        <source>{count, plural, one {# student zakt nu die eerder slaagde.} other {# studenten zakken nu die eerder slaagden.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.many_difficult" resname="insight.many_difficult">
+        <source>{count, plural, one {# vraag lijkt erg moeilijk.} other {# vragen lijken erg moeilijk.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.many_easy" resname="insight.many_easy">
+        <source>{count, plural, one {# vraag lijkt erg makkelijk.} other {# vragen lijken erg makkelijk.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.negative_rit" resname="insight.negative_rit">
+        <source>{count, plural, one {Vraag {questions} heeft mogelijk een foute antwoordensleutel.} other {# vragen hebben mogelijk een foute antwoordensleutel: {questions}.}}</source>
+      </trans-unit>
+    <trans-unit id="results.pass_mark_now" resname="results.pass_mark_now"><source>De zak/slaag-grens is nu {percent}%.</source></trans-unit><trans-unit id="results.pass_rate_label" resname="results.pass_rate_label"><source>{rate}% van de studenten is geslaagd</source></trans-unit><trans-unit id="results.pass_grade" resname="results.pass_grade"><source>voldoende {grade}</source></trans-unit><trans-unit id="results.average_score" resname="results.average_score"><source>gemiddelde score {percent}%</source></trans-unit><trans-unit id="chart.bin" resname="chart.bin"><source>{total, plural, one {Cijfer {label}: # student, {passed} geslaagd} other {Cijfer {label}: # studenten, {passed} geslaagd}}</source></trans-unit><trans-unit id="chart.dot" resname="chart.dot"><source>{label}. Moeilijkheid {difficulty}, onderscheidend vermogen {discrimination}.</source></trans-unit><trans-unit id="insight.reliability_low" resname="insight.reliability_low"><source>De betrouwbaarheid is laag ({alpha}). De totaalscore is een zwakke samenvatting van deze toets.</source></trans-unit><trans-unit id="insight.reliability_good" resname="insight.reliability_good"><source>De betrouwbaarheid is goed ({alpha}). De vragen meten grotendeels hetzelfde.</source></trans-unit><trans-unit id="insight.low_pass_rate" resname="insight.low_pass_rate"><source>Minder dan de helft van de studenten is geslaagd ({rate}%).</source></trans-unit></body>
+  </file>
+</xliff>

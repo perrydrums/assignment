@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'help.title'|trans }}{% endblock %}
+
+{% block body %}
+    <header class="hero hero--results">
+        {{ include('_hero_backdrop.html.twig') }}
+        <div class="container topbar" data-controller="theme-switch">
+            {{ include('_topbar_brand.html.twig') }}
+            <div class="topbar__tools">
+                {{ include('_theme_switch.html.twig') }}
+                {{ include('_language_switch.html.twig') }}
+                <a class="button button--light button--small" href="{{ path('app_analysis_upload', {_locale: app.locale}) }}">{{ 'results.new'|trans }}</a>
+            </div>
+        </div>
+        <div class="container hero__content">
+            <p class="eyebrow eyebrow--on-dark">{{ 'help.eyebrow'|trans }}</p>
+            <h1 class="hero__title hero__title--file">{{ 'help.title'|trans }}</h1>
+            <p class="hero__lead">{{ 'help.lead'|trans }}</p>
+        </div>
+    </header>
+    <main id="main" class="container page page--results help">
+        <article class="panel help__article">
+            <section id="grading-scale">
+                <h2>{{ 'term.caesura'|trans }}</h2>
+                <p>{{ 'help.caesura'|trans }}</p>
+                <p>{{ 'help.caesura_pass'|trans }}</p>
+            </section>
+            <section id="difficulty">
+                <h2>{{ 'term.difficulty.label'|trans }}</h2>
+                <p>{{ 'term.difficulty.text'|trans }}</p>
+            </section>
+            <section id="discrimination">
+                <h2>{{ 'term.discrimination.label'|trans }}</h2>
+                <p>{{ 'term.discrimination.text'|trans }}</p>
+            </section>
+            <section id="reliability">
+                <h2>{{ 'term.reliability.label'|trans }}</h2>
+                <p>{{ 'term.reliability.text'|trans }}</p>
+            </section>
+            <section id="flags">
+                <h2>{{ 'help.flags_title'|trans }}</h2>
+                <p>{{ 'help.flags'|trans }}</p>
+            </section>
+            <section id="adjustments">
+                <h2>{{ 'help.adjust_title'|trans }}</h2>
+                <p>{{ 'help.adjust'|trans }}</p>
+                <p>{{ 'help.adjust_full'|trans }}</p>
+            </section>
+            <section id="privacy">
+                <h2>{{ 'help.privacy_title'|trans }}</h2>
+                <p>{{ 'help.privacy'|trans }}</p>
+            </section>
+        </article>
+    </main>
+{% endblock %}

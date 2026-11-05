@@ -6,7 +6,7 @@ command and a web UI; both run the same analysis code.
 
 ## Requirements
 
-- PHP 8.4+ with the `zip`, `xml`, `xmlreader`, `gd` and `mbstring` extensions (needed by PhpSpreadsheet)
+- PHP 8.4+ with the `zip`, `xml`, `xmlreader`, `gd`, `mbstring` and `intl` extensions (`intl` is used for translations and number formatting; PhpSpreadsheet needs the others)
 - Composer 2
 
 [DDEV](https://ddev.com/) is the local environment. It provides PHP 8.4 and Composer inside a container, so those do not have to be installed on the host. Docker and DDEV are required to use it.
@@ -38,22 +38,35 @@ cell), `2` invalid caesura.
 
 ### Web UI
 
-After `ddev start`, open <https://assignment.ddev.site>. Upload a workbook (drag and drop or browse),
-check or edit the caesura, which has a live preview of the grade curve, and select **Analyse results**.
-If `Assignment.xlsx` is in the project root, **Try the sample workbook** analyses it in one click.
+After `ddev start`, open <https://assignment.ddev.site>. The site is in English or Dutch
+(`/en` and `/nl`); `/` follows the browser language. Upload a RemindoTest Excel export, check the
+grading scale (the standard scale is 70% = 5.5) and select **Analyse results**. If `Assignment.xlsx`
+is in the project root, **View an example analysis** runs it in one click.
 
-The results page shows:
+The results page is written for teachers:
 
-- Summary cards: the pass rate, average grade, average score and average P'-value.
-- A grade distribution split into passed and failed. Selecting a bar lists those students.
-- An item map that plots P' (difficulty) against rit (discrimination). Selecting a question jumps
-  to it in the table.
-- Sortable, searchable and filterable tables for students and questions, with CSV export.
-- The exact report the console command prints, plus the equivalent CLI command to copy.
+- Pass rate (and how it changed), average grade, reliability (Cronbach's alpha) and how many
+  questions to review.
+- Short notes on what stands out, each linking to the students or the question.
+- A grade distribution. Selecting a bar lists those students.
+- A question map with shaded guideline zones. Selecting a question opens its detail.
+- Sortable, searchable tables. A student row shows the score on each question; a question row shows
+  the score distribution, the strong and weak groups, and reliability if the question is left out.
+- **Adjust analysis** changes the grading scale, leaves a question out, or gives everyone full marks,
+  and recalculates without uploading again.
+- **Download Excel** (summary, grades and questions) and **Print summary** (the figures, notes and
+  charts, without the student and question tables).
 
-Uploaded workbooks are analysed from PHP's temporary upload file and never stored. The UI has no
-authentication. It is meant to run locally; add authentication before deploying it anywhere shared,
-because the workbooks contain student data.
+A theme switcher next to the language switch recolours the UI in the style of certify360.com
+(**Default**) or of one of the eight Certify360 brands (Lindenhaeghe, CS Opleidingen, Nederlands
+Compliance Instituut, WWZ Academie, FOI, Learncare, Examenadviesburo, COEL toetscentra). The header
+then shows that brand's logo next to the product name. Themes change colours and the logo only. The
+choice is kept in a cookie.
+
+Uploaded workbooks are analysed from PHP's temporary upload file and never stored. Adjusting the
+analysis sends the same data back with the page; nothing is written to disk or a database. The UI
+has no authentication. It is meant to run locally; add authentication before deploying it anywhere
+shared, because the workbooks contain student data.
 
 ### Input format
 
@@ -89,20 +102,21 @@ downloads the JavaScript dependencies (`importmap:install`). Templates and confi
 ```
 src/
 ├── Command/          AnalyzeExamCommand: CLI input, error messages, exit codes
-├── Controller/       ExamAnalysisController: upload form and results page
-├── Form/             Upload form, its input model and validation
-├── Application/      ExamAnalyzer, ExamAnalysis, CaesuraNotation ("20:1.0,70:5.5,100:10.0")
+├── Controller/       Upload, results, Excel export, help, and the language redirect
+├── Form/             Upload form, analysis settings and the embedded-exam transformer
+├── Application/      ExamAnalyzer, AnalysisRunner, AnalysisSettings, CaesuraNotation
 ├── Domain/           Pure PHP business logic (no Symfony / PhpSpreadsheet)
-│   ├── Exam/         Exam, Question, Student
+│   ├── Exam/         Exam, Question, Student, QuestionAdjustment
 │   ├── Grade/        Caesura, GradeCalculator
-│   └── Analytics/    PValueCalculator, PearsonCorrelation
+│   └── Analytics/    P', rit, Cronbach's alpha, quality guidelines
 └── Infrastructure/
-    ├── Excel/        ExcelResultImporter (PhpSpreadsheet)
+    ├── Excel/        ExcelResultImporter and ExcelResultExporter (PhpSpreadsheet)
     ├── Console/      ExamResultPresenter (CLI report)
-    ├── Web/          ExamAnalysisView(Factory): summary figures and chart geometry
-    └── ScoreFormatter.php  shared score formatting (console and the Twig |score filter)
+    ├── Web/          ExamAnalysisView, ExamDataCodec, translated errors, Theme and ThemeResolver
+    └── ScoreFormatter.php  locale-aware score formatting (console and the Twig |score filter)
 templates/            Twig pages and partials
-assets/               Stimulus controllers, CSS and self-hosted fonts
+translations/         English and Dutch catalogues
+assets/               Stimulus controllers, CSS (themes.css holds the colour themes), fonts, brand logos
 ```
 
 See [docs/technical-decisions.md](docs/technical-decisions.md) for the reasoning behind the main

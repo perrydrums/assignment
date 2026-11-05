@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application;
 
+use App\Domain\Analytics\CronbachAlpha;
 use App\Domain\Analytics\PearsonCorrelation;
 use App\Domain\Analytics\PValueCalculator;
 use App\Domain\Exam\Exam;
@@ -16,6 +17,7 @@ final readonly class ExamAnalyzer
         private GradeCalculator $gradeCalculator,
         private PValueCalculator $pValueCalculator,
         private PearsonCorrelation $correlation,
+        private CronbachAlpha $reliability,
     ) {
     }
 
@@ -36,9 +38,11 @@ final readonly class ExamAnalyzer
         // rit: correlation between the question score and the total exam score, the total
         // including the question itself (as defined in the assignment).
         $totalScores = $exam->totalScores();
+        $itemScores = [];
         $questions = [];
         foreach ($exam->questions as $index => $question) {
             $scores = $exam->scoresForQuestion($index);
+            $itemScores[] = $scores;
             $questions[] = new QuestionResult(
                 $question->label,
                 $question->maxScore,
@@ -47,6 +51,17 @@ final readonly class ExamAnalyzer
             );
         }
 
-        return new ExamAnalysis($maxScore, $caesura, $students, $questions);
+        $reliability = $this->reliability->calculate($itemScores);
+        foreach ($questions as $index => $question) {
+            $questions[$index] = new QuestionResult(
+                $question->label,
+                $question->maxScore,
+                $question->pValue,
+                $question->ritValue,
+                $reliability['alphaIfRemoved'][$index],
+            );
+        }
+
+        return new ExamAnalysis($maxScore, $caesura, $students, $questions, $reliability['alpha']);
     }
 }

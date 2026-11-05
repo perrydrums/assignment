@@ -1,0 +1,7 @@
+<details class="term">
+    <summary aria-label="{{ ('term.' ~ term ~ '.label')|trans }}">{{ include('_icon.html.twig', {name: 'info'}) }}</summary>
+    <span class="term__panel" role="note">
+        <strong>{{ ('term.' ~ term ~ '.label')|trans }}</strong>
+        {{ ('term.' ~ term ~ '.text')|trans }}
+    </span>
+</details>

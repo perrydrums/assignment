@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="results.of_passed" resname="results.of_passed">
+        <source>{count, plural, one {of # student passed} other {of # students passed}}</source>
+      </trans-unit>
+      <trans-unit id="results.failed_count" resname="results.failed_count">
+        <source>{count, plural, one {# failed} other {# failed}}</source>
+      </trans-unit>
+      <trans-unit id="results.removed" resname="results.removed">
+        <source>{count, plural, one {# question was left out.} other {# questions were left out.}}</source>
+      </trans-unit>
+      <trans-unit id="results.full_marks" resname="results.full_marks">
+        <source>{count, plural, one {# question was given full marks for everyone.} other {# questions were given full marks for everyone.}}</source>
+      </trans-unit>
+      <trans-unit id="results.passes_gained" resname="results.passes_gained">
+        <source>{count, plural, one {# student now passes who did not before.} other {# students now pass who did not before.}}</source>
+      </trans-unit>
+      <trans-unit id="results.passes_lost" resname="results.passes_lost">
+        <source>{count, plural, one {# student now fails who passed before.} other {# students now fail who passed before.}}</source>
+      </trans-unit>
+      <trans-unit id="results.to_review_detail" resname="results.to_review_detail">
+        <source>{count, plural, one {of # question} other {of # questions}}</source>
+      </trans-unit>
+      <trans-unit id="insight.passes_gained" resname="insight.passes_gained">
+        <source>{count, plural, one {# student now passes who did not before.} other {# students now pass who did not before.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.passes_lost" resname="insight.passes_lost">
+        <source>{count, plural, one {# student now fails who passed before.} other {# students now fail who passed before.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.many_difficult" resname="insight.many_difficult">
+        <source>{count, plural, one {# question looks very difficult.} other {# questions look very difficult.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.many_easy" resname="insight.many_easy">
+        <source>{count, plural, one {# question looks very easy.} other {# questions look very easy.}}</source>
+      </trans-unit>
+      <trans-unit id="insight.negative_rit" resname="insight.negative_rit">
+        <source>{count, plural, one {Question {questions} may have a wrong answer key.} other {# questions may have a wrong answer key: {questions}.}}</source>
+      </trans-unit>
+    <trans-unit id="results.pass_mark_now" resname="results.pass_mark_now"><source>The pass mark is now {percent}%.</source></trans-unit><trans-unit id="results.pass_rate_label" resname="results.pass_rate_label"><source>{rate}% of the students passed</source></trans-unit><trans-unit id="results.pass_grade" resname="results.pass_grade"><source>pass {grade}</source></trans-unit><trans-unit id="results.average_score" resname="results.average_score"><source>average score {percent}%</source></trans-unit><trans-unit id="chart.bin" resname="chart.bin"><source>{total, plural, one {Grade {label}: # student, {passed} passed} other {Grade {label}: # students, {passed} passed}}</source></trans-unit><trans-unit id="chart.dot" resname="chart.dot"><source>{label}. Difficulty {difficulty}, discrimination {discrimination}.</source></trans-unit><trans-unit id="insight.reliability_low" resname="insight.reliability_low"><source>Reliability is low ({alpha}). The total score is a weak summary of this test.</source></trans-unit><trans-unit id="insight.reliability_good" resname="insight.reliability_good"><source>Reliability is good ({alpha}). The questions largely measure the same thing.</source></trans-unit><trans-unit id="insight.low_pass_rate" resname="insight.low_pass_rate"><source>Fewer than half the students passed ({rate}%).</source></trans-unit></body>
+  </file>
+</xliff>

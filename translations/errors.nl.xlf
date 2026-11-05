@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="nl" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="caesura.invalid" resname="caesura.invalid">
+        <source>De cesuur is niet geldig.</source>
+      </trans-unit>
+      <trans-unit id="caesura.too_few_points" resname="caesura.too_few_points">
+        <source>Een cesuur heeft minstens twee punten nodig.</source>
+      </trans-unit>
+      <trans-unit id="caesura.percentage_range" resname="caesura.percentage_range">
+        <source>Een percentage moet tussen 0 en 100 liggen, nu %value%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.grade_not_finite" resname="caesura.grade_not_finite">
+        <source>Een cijfer moet een getal zijn.</source>
+      </trans-unit>
+      <trans-unit id="caesura.percentages_not_increasing" resname="caesura.percentages_not_increasing">
+        <source>Percentages moeten oplopen. %current%% komt na %previous%%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.grades_decrease" resname="caesura.grades_decrease">
+        <source>Cijfers mogen niet dalen. %current% komt na %previous%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.pass_percentage_range" resname="caesura.pass_percentage_range">
+        <source>De zak/slaag-grens moet groter zijn dan 0 en hoogstens 100, nu %value%.</source>
+      </trans-unit>
+      <trans-unit id="caesura.incomplete_point" resname="caesura.incomplete_point">
+        <source>Elk punt heeft een percentage en een cijfer nodig.</source>
+      </trans-unit>
+      <trans-unit id="caesura.pass_percentage_missing" resname="caesura.pass_percentage_missing">
+        <source>De zak/slaag-grens ontbreekt.</source>
+      </trans-unit>
+      <trans-unit id="caesura.invalid_point" resname="caesura.invalid_point">
+        <source>Ongeldig punt "%point%". Gebruik percentage:cijfer, bijvoorbeeld 70:5.5.</source>
+      </trans-unit>
+      <trans-unit id="caesura.invalid_number" resname="caesura.invalid_number">
+        <source>"%value%" is geen getal.</source>
+      </trans-unit>
+      <trans-unit id="workbook.generic" resname="workbook.generic">
+        <source>Het bestand kon niet worden gelezen.</source>
+      </trans-unit>
+      <trans-unit id="workbook.file_missing" resname="workbook.file_missing">
+        <source>Het bestand bestaat niet of is niet leesbaar.</source>
+      </trans-unit>
+      <trans-unit id="workbook.not_excel" resname="workbook.not_excel">
+        <source>Het bestand kon niet als Excel-werkboek (.xlsx of .xls) worden gelezen: %detail%</source>
+      </trans-unit>
+      <trans-unit id="workbook.no_sheet" resname="workbook.no_sheet">
+        <source>Het werkboek bevat geen werkblad.</source>
+      </trans-unit>
+      <trans-unit id="workbook.unprocessable" resname="workbook.unprocessable">
+        <source>Het werkboek kon niet worden verwerkt: %detail%</source>
+      </trans-unit>
+      <trans-unit id="workbook.rejected" resname="workbook.rejected">
+        <source>%detail%</source>
+      </trans-unit>
+      <trans-unit id="workbook.no_questions" resname="workbook.no_questions">
+        <source>De koprij bevat geen vraagkolommen.</source>
+      </trans-unit>
+      <trans-unit id="workbook.no_students" resname="workbook.no_students">
+        <source>Het werkblad bevat geen studentrijen (verwacht vanaf rij %row%).</source>
+      </trans-unit>
+      <trans-unit id="workbook.example_missing" resname="workbook.example_missing">
+        <source>Het voorbeeldbestand is niet beschikbaar.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.header_id" resname="workbook.cell.header_id">
+        <source>Cel %cell%: verwacht de kop "ID", maar vond "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_label" resname="workbook.cell.max_label">
+        <source>Cel %cell%: verwacht het label van de maximumscore (bijvoorbeeld "Max question score:"), maar vond "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.header_empty" resname="workbook.cell.header_empty">
+        <source>Cel %cell%: de vraagkop is leeg, maar de kolom bevat gegevens.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_not_positive" resname="workbook.cell.max_not_positive">
+        <source>Cel %cell%: de maximumscore van "%label%" moet groter zijn dan 0, nu %value%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.student_missing" resname="workbook.cell.student_missing">
+        <source>Cel %cell%: het studentnummer ontbreekt.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.student_duplicate" resname="workbook.cell.student_duplicate">
+        <source>Cel %cell%: studentnummer "%id%" komt al voor in rij %row%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_range" resname="workbook.cell.score_range">
+        <source>Cel %cell%: score %value% van student "%id%" op "%label%" valt buiten het bereik 0 tot %max%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.expected_text" resname="workbook.cell.expected_text">
+        <source>Cel %cell%: verwacht tekst, maar vond %type%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_missing" resname="workbook.cell.max_missing">
+        <source>Cel %cell%: de maximumscore van "%label%" ontbreekt.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_text" resname="workbook.cell.max_text">
+        <source>Cel %cell%: de maximumscore van "%label%" moet een getal zijn, maar is de tekst "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.max_type" resname="workbook.cell.max_type">
+        <source>Cel %cell%: de maximumscore van "%label%" moet een getal zijn, maar is %value%.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_missing" resname="workbook.cell.score_missing">
+        <source>Cel %cell%: de score van student "%id%" op "%label%" ontbreekt.</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_text" resname="workbook.cell.score_text">
+        <source>Cel %cell%: de score van student "%id%" op "%label%" moet een getal zijn, maar is de tekst "%value%".</source>
+      </trans-unit>
+      <trans-unit id="workbook.cell.score_type" resname="workbook.cell.score_type">
+        <source>Cel %cell%: de score van student "%id%" op "%label%" moet een getal zijn, maar is %value%.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.invalid_json" resname="exam_data.invalid_json">
+        <source>De analysegegevens zijn niet geldig. Upload het bestand opnieuw.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.structure" resname="exam_data.structure">
+        <source>De analysegegevens hebben een onverwachte vorm.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.too_large" resname="exam_data.too_large">
+        <source>Een analyse is beperkt tot %questions% vragen en %students% studenten.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.question" resname="exam_data.question">
+        <source>Een vraag in de analysegegevens is onvolledig.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.student" resname="exam_data.student">
+        <source>Een student in de analysegegevens is onvolledig.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.score" resname="exam_data.score">
+        <source>Een score in de analysegegevens is geen getal.</source>
+      </trans-unit>
+      <trans-unit id="exam_data.rejected" resname="exam_data.rejected">
+        <source>De analysegegevens zijn afgewezen.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

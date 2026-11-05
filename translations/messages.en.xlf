@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="brand.product" resname="brand.product">
+        <source>Remindo Analytics</source>
+      </trans-unit>
+      <trans-unit id="brand.description" resname="brand.description">
+        <source>Grades, pass rates and question quality for your tests.</source>
+      </trans-unit>
+      <trans-unit id="language.label" resname="language.label">
+        <source>Language</source>
+      </trans-unit>
+      <trans-unit id="footer.tagline" resname="footer.tagline">
+        <source>See how your students did, and which questions to look at again.</source>
+      </trans-unit>
+      <trans-unit id="footer.privacy" resname="footer.privacy">
+        <source>Results are analysed and then discarded. Nothing is stored.</source>
+      </trans-unit>
+      <trans-unit id="footer.help" resname="footer.help">
+        <source>How the analysis works</source>
+      </trans-unit>
+      <trans-unit id="upload.title" resname="upload.title">
+        <source>Analyse test results</source>
+      </trans-unit>
+      <trans-unit id="upload.eyebrow" resname="upload.eyebrow">
+        <source>For teachers</source>
+      </trans-unit>
+      <trans-unit id="upload.headline" resname="upload.headline">
+        <source>See how your test went.</source>
+      </trans-unit>
+      <trans-unit id="upload.lead" resname="upload.lead">
+        <source>Upload the Excel export from RemindoTest. You get a grade for every student, and a clear view of which questions worked.</source>
+      </trans-unit>
+      <trans-unit id="upload.private" resname="upload.private">
+        <source>Nothing is stored</source>
+      </trans-unit>
+      <trans-unit id="upload.step_file" resname="upload.step_file">
+        <source>Upload the results</source>
+      </trans-unit>
+      <trans-unit id="upload.drop_title" resname="upload.drop_title">
+        <source>Drop the Excel file here</source>
+      </trans-unit>
+      <trans-unit id="upload.drop_or" resname="upload.drop_or">
+        <source>or</source>
+      </trans-unit>
+      <trans-unit id="upload.browse" resname="upload.browse">
+        <source>browse your files</source>
+      </trans-unit>
+      <trans-unit id="upload.formats" resname="upload.formats">
+        <source>Excel export from RemindoTest · up to 10 MB</source>
+      </trans-unit>
+      <trans-unit id="upload.ready" resname="upload.ready">
+        <source>ready</source>
+      </trans-unit>
+      <trans-unit id="upload.remove_file" resname="upload.remove_file">
+        <source>Remove the selected file</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_toggle" resname="upload.layout_toggle">
+        <source>What the file should look like</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_question" resname="upload.layout_question">
+        <source>Score question</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_max" resname="upload.layout_max">
+        <source>Max question score:</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_student" resname="upload.layout_student">
+        <source>Student 0001</source>
+      </trans-unit>
+      <trans-unit id="upload.layout_help" resname="upload.layout_help">
+        <source>The first worksheet is read. The first row names the questions, the second row gives each question's maximum, and every following row is one student.</source>
+      </trans-unit>
+      <trans-unit id="upload.step_scale" resname="upload.step_scale">
+        <source>Check the grading scale</source>
+      </trans-unit>
+      <trans-unit id="upload.scale_intro" resname="upload.scale_intro">
+        <source>This is how a score becomes a grade. Between the points, the grade changes evenly.</source>
+      </trans-unit>
+      <trans-unit id="upload.scale_help" resname="upload.scale_help">
+        <source>How does this work?</source>
+      </trans-unit>
+      <trans-unit id="upload.add_point" resname="upload.add_point">
+        <source>Add a point</source>
+      </trans-unit>
+      <trans-unit id="upload.live_preview" resname="upload.live_preview">
+        <source>Preview</source>
+      </trans-unit>
+      <trans-unit id="upload.reset_scale" resname="upload.reset_scale">
+        <source>Standard scale: 70% = 5.5</source>
+      </trans-unit>
+      <trans-unit id="upload.privacy" resname="upload.privacy">
+        <source>The file is used for this analysis and then discarded.</source>
+      </trans-unit>
+      <trans-unit id="upload.example" resname="upload.example">
+        <source>View an example analysis</source>
+      </trans-unit>
+      <trans-unit id="upload.submit" resname="upload.submit">
+        <source>Analyse results</source>
+      </trans-unit>
+      <trans-unit id="upload.busy" resname="upload.busy">
+        <source>Analysing…</source>
+      </trans-unit>
+      <trans-unit id="upload.error_required" resname="upload.error_required">
+        <source>Choose an Excel file to analyse.</source>
+      </trans-unit>
+      <trans-unit id="upload.error_type" resname="upload.error_type">
+        <source>Only Excel files (.xlsx or .xls) can be analysed, not "{name}".</source>
+      </trans-unit>
+      <trans-unit id="upload.error_size" resname="upload.error_size">
+        <source>This file is {size}. The maximum is {max}.</source>
+      </trans-unit>
+      <trans-unit id="upload.features_eyebrow" resname="upload.features_eyebrow">
+        <source>What you get</source>
+      </trans-unit>
+      <trans-unit id="upload.features_title" resname="upload.features_title">
+        <source>Three questions, answered for every test</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.grades.title" resname="upload.feature.grades.title">
+        <source>How did each student do?</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.grades.text" resname="upload.feature.grades.text">
+        <source>Every total score becomes a grade on your scale. A student passes on the exact score, not on a grade that was rounded up.</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.difficulty.title" resname="upload.feature.difficulty.title">
+        <source>Was a question too easy or too hard?</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.difficulty.text" resname="upload.feature.difficulty.text">
+        <source>Difficulty (P') compares the average score with the maximum. Close to 0 means almost nobody scored; close to 1 means almost everybody had full marks.</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.discrimination.title" resname="upload.feature.discrimination.title">
+        <source>Did it separate strong from weak?</source>
+      </trans-unit>
+      <trans-unit id="upload.feature.discrimination.text" resname="upload.feature.discrimination.text">
+        <source>Discrimination (rit) shows whether students with a high total also did better on that question. A very low or negative value is worth a look.</source>
+      </trans-unit>
+      <trans-unit id="upload.chart_title" resname="upload.chart_title">
+        <source>Preview of the grading scale</source>
+      </trans-unit>
+      <trans-unit id="form.workbook" resname="form.workbook">
+        <source>Test results</source>
+      </trans-unit>
+      <trans-unit id="form.caesura" resname="form.caesura">
+        <source>Grading scale</source>
+      </trans-unit>
+      <trans-unit id="form.score_percentage" resname="form.score_percentage">
+        <source>Score percentage</source>
+      </trans-unit>
+      <trans-unit id="form.grade" resname="form.grade">
+        <source>Grade</source>
+      </trans-unit>
+      <trans-unit id="form.score" resname="form.score">
+        <source>Score</source>
+      </trans-unit>
+      <trans-unit id="form.pass_percentage" resname="form.pass_percentage">
+        <source>Pass percentage</source>
+      </trans-unit>
+      <trans-unit id="form.pass_from" resname="form.pass_from">
+        <source>Students pass from</source>
+      </trans-unit>
+      <trans-unit id="form.adjustment.keep" resname="form.adjustment.keep">
+        <source>Count as scored</source>
+      </trans-unit>
+      <trans-unit id="form.adjustment.remove" resname="form.adjustment.remove">
+        <source>Leave out of the test</source>
+      </trans-unit>
+      <trans-unit id="form.adjustment.full_marks" resname="form.adjustment.full_marks">
+        <source>Give everyone full marks</source>
+      </trans-unit>
+      <trans-unit id="results.eyebrow" resname="results.eyebrow">
+        <source>Analysis</source>
+      </trans-unit>
+      <trans-unit id="results.new" resname="results.new">
+        <source>New analysis</source>
+      </trans-unit>
+      <trans-unit id="results.facts" resname="results.facts">
+        <source>About this test</source>
+      </trans-unit>
+      <trans-unit id="results.students" resname="results.students">
+        <source>students</source>
+      </trans-unit>
+      <trans-unit id="results.questions" resname="results.questions">
+        <source>questions</source>
+      </trans-unit>
+      <trans-unit id="results.max" resname="results.max">
+        <source>maximum</source>
+      </trans-unit>
+      <trans-unit id="results.pass_from" resname="results.pass_from">
+        <source>pass from</source>
+      </trans-unit>
+      <trans-unit id="results.adjust" resname="results.adjust">
+        <source>Adjust analysis</source>
+      </trans-unit>
+      <trans-unit id="results.download" resname="results.download">
+        <source>Download Excel</source>
+      </trans-unit>
+      <trans-unit id="results.print" resname="results.print">
+        <source>Print summary</source>
+      </trans-unit>
+      <trans-unit id="results.undo" resname="results.undo">
+        <source>Undo all changes</source>
+      </trans-unit>
+      <trans-unit id="results.insights_eyebrow" resname="results.insights_eyebrow">
+        <source>In short</source>
+      </trans-unit>
+      <trans-unit id="results.insights_title" resname="results.insights_title">
+        <source>What stands out</source>
+      </trans-unit>
+      <trans-unit id="results.charts" resname="results.charts">
+        <source>Charts</source>
+      </trans-unit>
+      <trans-unit id="results.explore" resname="results.explore">
+        <source>Look closer</source>
+      </trans-unit>
+      <trans-unit id="results.tables_title" resname="results.tables_title">
+        <source>Students and questions</source>
+      </trans-unit>
+      <trans-unit id="results.tab_students" resname="results.tab_students">
+        <source>Students</source>
+      </trans-unit>
+      <trans-unit id="results.tab_questions" resname="results.tab_questions">
+        <source>Questions</source>
+      </trans-unit>
+      <trans-unit id="results.summary" resname="results.summary">
+        <source>Summary</source>
+      </trans-unit>
+      <trans-unit id="results.pass_rate" resname="results.pass_rate">
+        <source>Pass rate</source>
+      </trans-unit>
+      <trans-unit id="results.average_grade" resname="results.average_grade">
+        <source>Average grade</source>
+      </trans-unit>
+      <trans-unit id="results.not_available" resname="results.not_available">
+        <source>n/a</source>
+      </trans-unit>
+      <trans-unit id="results.to_review" resname="results.to_review">
+        <source>Questions to review</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_good" resname="results.reliability_good">
+        <source>Good: the questions point in the same direction</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_acceptable" resname="results.reliability_acceptable">
+        <source>Acceptable</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_low" resname="results.reliability_low">
+        <source>Low: treat the total with care</source>
+      </trans-unit>
+      <trans-unit id="results.reliability_unknown" resname="results.reliability_unknown">
+        <source>Not enough variation to judge</source>
+      </trans-unit>
+      <trans-unit id="results.noun_students" resname="results.noun_students">
+        <source>students</source>
+      </trans-unit>
+      <trans-unit id="results.noun_questions" resname="results.noun_questions">
+        <source>questions</source>
+      </trans-unit>
+      <trans-unit id="results.count_all" resname="results.count_all">
+        <source>{total} {noun}</source>
+      </trans-unit>
+      <trans-unit id="results.count_some" resname="results.count_some">
+        <source>{visible} of {total} {noun}</source>
+      </trans-unit>
+      <trans-unit id="results.search_students" resname="results.search_students">
+        <source>Search by student</source>
+      </trans-unit>
+      <trans-unit id="results.search_questions" resname="results.search_questions">
+        <source>Search questions</source>
+      </trans-unit>
+      <trans-unit id="results.filter_result" resname="results.filter_result">
+        <source>Filter by result</source>
+      </trans-unit>
+      <trans-unit id="results.filter_review" resname="results.filter_review">
+        <source>Filter questions</source>
+      </trans-unit>
+      <trans-unit id="results.filter_all" resname="results.filter_all">
+        <source>All</source>
+      </trans-unit>
+      <trans-unit id="results.passed" resname="results.passed">
+        <source>Passed</source>
+      </trans-unit>
+      <trans-unit id="results.failed" resname="results.failed">
+        <source>Failed</source>
+      </trans-unit>
+      <trans-unit id="results.changed" resname="results.changed">
+        <source>Result changed</source>
+      </trans-unit>
+      <trans-unit id="results.grade" resname="results.grade">
+        <source>Grade</source>
+      </trans-unit>
+      <trans-unit id="results.clear_grade" resname="results.clear_grade">
+        <source>Remove the grade filter</source>
+      </trans-unit>
+      <trans-unit id="results.percentage" resname="results.percentage">
+        <source>Percentage</source>
+      </trans-unit>
+      <trans-unit id="results.result" resname="results.result">
+        <source>Result</source>
+      </trans-unit>
+      <trans-unit id="results.student" resname="results.student">
+        <source>Student</source>
+      </trans-unit>
+      <trans-unit id="results.no_students" resname="results.no_students">
+        <source>No students match these filters.</source>
+      </trans-unit>
+      <trans-unit id="results.clear_filters" resname="results.clear_filters">
+        <source>Clear filters</source>
+      </trans-unit>
+      <trans-unit id="results.needs_review" resname="results.needs_review">
+        <source>Needs a look</source>
+      </trans-unit>
+      <trans-unit id="results.review" resname="results.review">
+        <source>Review</source>
+      </trans-unit>
+      <trans-unit id="results.no_variation" resname="results.no_variation">
+        <source>Every student had the same score, so discrimination cannot be calculated.</source>
+      </trans-unit>
+      <trans-unit id="results.no_flags" resname="results.no_flags">
+        <source>Fine</source>
+      </trans-unit>
+      <trans-unit id="results.no_questions" resname="results.no_questions">
+        <source>No questions match these filters.</source>
+      </trans-unit>
+      <trans-unit id="results.question_caption" resname="results.question_caption">
+        <source>Difficulty, discrimination and review notes per question</source>
+      </trans-unit>
+      <trans-unit id="chart.grades_title" resname="chart.grades_title">
+        <source>Grade distribution</source>
+      </trans-unit>
+      <trans-unit id="chart.grades_help" resname="chart.grades_help">
+        <source>Students per rounded grade. Select a bar to list those students.</source>
+      </trans-unit>
+      <trans-unit id="chart.legend" resname="chart.legend">
+        <source>Legend</source>
+      </trans-unit>
+      <trans-unit id="chart.pass" resname="chart.pass">
+        <source>pass</source>
+      </trans-unit>
+      <trans-unit id="chart.map_title" resname="chart.map_title">
+        <source>Question map</source>
+      </trans-unit>
+      <trans-unit id="chart.map_help" resname="chart.map_help">
+        <source>Difficulty across, discrimination up. Shaded areas are outside the guidelines. Select a question to open it.</source>
+      </trans-unit>
+      <trans-unit id="chart.dot_size" resname="chart.dot_size">
+        <source>Larger dot: more points</source>
+      </trans-unit>
+      <trans-unit id="chart.easier" resname="chart.easier">
+        <source>Difficulty → easier</source>
+      </trans-unit>
+      <trans-unit id="chart.not_plotted" resname="chart.not_plotted">
+        <source>Not on the map, because every student scored the same:</source>
+      </trans-unit>
+      <trans-unit id="term.caesura" resname="term.caesura">
+        <source>Grading scale (caesura)</source>
+      </trans-unit>
+      <trans-unit id="term.caesura_short" resname="term.caesura_short">
+        <source>Scale</source>
+      </trans-unit>
+      <trans-unit id="term.reliability" resname="term.reliability">
+        <source>Reliability</source>
+      </trans-unit>
+      <trans-unit id="term.difficulty.label" resname="term.difficulty.label">
+        <source>Difficulty (P')</source>
+      </trans-unit>
+      <trans-unit id="term.difficulty.short" resname="term.difficulty.short">
+        <source>P'</source>
+      </trans-unit>
+      <trans-unit id="term.difficulty.text" resname="term.difficulty.text">
+        <source>The average score divided by the maximum. 0 means nobody scored anything; 1 means everybody had full marks.</source>
+      </trans-unit>
+      <trans-unit id="term.discrimination.label" resname="term.discrimination.label">
+        <source>Discrimination (rit)</source>
+      </trans-unit>
+      <trans-unit id="term.discrimination.short" resname="term.discrimination.short">
+        <source>rit</source>
+      </trans-unit>
+      <trans-unit id="term.discrimination.text" resname="term.discrimination.text">
+        <source>How well the question follows the total score. Above 0.20 is a common guideline. A negative value means the stronger students did worse on it: check the answer key.</source>
+      </trans-unit>
+      <trans-unit id="term.reliability.label" resname="term.reliability.label">
+        <source>Reliability (Cronbach's alpha)</source>
+      </trans-unit>
+      <trans-unit id="term.reliability.text" resname="term.reliability.text">
+        <source>Whether the questions measure one consistent thing. About 0.70 is acceptable and 0.80 is good. These are guidelines, not a verdict. Alpha is not defined when almost everyone scored the same.</source>
+      </trans-unit>
+      <trans-unit id="detail.score" resname="detail.score">
+        <source>Score</source>
+      </trans-unit>
+      <trans-unit id="detail.question" resname="detail.question">
+        <source>Question</source>
+      </trans-unit>
+      <trans-unit id="detail.maximum" resname="detail.maximum">
+        <source>Maximum</source>
+      </trans-unit>
+      <trans-unit id="detail.counted" resname="detail.counted">
+        <source>In this analysis</source>
+      </trans-unit>
+      <trans-unit id="detail.students" resname="detail.students">
+        <source>Students</source>
+      </trans-unit>
+      <trans-unit id="detail.high_group" resname="detail.high_group">
+        <source>Strongest students</source>
+      </trans-unit>
+      <trans-unit id="detail.low_group" resname="detail.low_group">
+        <source>Weakest students</source>
+      </trans-unit>
+      <trans-unit id="settings.eyebrow" resname="settings.eyebrow">
+        <source>What-if</source>
+      </trans-unit>
+      <trans-unit id="settings.title" resname="settings.title">
+        <source>Adjust this analysis</source>
+      </trans-unit>
+      <trans-unit id="settings.close" resname="settings.close">
+        <source>Close</source>
+      </trans-unit>
+      <trans-unit id="settings.scale_intro" resname="settings.scale_intro">
+        <source>Change the scale or the pass mark and apply. The original file is not modified.</source>
+      </trans-unit>
+      <trans-unit id="settings.reset_baseline" resname="settings.reset_baseline">
+        <source>Back to the scale you started with</source>
+      </trans-unit>
+      <trans-unit id="settings.questions" resname="settings.questions">
+        <source>Questions</source>
+      </trans-unit>
+      <trans-unit id="settings.questions_intro" resname="settings.questions_intro">
+        <source>Leave a flawed question out, or give everyone full marks when the answer key was wrong.</source>
+      </trans-unit>
+      <trans-unit id="settings.guidelines" resname="settings.guidelines">
+        <source>Review guidelines</source>
+      </trans-unit>
+      <trans-unit id="settings.guidelines_intro" resname="settings.guidelines_intro">
+        <source>Indicative boundaries. Questions outside them are marked for a look; they are not automatically bad.</source>
+      </trans-unit>
+      <trans-unit id="settings.difficult_below" resname="settings.difficult_below">
+        <source>Very difficult below</source>
+      </trans-unit>
+      <trans-unit id="settings.easy_above" resname="settings.easy_above">
+        <source>Very easy above</source>
+      </trans-unit>
+      <trans-unit id="settings.weak_below" resname="settings.weak_below">
+        <source>Weak discrimination below</source>
+      </trans-unit>
+      <trans-unit id="settings.apply" resname="settings.apply">
+        <source>Update analysis</source>
+      </trans-unit>
+      <trans-unit id="help.eyebrow" resname="help.eyebrow">
+        <source>Guide</source>
+      </trans-unit>
+      <trans-unit id="help.title" resname="help.title">
+        <source>How the analysis works</source>
+      </trans-unit>
+      <trans-unit id="help.lead" resname="help.lead">
+        <source>A short explanation of the numbers on the results page.</source>
+      </trans-unit>
+      <trans-unit id="help.caesura" resname="help.caesura">
+        <source>The grading scale turns a percentage of the maximum score into a grade. Between two points the grade changes evenly. Below the first point the grade stays at the first grade, and at the top it stops at the last grade.</source>
+      </trans-unit>
+      <trans-unit id="help.caesura_pass" resname="help.caesura_pass">
+        <source>Passing is decided on the exact percentage, not on the rounded grade. A student can therefore see a 5.5 and still have failed, if the score was just under the pass mark.</source>
+      </trans-unit>
+      <trans-unit id="help.flags_title" resname="help.flags_title">
+        <source>Why a question is marked</source>
+      </trans-unit>
+      <trans-unit id="help.flags" resname="help.flags">
+        <source>By default a question is marked when its difficulty is below 0.30 or above 0.90, or when its discrimination is below 0.20. A negative discrimination is always marked, because that often means the answer key is wrong. You can change the boundaries under Adjust analysis.</source>
+      </trans-unit>
+      <trans-unit id="help.adjust_title" resname="help.adjust_title">
+        <source>Trying a change</source>
+      </trans-unit>
+      <trans-unit id="help.adjust" resname="help.adjust">
+        <source>Leaving a question out removes its points from the maximum and from every student, and the grades are calculated again.</source>
+      </trans-unit>
+      <trans-unit id="help.adjust_full" resname="help.adjust_full">
+        <source>Giving everyone full marks keeps the question's points but assumes every student got them, for example after a wrong answer key.</source>
+      </trans-unit>
+      <trans-unit id="help.privacy_title" resname="help.privacy_title">
+        <source>Your students' results</source>
+      </trans-unit>
+      <trans-unit id="help.privacy" resname="help.privacy">
+        <source>The file is read into memory for the analysis and is not saved. When you adjust the analysis, the same data is sent again with the page. Close the page and it is gone.</source>
+      </trans-unit>
+      <trans-unit id="flash.exam_data_invalid" resname="flash.exam_data_invalid">
+        <source>This analysis could not be continued. Please upload the file again.</source>
+      </trans-unit>
+      <trans-unit id="export.sheet.summary" resname="export.sheet.summary">
+        <source>Summary</source>
+      </trans-unit>
+      <trans-unit id="export.sheet.grades" resname="export.sheet.grades">
+        <source>Grades</source>
+      </trans-unit>
+      <trans-unit id="export.sheet.questions" resname="export.sheet.questions">
+        <source>Questions</source>
+      </trans-unit>
+      <trans-unit id="export.file" resname="export.file">
+        <source>File</source>
+      </trans-unit>
+      <trans-unit id="export.students" resname="export.students">
+        <source>Students</source>
+      </trans-unit>
+      <trans-unit id="export.questions" resname="export.questions">
+        <source>Questions</source>
+      </trans-unit>
+      <trans-unit id="export.max_score" resname="export.max_score">
+        <source>Maximum score</source>
+      </trans-unit>
+      <trans-unit id="export.pass_percentage" resname="export.pass_percentage">
+        <source>Pass mark</source>
+      </trans-unit>
+      <trans-unit id="export.passed" resname="export.passed">
+        <source>Passed</source>
+      </trans-unit>
+      <trans-unit id="export.failed" resname="export.failed">
+        <source>Failed</source>
+      </trans-unit>
+      <trans-unit id="export.average_grade" resname="export.average_grade">
+        <source>Average grade</source>
+      </trans-unit>
+      <trans-unit id="export.reliability" resname="export.reliability">
+        <source>Reliability (alpha)</source>
+      </trans-unit>
+      <trans-unit id="export.grading_scale" resname="export.grading_scale">
+        <source>Grading scale</source>
+      </trans-unit>
+      <trans-unit id="export.student" resname="export.student">
+        <source>Student</source>
+      </trans-unit>
+      <trans-unit id="export.score" resname="export.score">
+        <source>Score</source>
+      </trans-unit>
+      <trans-unit id="export.percentage" resname="export.percentage">
+        <source>Percentage</source>
+      </trans-unit>
+      <trans-unit id="export.grade" resname="export.grade">
+        <source>Grade</source>
+      </trans-unit>
+      <trans-unit id="export.result" resname="export.result">
+        <source>Result</source>
+      </trans-unit>
+      <trans-unit id="export.passed_value" resname="export.passed_value">
+        <source>passed</source>
+      </trans-unit>
+      <trans-unit id="export.failed_value" resname="export.failed_value">
+        <source>failed</source>
+      </trans-unit>
+      <trans-unit id="export.number" resname="export.number">
+        <source>Number</source>
+      </trans-unit>
+      <trans-unit id="export.question" resname="export.question">
+        <source>Question</source>
+      </trans-unit>
+      <trans-unit id="export.difficulty" resname="export.difficulty">
+        <source>Difficulty (P')</source>
+      </trans-unit>
+      <trans-unit id="export.discrimination" resname="export.discrimination">
+        <source>Discrimination (rit)</source>
+      </trans-unit>
+      <trans-unit id="export.alpha_if_removed" resname="export.alpha_if_removed">
+        <source>Reliability without this question</source>
+      </trans-unit>
+      <trans-unit id="export.review" resname="export.review">
+        <source>Review</source>
+      </trans-unit>
+      <trans-unit id="flag.negative" resname="flag.negative">
+        <source>Check the answer key</source>
+      </trans-unit>
+      <trans-unit id="flag.no_variation" resname="flag.no_variation">
+        <source>No variation</source>
+      </trans-unit>
+      <trans-unit id="flag.very_difficult" resname="flag.very_difficult">
+        <source>Very difficult</source>
+      </trans-unit>
+      <trans-unit id="flag.very_easy" resname="flag.very_easy">
+        <source>Very easy</source>
+      </trans-unit>
+      <trans-unit id="flag.weak" resname="flag.weak">
+        <source>Weak discrimination</source>
+      </trans-unit>
+      <trans-unit id="nav.skip" resname="nav.skip">
+        <source>Skip to content</source>
+      </trans-unit>
+      <trans-unit id="nav.back_to_top" resname="nav.back_to_top">
+        <source>Back to top</source>
+      </trans-unit>
+      <trans-unit id="nav.home" resname="nav.home">
+        <source>Remindo Analytics, start a new analysis</source>
+      </trans-unit>
+      <trans-unit id="form.remove_point" resname="form.remove_point">
+        <source>Remove this point</source>
+      </trans-unit>
+      <trans-unit id="detail.per_question" resname="detail.per_question">
+        <source>Score per question</source>
+      </trans-unit>
+      <trans-unit id="detail.distribution" resname="detail.distribution">
+        <source>How students scored</source>
+      </trans-unit>
+      <trans-unit id="detail.groups" resname="detail.groups">
+        <source>Strongest versus weakest students</source>
+      </trans-unit>
+      <trans-unit id="detail.groups_note" resname="detail.groups_note">
+        <source>Average score on this question for the %size% students with the highest total and the %size% with the lowest.</source>
+      </trans-unit>
+      <trans-unit id="detail.alpha_if_removed" resname="detail.alpha_if_removed">
+        <source>Reliability without this question</source>
+      </trans-unit>
+      <trans-unit id="detail.alpha_now" resname="detail.alpha_now">
+        <source>now %alpha%</source>
+      </trans-unit>
+      <trans-unit id="settings.questions_changed" resname="settings.questions_changed">
+        <source>%count% changed</source>
+      </trans-unit>
+      <trans-unit id="theme.label" resname="theme.label">
+        <source>Theme</source>
+      </trans-unit>
+      <trans-unit id="theme.default" resname="theme.default">
+        <source>Default</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

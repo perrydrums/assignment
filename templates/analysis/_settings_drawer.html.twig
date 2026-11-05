@@ -1,0 +1,78 @@
+{% set changed_questions = settings.removedCount + settings.fullMarksCount %}
+
+<dialog class="drawer" data-drawer-target="dialog" aria-labelledby="settings-title">
+    <header class="drawer__head">
+        <div>
+            <p class="eyebrow">{{ 'settings.eyebrow'|trans }}</p>
+            <h2 class="drawer__title" id="settings-title">{{ 'settings.title'|trans }}</h2>
+        </div>
+        <button type="button" class="icon-button" data-action="drawer#close" aria-label="{{ 'settings.close'|trans }}">{{ include('_icon.html.twig', {name: 'x'}) }}</button>
+    </header>
+    <div class="drawer__body">
+        {% if settings_form.vars.errors|length > 0 %}
+            {{ form_errors(settings_form) }}
+        {% endif %}
+
+        <section class="drawer__section" aria-labelledby="settings-scale"
+                 data-controller="caesura"
+                 data-caesura-index-value="{{ settings_form.caesura.points|length }}"
+                 data-caesura-pass-word-value="{{ 'chart.pass'|trans }}"
+                 data-caesura-default-points-value="{{ settings.baselineCaesura.points|map(point => {percentage: point.percentage, grade: point.grade})|json_encode }}"
+                 data-caesura-default-pass-value="{{ settings.baselineCaesura.passPercentage }}">
+            <h3 class="drawer__section-title" id="settings-scale">{{ 'term.caesura'|trans }}</h3>
+            <p class="drawer__intro">{{ 'settings.scale_intro'|trans }}</p>
+            {{ include('analysis/_caesura_editor.html.twig', {
+                points: settings_form.caesura.points,
+                pass: settings_form.caesura.passPercentage,
+                chart_title_id: 'settings-chart-title',
+                reset_label: 'settings.reset_baseline'|trans,
+            }) }}
+        </section>
+
+        <section class="drawer__section" aria-labelledby="settings-guidelines">
+            <h3 class="drawer__section-title" id="settings-guidelines">{{ 'settings.guidelines'|trans }}</h3>
+            <p class="drawer__intro">{{ 'settings.guidelines_intro'|trans }}</p>
+            <div class="guideline-fields">
+                <label>{{ 'settings.difficult_below'|trans }} {{ form_widget(settings_form.veryDifficultBelow, {attr: {class: 'input input--number'}}) }}</label>
+                <label>{{ 'settings.easy_above'|trans }} {{ form_widget(settings_form.veryEasyAbove, {attr: {class: 'input input--number'}}) }}</label>
+                <label>{{ 'settings.weak_below'|trans }} {{ form_widget(settings_form.weakDiscriminationBelow, {attr: {class: 'input input--number'}}) }}</label>
+            </div>
+            {{ form_errors(settings_form.veryDifficultBelow) }}
+        </section>
+
+        <details class="drawer__section collapsible"{% if settings_form.adjustments.vars.errors|length > 0 %} open{% endif %}>
+            <summary class="collapsible__summary">
+                <h3 class="drawer__section-title">{{ 'settings.questions'|trans }}</h3>
+                <span class="chip">{{ settings_form.adjustments|length }}</span>
+                {% if changed_questions > 0 %}
+                    <span class="chip chip--accent">{{ 'settings.questions_changed'|trans({'%count%': changed_questions}) }}</span>
+                {% endif %}
+                <span class="collapsible__toggle" aria-hidden="true">{{ include('_icon.html.twig', {name: 'chevron-down'}) }}</span>
+            </summary>
+            <div class="collapsible__body">
+                <p class="drawer__intro">{{ 'settings.questions_intro'|trans }}</p>
+                {{ form_errors(settings_form.adjustments) }}
+                <ul class="adjustment-list">
+                    {% for adjustment in settings_form.adjustments %}
+                        {% set label = exam_payload.questions[loop.index0].label %}
+                        <li>
+                            <span class="adjustment-list__label" id="adjustment-label-{{ loop.index0 }}">{{ label }}</span>
+                            <span class="select">
+                                {{ form_widget(adjustment, {attr: {
+                                    class: 'input select__input',
+                                    'aria-labelledby': 'adjustment-label-' ~ loop.index0,
+                                    'data-adjustment-index': loop.index0,
+                                }}) }}
+                                {{ include('_icon.html.twig', {name: 'chevron-down', class: 'select__icon'}) }}
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </details>
+    </div>
+    <footer class="drawer__foot">
+        <button type="button" class="button button--ghost" data-action="drawer#close">{{ 'settings.close'|trans }}</button>
+        <button type="submit" class="button button--primary">{{ 'settings.apply'|trans }}</button>
+    </footer>
+</dialog>

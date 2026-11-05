@@ -12,20 +12,24 @@
 {% set plot_height = height - top - bottom %}
 {% set baseline = top + plot_height %}
 {% set zero_y = (baseline - (0 - rit_low) / (rit_high - rit_low) * plot_height)|round(2) %}
+{% set difficult_x = left + view.guidelines.veryDifficultBelow * plot_width %}
+{% set easy_x = left + view.guidelines.veryEasyAbove * plot_width %}
+{% set weak_ratio = (view.guidelines.weakDiscriminationBelow - rit_low) / (rit_high - rit_low) %}
+{% set weak_y = min(baseline, max(top, baseline - weak_ratio * plot_height)) %}
 {% set without_rit = view.questionsWithoutRitValue %}
 
 <article class="chart-card chart-card--item-map" data-controller="chart" data-reveal-target="item">
     <header class="chart-card__header">
         <div>
-            <h2 class="chart-card__title">Item map</h2>
-            <p class="chart-card__subtitle">Difficulty (P') against discrimination (rit). Select a question to find it.</p>
+            <h2 class="chart-card__title">{{ 'chart.map_title'|trans }}</h2>
+            <p class="chart-card__subtitle">{{ 'chart.map_help'|trans }}</p>
         </div>
-        <p class="legend legend--note">Dot size: max score</p>
+        <p class="legend legend--note">{{ 'chart.dot_size'|trans }}</p>
     </header>
 
     <div class="chart" data-chart-target="frame"
          data-action="pointerover->chart#show pointerout->chart#hide focusin->chart#show focusout->chart#hide">
-        <svg class="item-map" viewBox="0 0 {{ width }} {{ height }}" role="group" aria-label="Questions by P'-value and rit-value">
+        <svg class="item-map" viewBox="0 0 {{ width }} {{ height }}" role="group" aria-label="{{ 'chart.map_title'|trans }}">
             <g class="chart__grid">
                 {% for tick in rit_ticks %}
                     {% set y = (baseline - (tick - rit_low) / (rit_high - rit_low) * plot_height)|round(2) %}
@@ -38,9 +42,14 @@
                     <text class="chart__tick chart__tick--x" x="{{ x }}" y="{{ baseline + 20 }}">{{ p|number_format(2) }}</text>
                 {% endfor %}
             </g>
+            <g class="item-map__zones" aria-hidden="true">
+                <rect class="item-map__zone item-map__zone--hard" x="{{ left }}" y="{{ top }}" width="{{ max(0, difficult_x - left)|round(2) }}" height="{{ plot_height }}"/>
+                <rect class="item-map__zone item-map__zone--easy" x="{{ easy_x|round(2) }}" y="{{ top }}" width="{{ max(0, width - right - easy_x)|round(2) }}" height="{{ plot_height }}"/>
+                <rect class="item-map__zone item-map__zone--weak" x="{{ left }}" y="{{ weak_y|round(2) }}" width="{{ plot_width }}" height="{{ max(0, baseline - weak_y)|round(2) }}"/>
+            </g>
             <line class="item-map__zero" x1="{{ left }}" x2="{{ width - right }}" y1="{{ zero_y }}" y2="{{ zero_y }}"/>
-            <text class="chart__axis-title" x="{{ left }}" y="{{ top - 9 }}">rit ↑</text>
-            <text class="chart__axis-title chart__axis-title--end" x="{{ width - right }}" y="{{ baseline + 36 }}">P' → easier</text>
+            <text class="chart__axis-title" x="{{ left }}" y="{{ top - 9 }}">{{ 'term.discrimination.short'|trans }} ↑</text>
+            <text class="chart__axis-title chart__axis-title--end" x="{{ width - right }}" y="{{ baseline + 36 }}">{{ 'chart.easier'|trans }}</text>
 
             {% for point in points %}
                 {% set question = point.question %}
@@ -48,8 +57,8 @@
                         cx="{{ (left + point.x * plot_width)|round(2) }}" cy="{{ (baseline - point.y * plot_height)|round(2) }}"
                         r="{{ min(3.5 + question.maxScore, 9) }}" style="--i: {{ loop.index0 }}"
                         tabindex="0" role="button"
-                        aria-label="{{ question.label }}: P'-value {{ question.pValue|number_format(3) }}, rit-value {{ question.ritValue|number_format(3) }}. Show in the questions table."
-                        data-tooltip="{{ question.label }}&#10;P' {{ question.pValue|number_format(3) }} · rit {{ question.ritValue|number_format(3) }} · max {{ question.maxScore|score }}"
+                        aria-label="{{ 'chart.dot'|trans({label: question.label, difficulty: question.pValue|format_number({fraction_digit: 3}), discrimination: question.ritValue|format_number({fraction_digit: 3})}) }}"
+                        data-tooltip="{{ question.label }}&#10;{{ 'term.difficulty.short'|trans }} {{ question.pValue|format_number({fraction_digit: 3}) }} · {{ 'term.discrimination.short'|trans }} {{ question.ritValue|format_number({fraction_digit: 3}) }} · {{ 'detail.maximum'|trans }} {{ question.maxScore|score }}"
                         data-action="click->chart#select keydown->chart#selectWithKeyboard"
                         data-chart-event-name-param="analysis:focus-question"
                         data-chart-detail-param="{{ {tab: 'questions', rowId: 'question-' ~ point.number}|json_encode }}"/>
@@ -62,7 +71,7 @@
         <p class="chart-card__note">
             {{ include('_icon.html.twig', {name: 'info'}) }}
             <span>
-                Not plotted, because every student had the same score:
+                {{ 'chart.not_plotted'|trans }}
                 {% for number, question in without_rit -%}
                     <button type="button" class="inline-link" data-action="chart#select"
                             data-chart-event-name-param="analysis:focus-question"

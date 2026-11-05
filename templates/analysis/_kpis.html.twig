@@ -3,59 +3,67 @@
 {% set highest_grade = (caesura.points|last).grade %}
 {% set grade_span = max(highest_grade - lowest_grade, 0.0001) %}
 {% set average_percentage = view.averageScore / analysis.maxScore * 100 %}
-{% set without_rit = view.questionsWithoutRitValue|length %}
+{% set band = view.reliabilityBand %}
+{% set delta = view.outcome.passCountDelta %}
 
-<section class="kpis" aria-label="Summary">
+<section class="kpis" aria-label="{{ 'results.summary'|trans }}">
     <article class="kpi kpi--pass-rate" style="--i: 0">
-        <div class="ring" role="img" aria-label="{{ pass_rate|number_format(1) }}% of the students passed">
+        <div class="ring" role="img" aria-label="{{ 'results.pass_rate_label'|trans({rate: pass_rate|format_number({fraction_digit: 1})}) }}">
             <svg viewBox="0 0 120 120" aria-hidden="true">
                 <circle class="ring__track" cx="60" cy="60" r="50" pathLength="100"/>
                 <circle class="ring__value" cx="60" cy="60" r="50" pathLength="100" style="--offset: {{ (100 - pass_rate)|round(3) }}"/>
             </svg>
             <span class="ring__label" aria-hidden="true">
-                <span><span data-controller="count-up" data-count-up-to-value="{{ pass_rate|round(3) }}" data-count-up-decimals-value="1">{{ pass_rate|number_format(1) }}</span><span class="ring__unit">%</span></span>
+                <span><span data-controller="count-up" data-count-up-to-value="{{ pass_rate|round(3) }}" data-count-up-decimals-value="1">{{ pass_rate|format_number({fraction_digit: 1}) }}</span><span class="ring__unit">%</span></span>
             </span>
         </div>
         <div class="kpi__body">
-            <h2 class="kpi__label">Pass rate</h2>
-            <p class="kpi__headline"><strong>{{ analysis.passedCount }}</strong> of {{ student_count }} students passed</p>
-            <p class="kpi__detail">{{ analysis.failedCount }} failed · pass from {{ caesura.passPercentage|score }}% of {{ analysis.maxScore|score }} points</p>
+            <h2 class="kpi__label">{{ 'results.pass_rate'|trans }}</h2>
+            <p class="kpi__headline"><strong>{{ analysis.passedCount }}</strong> {{ 'results.of_passed'|trans({count: student_count}) }}</p>
+            <p class="kpi__detail">
+                {{ 'results.failed_count'|trans({count: analysis.failedCount}) }}
+                {% if delta > 0 %}<span class="delta delta--up">+{{ delta }}</span>{% elseif delta < 0 %}<span class="delta delta--down">{{ delta }}</span>{% endif %}
+            </p>
         </div>
     </article>
 
     <article class="kpi" style="--i: 1">
-        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'grade'}) }} Average grade</h2>
+        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'grade'}) }} {{ 'results.average_grade'|trans }}</h2>
         <p class="kpi__value">
-            <span data-controller="count-up" data-count-up-to-value="{{ analysis.averageGrade|round(3) }}" data-count-up-decimals-value="1">{{ analysis.averageGrade|number_format(1) }}</span>
+            <span data-controller="count-up" data-count-up-to-value="{{ analysis.averageGrade|round(3) }}" data-count-up-decimals-value="1">{{ analysis.averageGrade|format_number({fraction_digit: 1}) }}</span>
         </p>
         <div class="grade-scale" style="--average: {{ ((analysis.averageGrade - lowest_grade) / grade_span)|round(4) }}; --pass: {{ ((view.passGrade - lowest_grade) / grade_span)|round(4) }}"
-             role="img" aria-label="Average grade {{ analysis.averageGrade|number_format(1) }}, pass grade {{ view.passGrade|number_format(1) }}">
+             role="img" aria-label="{{ 'results.average_grade'|trans }} {{ analysis.averageGrade|format_number({fraction_digit: 1}) }}">
             <span class="grade-scale__pass"></span>
             <span class="grade-scale__marker"></span>
         </div>
         <p class="kpi__scale-labels" aria-hidden="true">
-            <span>{{ lowest_grade|number_format(1) }}</span>
-            <span>pass {{ view.passGrade|number_format(1) }}</span>
-            <span>{{ highest_grade|number_format(1) }}</span>
+            <span>{{ lowest_grade|format_number({fraction_digit: 1}) }}</span>
+            <span>{{ 'results.pass_grade'|trans({grade: view.passGrade|format_number({fraction_digit: 1})}) }}</span>
+            <span>{{ highest_grade|format_number({fraction_digit: 1}) }}</span>
         </p>
     </article>
 
     <article class="kpi" style="--i: 2">
-        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'sheet'}) }} Average score</h2>
+        <h2 class="kpi__label">
+            {{ include('_icon.html.twig', {name: 'trend'}) }} {{ 'term.reliability'|trans }}
+            {{ include('analysis/_term.html.twig', {term: 'reliability'}) }}
+        </h2>
         <p class="kpi__value">
-            <span data-controller="count-up" data-count-up-to-value="{{ average_percentage|round(3) }}" data-count-up-decimals-value="1">{{ average_percentage|number_format(1) }}</span><span class="kpi__unit">%</span>
+            {% if analysis.reliability is null %}
+                <span class="kpi__unit">{{ 'results.not_available'|trans }}</span>
+            {% else %}
+                <span data-controller="count-up" data-count-up-to-value="{{ analysis.reliability|round(3) }}" data-count-up-decimals-value="2">{{ analysis.reliability|format_number({fraction_digit: 2}) }}</span>
+            {% endif %}
         </p>
-        <p class="kpi__detail">{{ view.averageScore|score }} of {{ analysis.maxScore|score }} points on average</p>
+        <p class="kpi__detail">{{ ('results.reliability_' ~ band)|trans }} · {{ 'results.average_score'|trans({percent: average_percentage|format_number({fraction_digit: 1})}) }}</p>
     </article>
 
     <article class="kpi" style="--i: 3">
-        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'gauge'}) }} Average P'-value</h2>
+        <h2 class="kpi__label">{{ include('_icon.html.twig', {name: 'alert'}) }} {{ 'results.to_review'|trans }}</h2>
         <p class="kpi__value">
-            <span data-controller="count-up" data-count-up-to-value="{{ view.averagePValue|round(4) }}" data-count-up-decimals-value="2">{{ view.averagePValue|number_format(2) }}</span>
+            <span data-controller="count-up" data-count-up-to-value="{{ view.reviewCount }}" data-count-up-decimals-value="0">{{ view.reviewCount }}</span>
         </p>
-        <p class="kpi__detail">
-            across {{ question_count }} questions
-            {%- if without_rit > 0 %} · {{ without_rit }} without rit-value{% endif %}
-        </p>
+        <p class="kpi__detail">{{ 'results.to_review_detail'|trans({count: question_count}) }}</p>
     </article>
 </section>

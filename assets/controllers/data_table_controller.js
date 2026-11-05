@@ -3,14 +3,18 @@ import { Controller } from '@hotwired/stimulus';
 const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
 
 /*
- * Sorting, searching, filtering and CSV export for a server-rendered table.
+ * Sorting, searching and filtering for a server-rendered table.
  *
  * Rows describe themselves: data-search (searchable text), data-tags (filter values) and data-grade
- * (for grade ranges). Cells may carry data-sort (sort value) and data-export (CSV value).
+ * (for grade ranges). Cells may carry data-sort (the value used for sorting).
  */
 export default class extends Controller {
     static targets = ['body', 'row', 'header', 'search', 'filterButton', 'count', 'empty', 'rangeChip', 'rangeLabel'];
-    static values = { noun: String, filename: String };
+    static values = {
+        noun: String,
+        countAllPattern: { type: String, default: '{total} {noun}' },
+        countPattern: { type: String, default: '{visible} of {total} {noun}' },
+    };
 
     connect() {
         this.query = '';
@@ -98,20 +102,6 @@ export default class extends Controller {
         });
     }
 
-    exportCsv() {
-        const header = this.headerTargets.map((th) => th.dataset.exportLabel ?? th.textContent.trim());
-        const rows = this.rowTargets
-            .filter((row) => !row.hidden)
-            .map((row) => [...row.cells].map((cell) => cell.dataset.export ?? cell.textContent.trim()));
-        const csv = [header, ...rows].map((cells) => cells.map(toCsvField).join(',')).join('\r\n');
-
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(new Blob(['\ufeff', csv], { type: 'text/csv;charset=utf-8' }));
-        link.download = this.filenameValue;
-        link.click();
-        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-    }
-
     apply() {
         let visible = 0;
         for (const row of this.rowTargets) {
@@ -123,7 +113,11 @@ export default class extends Controller {
         }
 
         const total = this.rowTargets.length;
-        this.countTarget.textContent = visible === total ? `${total} ${this.nounValue}` : `${visible} of ${total} ${this.nounValue}`;
+        const pattern = visible === total ? this.countAllPatternValue : this.countPatternValue;
+        this.countTarget.textContent = pattern
+            .replaceAll('{visible}', String(visible))
+            .replaceAll('{total}', String(total))
+            .replaceAll('{noun}', this.nounValue);
         if (this.hasEmptyTarget) {
             this.emptyTarget.hidden = visible > 0;
         }
@@ -150,11 +144,4 @@ function compareNumbers(a, b, sign) {
     }
 
     return (left - right) * sign;
-}
-
-// Text starting with = + - @ would be executed as a formula by spreadsheet programs.
-function toCsvField(value) {
-    const safe = /^[=+\-@\t\r]/.test(value) && Number.isNaN(Number(value)) ? `'${value}` : value;
-
-    return /[",\r\n]/.test(safe) ? `"${safe.replaceAll('"', '""')}"` : safe;
 }
