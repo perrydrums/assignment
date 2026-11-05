@@ -27,7 +27,7 @@
         <source>Voor docenten</source>
       </trans-unit>
       <trans-unit id="upload.headline" resname="upload.headline">
-        <source>Zie hoe je toets ging.</source>
+        <source>Hoe goed werkte je toets?</source>
       </trans-unit>
       <trans-unit id="upload.lead" resname="upload.lead">
         <source>Upload de Excel-export uit RemindoTest. Je krijgt een cijfer per student, en een helder beeld van welke vragen werkten.</source>

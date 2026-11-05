@@ -27,7 +27,7 @@
         <source>For teachers</source>
       </trans-unit>
       <trans-unit id="upload.headline" resname="upload.headline">
-        <source>See how your test went.</source>
+        <source>How did your test perform?</source>
       </trans-unit>
       <trans-unit id="upload.lead" resname="upload.lead">
         <source>Upload the Excel export from RemindoTest. You get a grade for every student, and a clear view of which questions worked.</source>
